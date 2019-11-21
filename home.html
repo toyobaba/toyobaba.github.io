@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Omotoyosi Taiwo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href='https://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css' />
+        <style type="text/css">
+            * { box-sizing: border-box; }
+            h1, h2, h3 { margin: 0; }
+            .left { text-align: left; }
+            .center { text-align: center; margin: auto; }
+            .content {
+                font-family: 'EB Garamond', 'Garamond', 'Georgia', serif;
+                padding: 10px;
+                display: inline-block;
+            }
+            #header { border-bottom: 1px solid #000; }
+            #header h1 { font-size: 3em; margin: 0; }
+            #content-container { width: 100%; max-width: 40em; }
+            #header a { text-decoration: none; }
+            .project {
+                border: 1px solid #000;
+                padding: 10px;
+                margin: 10px 0;
+            }
+            .btn {
+                display: inline-block;
+                background: #387BA8;
+                padding: 0.5em;
+                text-align: center;
+                color: white;
+                border-radius: 0.25em;
+                text-decoration: none;
+                margin: 0.5em;
+                width: 10em;
+            }
+            .btn:hover { background:#3D87B8; }
+        </style>
+    </head>
+    <body>
+        <a id="top"></a>
+        <div id="header-container" class="center">
+            <div id="header" class="content center">
+                <h1>Omotoyosi Taiwo</h1>
+                <span id="header-links">
+                <a href="https://github.com/toyobaba">GitHub</a> | 
+                <a href="resume.pdf">Resume</a> | 
+                <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xB5776ED0D5171980">PGP Public Key</a> | 
+                <a href="mailto:omtaiwo@gmail.com">Email</a>
+                </span>
+            </div>
+        </div>
+
+        <div id="content-container" class="center">
+            <div id="content" class="content left">
+                
+
+                <h2>What I've Done</h2>
+                <div class="project" id="cs3157">
+                    <h2><a href="http://www.cs.columbia.edu/~jae/3157-2018-9/">cs3157</a></h2>
+                    <em>January 2017&ndash;May 2019</em><br />
+
+                    <strong>Technologies Used:</strong> C, Bash, C++, Adobe Audition & Premiere
+                    <ul>
+                        <li>Served as a course assistant from Spring 2017 to Spring 2018, and as co-head teaching assistant from Fall 2018 to Spring 2019</li>
+                        <li>Led teams of up to 15 other TAs and delegated tasks to them</li>
+                        <li>Improved parts of the course's semi-automated submission testing infrastructure, which was written in Bash</li>
+                        <li>Produced and co-hosted a <a href="https://youtube.com/cs3157">YouTube channel</a> with video reviews of lecture content</li>
+                    </ul>
+
+                    You can also read my teaching evaluations: <br />
+                    <a href="evals-2017-1.pdf" target="_blank" class="btn">Spring 2017</a>
+                </div>
+
+                <div class="project" id="columbia">
+                    <h2>Course projects</h2>
+                    <em>Fall 2015&ndash;Spring 2019</em><br /><br />
+
+                    Notable group projects I've worked on as an undergraduate student include:
+                    <ul>
+                        <li><a href="https://github.com/ivychen/autoMATic">autoMATic</a>, a matrix manipulation language written in OCaml and LLVM</li>
+                        <li>A <a href="https://github.com/VarshaMaragi/ML_Library_UsingConcepts">machine learning library</a> for C++ using the WG21 concepts draft</li>
+                        <li>A weighted round-robin CPU scheduler for the Linux kernel to optimize Android app startup time</li>
+                        <li>An FPGA implementation of an RCA 1802 CPU written in SystemVerilog</li>
+                        <li>An HTTP/1.0 server written in C</li>
+                    </ul>
+
+                    Some projects may not have public repositories due to academic integrity guidelines.
+                    Please email me if you'd like more information on them.
+                </div>
+
+                <div class="project" id="sc4fix">
+                    <h2><a href="https://github.com/nsgomez/sc4fix">SC4Fix</a></h2>
+                    <em>December 2015; January 2018</em><br />
+
+                    <strong>Technologies Used:</strong> C, C++, x86 Assembly
+                    <ul>
+                        <li>Used Ollydbg to debug a reproducible null dereference crash in the game SimCity 4</li>
+                        <li>Reverse engineered parts of the game to fix a serialization bug that would corrupt save files</li>
+                    </ul>
+                </div>
+
+                <div class="project" id="gzcom">
+                    <h2><a href="https://github.com/nsgomez/gzcom-dll">gzcom-dll</a></h2>
+                    <em>June 2012&ndash;present</em><br />
+
+                    <strong>Technologies Used:</strong> C, C++
+                    <ul>
+                        <li>Obtained reference code for parts of SimCity 4's COM framework</li>
+                        <li>Reverse engineered other parts of the framework to create a functional COM module</li>
+                        <li>Documented structures in the game's API for potential developers</li>
+                    </ul>
+                </div>
+                
+                <div class="project" id="tincam">
+                    <h2><a href="https://devpost.com/software/tincam">TinCam</a></h2>
+                    <em>April 2016</em><br />
+
+                    <strong>Technologies Used:</strong> Python, Raspberry Pi, Dropbox API
+                    <ul>
+                        <li>Best Hardware Hack at <a href="http://hackny.org">HackNY</a>'s Spring 2016 hackathon</li>
+                        <li>Created a threaded Python program for capturing picture streams and video</li>
+                        <li>Configured a Pi A+ to roam open Wi-Fi networks to be able to upload most of the time</li>
+                        <li>Experimental Twitch streaming implemented for kicks</li>
+                    </ul>
+                    
+                    Collaborative project with <a href="https://github.com/roytenberg">Ben Roytenberg</a>, Claire Wang and Sascha Wu.
+                </div>
+                
+                <div class="project" id="vboxmanager">
+                    <h2><a href="https://github.com/nsgomez/vboxmanager">VBoxManager</a></h2>
+                    <em>February 2016</em><br />
+
+                    <strong>Technologies Used:</strong> Python, Flask, SQLite, VirtualBox CLI
+                    <ul>
+                        <li>Inspired by xkcd <a href="https://xkcd.com/350">comic #350</a></li>
+                        <li>Used Python 2.x and avast! antivirus on images to track when a machine is infected</li>
+                        <li>Used shared folders to automatically execute malware samples and model infections</li>
+                        <li>Wrote a frontend using Flask to display state of machines and infections</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "Person",
+
+            "name": "Nelson Gomez",
+            "born": "1997-03-16",
+            "email": "nelson.gomez@columbia.edu",
+            "gender": "Male",
+
+            "jobTitle": "Web Development Intern",
+            "url": "http://www.ngomez.me"
+        }
+        </script>
+    </body>
+</html>
