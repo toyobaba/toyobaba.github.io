@@ -1,0 +1,48 @@
+ * { box-sizing: border-box; }
+            h1, h2, h3 { margin: 0; }
+            .left { text-align: left; }
+			.right { text-align: right; }
+            .center { text-align: center; margin: auto; }
+            .content {
+                font-family: 'EB Garamond', 'Garamond', 'Georgia', serif;
+                padding: 10px;
+                display: inline-block;
+            }
+         
+            #header h1 { font-size: 3em; margin: 0; }
+            #content-container { width: 100%; max-width: 40em; }
+            #header a { text-decoration: none; }
+            .project {
+                border: 1px solid #000;
+                padding: 40px;
+                margin: 10px 0;
+            }
+            .btn {
+                display: inline-block;
+                background: #387BA8;
+                padding: 0.5em;
+                text-align: center;
+                color: white;
+                border-radius: 0.25em;
+                text-decoration: none;
+                margin: 0.5em;
+                width: 10em;
+				float: right;
+            }
+            .btn:hover { background:#3D87B8; }
+			
+			body {
+				color: #3b3b3b;
+				background-color: #E7E4D5;
+				margin: 0;
+				padding: 0;
+			}
+			
+		section { background-color: #f4f4f4; }
+		.box {
+			margin: 0 auto 16px auto;
+			padding: 1rem 2rem;
+			max-width: 1000px;
+			}
+
+		html {font-size: 21px;}
