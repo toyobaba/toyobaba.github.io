@@ -2,7 +2,7 @@
 
 name: mosfet fabrication and characterization
 technologies: SEM, silicon, mosFET, 
-image_path: /images/cupcakes/chocolate.jpg
+file_path: assets/mosfetfab.pdf
 description: fabrication and characterization of devices on n-type and p-type wafers.
 
 ---
