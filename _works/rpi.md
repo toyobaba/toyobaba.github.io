@@ -1,5 +1,5 @@
 ---
-index: 2
+index: b
 from: August 2014 
 to:  May 2016
 worksite: https://www.rpi.edu/

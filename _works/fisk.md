@@ -1,5 +1,5 @@
 ---
-index: 3
+index: c
 from: September 2009 
 to:  May 2011
 name: Fisk University
