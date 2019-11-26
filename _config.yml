@@ -1,9 +1,16 @@
 title: Welcome to toyobaba's homepage!
 collections:
     projects:
-       sort_by: index
+       order: 
+        - palfinder.md
+        - mosfetfab.md
+        - deblurring.md
+        - delta_doping.md
     works:
-       sort_by: index
+       order:
+        - globalfoundries.md
+        - rpi.md
+        - fisk.md
     
 author: Omotoyosi Taiwo
 description: "Small page to display the works I've done"
