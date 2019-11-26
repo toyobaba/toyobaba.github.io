@@ -119,3 +119,7 @@ footer a, footer a:hover { color: #ad1f1f; }
   height: 74px;
 }
 
+.head_image img {
+    width: 64px;
+    height: 64px;
+}
