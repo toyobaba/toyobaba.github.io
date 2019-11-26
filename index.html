@@ -11,14 +11,16 @@ title: Home
 				
                 <a href="https://github.com/toyobaba"> GitHub </a> |
                 <a href="resume.pdf"> Resume </a> | 
-                <a href="https://github.com/toyobaba"> Projects </a> | 
+                <a href="#projects"> Projects </a> | 
 				<a href="https://github.com/toyobaba"> DataCenter </a> |
                 <a href="mailto:omtaiwo@gmail.com"> Email </a>
 				
                 </span>
 				<hr>
-				<strong>Software Engineer (Backend) and Electrical Engineer (Semiconductors)</strong> <br/>
-				<strong>I write code,  I lift weights, and  I play chess</strong></p>
+				<p>
+				<strong> Software (Backend) and Electrical Engineer (Semi-conductors)</strong> <br/>
+				<strong> Recent Toronto transplant.</strong> <br/>
+				<strong> I like to learn new things, lift weights, play <a href="https://lichess.org/@/matttai90">chess</a></strong></p>
 				
             </div>
         </div>
@@ -29,27 +31,29 @@ title: Home
             <div id="content" class="content left">          
 
                 <h2 class="center">Work History</h2>
+				<br>
 				
 				<!-- Loop Work contents wth Liquid -->
 				{% for work in site.works %}
 				
-					<div class="project">
+					<div class="work">
 					<header>
 						<a href="{{work.worksite}}">      
 						<img itemprop="logo" src="{{work.image_path}}" alt="RPI">      
 						</a>
 						
-						<h2><a href="github.com/toyobaba">{{ work.name }}</a></h2>						
+						<h2><a href="{{work.worksite}}">{{ work.name }}</a></h2>						
 					</header>
 					<em>{{work.from}}&ndash;{{work.to}}</em><br />
 					<strong>{{ work.role }}</strong><br />
-					<strong>Technologies Used:</strong>{{ work.technologies }}
+					<strong>Technologies Used:</strong>&nbsp; {{ work.technologies }}
 						
-						<ul class = "work">
+						<ul class = "work_description">
 							<li>{{ work.description }}</li>
 						</ul>
 						
 					</div>
+					<br>
 				{% endfor %}
 
                
@@ -58,7 +62,7 @@ title: Home
 	</section>	
 	
 	<section class="box">
-        <div id="content-container" class="center">
+        <div id="projects" class="center">
             <div id="content" class="content left">          
 
                 <h2 class="center">Projects</h2>
@@ -66,11 +70,24 @@ title: Home
 				<!-- Loop Project contents wth Liquid -->
 				{% for project in site.projects %}
 					<div class="project">
+					<header>
 						<h2><a href="{{ project.file_path }}">{{ project.name }}</a></h2>
-						<em>January 2017&ndash;May 2019</em><br />
+						
+						<a href="{{project.source1}}">      
+						<img itemprop="logo" src="{{project.source1_path}}" title ="{{project. source1_image_title}}">      
+						</a>
+						
+						{% if project.source2 %}
+						<a href="{{project.source2}}">      
+						<img itemprop="logo" src="{{project.source2_path}}" title ="{{project. source2_image_title}}">      
+						</a>
+						{% endif %}
+					</header>
+						
+						<em>{{project.asiko}}</em><br />
 
-						<strong>Technologies Used:</strong>{{ project.technologies }}
-						<ul>
+						<strong>Technologies Used:</strong> &nbsp; {{ project.technologies }}
+						<ul class = "work_description">
 							<li>{{ project.description }}</li>
 							<!--<a href="evals-2017-1.pdf" target="_blank" class="btn">Spring 2017</a> -->
 						</ul>
