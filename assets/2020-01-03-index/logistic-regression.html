@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Unit 4 Logistic Regression | Analytics Edge - EdX</title>
+  <meta name="description" content="EdX Analytics Edge, Notes and Assignments" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Unit 4 Logistic Regression | Analytics Edge - EdX" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unit 4 Logistic Regression | Analytics Edge - EdX" />
+  
+  <meta name="twitter:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+<meta name="author" content="omotoyosi Taiwo" />
+
+
+<meta name="date" content="2019-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-regression.html"/>
+<link rel="next" href="classification-and-regression-trees-cart.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analytics Edge - EdX</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> EdX Analytics Edge Notebook</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#working-with-data"><i class="fa fa-check"></i><b>2.1</b> Working with data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#loading-data-files"><i class="fa fa-check"></i><b>2.1.1</b> Loading data files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#summary-statistics"><i class="fa fa-check"></i><b>2.1.2</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction.html"><a href="introduction.html#plots"><i class="fa fa-check"></i><b>2.1.3</b> Plots</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction.html"><a href="introduction.html#summary-tables"><i class="fa fa-check"></i><b>2.1.4</b> Summary tables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#recitation---usda-food-database"><i class="fa fa-check"></i><b>2.2</b> Recitation - USDA Food Database</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#data-analysis---recitation"><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis - Recitation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#histogram---recitation"><i class="fa fa-check"></i><b>2.2.2</b> Histogram - Recitation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#summary-tables---recitation"><i class="fa fa-check"></i><b>2.2.3</b> Summary tables - Recitation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#assignment"><i class="fa fa-check"></i><b>2.3</b> Assignment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction.html"><a href="introduction.html#part-1---analytical-detective"><i class="fa fa-check"></i><b>2.3.1</b> Part 1 - Analytical Detective</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction.html"><a href="introduction.html#part-2---stock-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Part 2 - Stock Dynamics</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction.html"><a href="introduction.html#part-3---demographics-and-employment-in-the-united-states"><i class="fa fa-check"></i><b>2.3.3</b> Part 3 - Demographics and Employment in the United States</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#introduction-to-linear-regression"><i class="fa fa-check"></i><b>3.1</b> Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#variable-linear-regression-model---predicting-wine-quality"><i class="fa fa-check"></i><b>3.1.1</b> 1 variable Linear Regression Model - Predicting Wine Quality</a></li>
+<li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-model"><i class="fa fa-check"></i><b>3.1.2</b> Multiple Linear Regression Model</a></li>
+<li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#correlation-and-muticollinearity"><i class="fa fa-check"></i><b>3.1.3</b> Correlation and Muticollinearity</a></li>
+<li class="chapter" data-level="3.1.4" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions"><i class="fa fa-check"></i><b>3.1.4</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#recitation-2---moneyball-in-the-nba"><i class="fa fa-check"></i><b>3.2</b> Recitation 2 - MOneyball in the NBA</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#regression-model-using-more-than-just-wins-variable"><i class="fa fa-check"></i><b>3.2.1</b> Regression model using more than just Wins variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions-1"><i class="fa fa-check"></i><b>3.2.2</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="linear-regression.html"><a href="linear-regression.html#assignment-1"><i class="fa fa-check"></i><b>3.3</b> Assignment</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linear-regression.html"><a href="linear-regression.html#part-1---climate-change"><i class="fa fa-check"></i><b>3.3.1</b> Part 1 - Climate Change</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linear-regression.html"><a href="linear-regression.html#part-2---detecting-flu-epidemics"><i class="fa fa-check"></i><b>3.3.2</b> Part 2 - Detecting Flu Epidemics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-to-logistic-regression"><i class="fa fa-check"></i><b>4.1</b> Introduction to Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#thresholding"><i class="fa fa-check"></i><b>4.1.1</b> Thresholding</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>4.1.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#making-predictions-2"><i class="fa fa-check"></i><b>4.1.3</b> Making predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#framingham-heart-study"><i class="fa fa-check"></i><b>4.2</b> Framingham Heart study</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#recitation-3---election-forecasting"><i class="fa fa-check"></i><b>4.3</b> Recitation 3 - Election Forecasting</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#a-sophisticated-baseline-model"><i class="fa fa-check"></i><b>4.3.1</b> A sophisticated baseline model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#assignment-2"><i class="fa fa-check"></i><b>4.4</b> Assignment</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#part-1---popularity-of-music-records"><i class="fa fa-check"></i><b>4.4.1</b> Part 1 - Popularity of Music Records</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html"><i class="fa fa-check"></i><b>5</b> Classification and Regression Trees (CART)</a><ul>
+<li class="chapter" data-level="5.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#introduction-to-trees---judge-jury-and-classifier"><i class="fa fa-check"></i><b>5.1</b> Introduction to trees - Judge, Jury, and Classifier</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#random-forests"><i class="fa fa-check"></i><b>5.1.1</b> Random Forests</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation"><i class="fa fa-check"></i><b>5.1.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#the-d2hawkeye-story"><i class="fa fa-check"></i><b>5.2</b> The D2Hawkeye Story</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#baseline-method-and-penalty-matrix"><i class="fa fa-check"></i><b>5.2.1</b> Baseline method and Penalty Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#recitation---boston-housing-data-regression-trees"><i class="fa fa-check"></i><b>5.3</b> Recitation - Boston Housing Data (Regression Trees)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#geographical-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Geographical Predictions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation-1"><i class="fa fa-check"></i><b>5.3.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#assignment-3"><i class="fa fa-check"></i><b>5.4</b> Assignment</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-1---understanding-why-people-vote"><i class="fa fa-check"></i><b>5.4.1</b> Part 1 - Understanding why people vote</a></li>
+<li class="chapter" data-level="5.4.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-2---letter-recognition"><i class="fa fa-check"></i><b>5.4.2</b> Part 2 - Letter Recognition</a></li>
+<li class="chapter" data-level="5.4.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-3---predicting-earnings-from-census-data"><i class="fa fa-check"></i><b>5.4.3</b> Part 3 - Predicting Earnings from Census Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-analytics.html"><a href="text-analytics.html"><i class="fa fa-check"></i><b>6</b> Text Analytics</a><ul>
+<li class="chapter" data-level="6.1" data-path="text-analytics.html"><a href="text-analytics.html#introduction-to-text-analytics"><i class="fa fa-check"></i><b>6.1</b> Introduction to Text Analytics</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="text-analytics.html"><a href="text-analytics.html#turning-tweets-into-knowledge"><i class="fa fa-check"></i><b>6.1.1</b> Turning Tweets into knowledge</a></li>
+<li class="chapter" data-level="6.1.2" data-path="text-analytics.html"><a href="text-analytics.html#preprocessing-data"><i class="fa fa-check"></i><b>6.1.2</b> Preprocessing data</a></li>
+<li class="chapter" data-level="6.1.3" data-path="text-analytics.html"><a href="text-analytics.html#build-a-cart-model"><i class="fa fa-check"></i><b>6.1.3</b> Build a CART model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="text-analytics.html"><a href="text-analytics.html#recitation---the-story-of-enron"><i class="fa fa-check"></i><b>6.2</b> Recitation - The Story of Enron</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="text-analytics.html"><a href="text-analytics.html#bag-of-words"><i class="fa fa-check"></i><b>6.2.1</b> Bag of Words</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="text-analytics.html"><a href="text-analytics.html#assignment-4"><i class="fa fa-check"></i><b>6.3</b> Assignment</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="text-analytics.html"><a href="text-analytics.html#part-1---detecting-vandalism-on-wikipedia"><i class="fa fa-check"></i><b>6.3.1</b> Part 1 - Detecting Vandalism on Wikipedia</a></li>
+<li class="chapter" data-level="6.3.2" data-path="text-analytics.html"><a href="text-analytics.html#part-2---automating-reviews-in-medicine"><i class="fa fa-check"></i><b>6.3.2</b> Part 2 - Automating Reviews in Medicine</a></li>
+<li class="chapter" data-level="6.3.3" data-path="text-analytics.html"><a href="text-analytics.html#part-3---separating-spam-from-ham"><i class="fa fa-check"></i><b>6.3.3</b> Part 3 - Separating Spam from Ham</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#introduction-to-clustering"><i class="fa fa-check"></i><b>7.1</b> Introduction to Clustering</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#heirarchical-clustering"><i class="fa fa-check"></i><b>7.1.1</b> Heirarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#recitation---segmenting-images"><i class="fa fa-check"></i><b>7.2</b> Recitation - Segmenting Images</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="clustering.html"><a href="clustering.html#flower-image"><i class="fa fa-check"></i><b>7.2.1</b> Flower Image</a></li>
+<li class="chapter" data-level="7.2.2" data-path="clustering.html"><a href="clustering.html#mri-image"><i class="fa fa-check"></i><b>7.2.2</b> MRI Image</a></li>
+<li class="chapter" data-level="7.2.3" data-path="clustering.html"><a href="clustering.html#k-means-clustering"><i class="fa fa-check"></i><b>7.2.3</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#assignment-5"><i class="fa fa-check"></i><b>7.3</b> Assignment</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#part-1---document-clustering-with-daily-kos"><i class="fa fa-check"></i><b>7.3.1</b> Part 1 - Document Clustering with Daily Kos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="clustering.html"><a href="clustering.html#part-2---market-segmentation-for-airlines"><i class="fa fa-check"></i><b>7.3.2</b> Part 2 - Market Segmentation for Airlines</a></li>
+<li class="chapter" data-level="7.3.3" data-path="clustering.html"><a href="clustering.html#part-3---predicting-stock-returns-with-cluster-then-predict"><i class="fa fa-check"></i><b>7.3.3</b> Part 3 - Predicting Stock Returns with Cluster-Then-Predict</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a><ul>
+<li class="chapter" data-level="8.1" data-path="visualization.html"><a href="visualization.html#scatterplots---visualizing-the-world"><i class="fa fa-check"></i><b>8.1</b> Scatterplots - Visualizing the world</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="visualization.html"><a href="visualization.html#basic-scatterplots-using-ggplot"><i class="fa fa-check"></i><b>8.1.1</b> Basic scatterplots using ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="visualization.html"><a href="visualization.html#visualizing-crime-over-time"><i class="fa fa-check"></i><b>8.2</b> Visualizing crime over time</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="visualization.html"><a href="visualization.html#heatmaps"><i class="fa fa-check"></i><b>8.2.1</b> Heatmaps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="visualization.html"><a href="visualization.html#a-geographical-hot-spot-map"><i class="fa fa-check"></i><b>8.2.2</b> A Geographical Hot Spot Map</a></li>
+<li class="chapter" data-level="8.2.3" data-path="visualization.html"><a href="visualization.html#a-heatmap-of-the-united-states"><i class="fa fa-check"></i><b>8.2.3</b> A Heatmap of the United States</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="visualization.html"><a href="visualization.html#recitation"><i class="fa fa-check"></i><b>8.3</b> Recitation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="visualization.html"><a href="visualization.html#bar-charts"><i class="fa fa-check"></i><b>8.3.1</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="visualization.html"><a href="visualization.html#assignment-6"><i class="fa fa-check"></i><b>8.4</b> Assignment</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="visualization.html"><a href="visualization.html#part-1---election-forecasting-revisited"><i class="fa fa-check"></i><b>8.4.1</b> Part 1 - Election Forecasting Revisited</a></li>
+<li class="chapter" data-level="8.4.2" data-path="visualization.html"><a href="visualization.html#part-2---visualizing-network-data"><i class="fa fa-check"></i><b>8.4.2</b> Part 2 - Visualizing Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="final-exam.html"><a href="final-exam.html"><i class="fa fa-check"></i><b>9</b> Final Exam</a><ul>
+<li class="chapter" data-level="9.1" data-path="final-exam.html"><a href="final-exam.html#part-1---estimating-miles-per-gallon"><i class="fa fa-check"></i><b>9.1</b> Part 1 - Estimating Miles Per Gallon</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="final-exam.html"><a href="final-exam.html#problem-1---exploratory-data-analysis"><i class="fa fa-check"></i><b>9.1.1</b> Problem 1 - Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="9.1.2" data-path="final-exam.html"><a href="final-exam.html#problem-2---simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Problem 2 - Simple Linear Regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables"><i class="fa fa-check"></i><b>9.1.3</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.1.4" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart-and-randomforest"><i class="fa fa-check"></i><b>9.1.4</b> Problem 4 - CART and Randomforest</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="final-exam.html"><a href="final-exam.html#part-2---predicting-heart-disease"><i class="fa fa-check"></i><b>9.2</b> Part 2 - Predicting Heart Disease</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="final-exam.html"><a href="final-exam.html#problem-12---exploratory-data-analysis-and-logistic-regression"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1&amp;2 - Exploratory Data Analysis and Logistic Regression</a></li>
+<li class="chapter" data-level="9.2.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables-1"><i class="fa fa-check"></i><b>9.2.2</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.2.3" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart"><i class="fa fa-check"></i><b>9.2.3</b> Problem 4 - CART</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="final-exam.html"><a href="final-exam.html#part-3---understanding-users-spending"><i class="fa fa-check"></i><b>9.3</b> Part 3 - Understanding User’s Spending</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="final-exam.html"><a href="final-exam.html#problem-1-and-2"><i class="fa fa-check"></i><b>9.3.1</b> Problem 1 and 2</a></li>
+<li class="chapter" data-level="9.3.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---clustering"><i class="fa fa-check"></i><b>9.3.2</b> Problem 3 - Clustering</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analytics Edge - EdX</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logistic-regression" class="section level1">
+<h1><span class="header-section-number">Unit 4</span> Logistic Regression</h1>
+<div id="introduction-to-logistic-regression" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction to Logistic Regression</h2>
+<p>Logistic Regression is an extension of linear regression for categorical dependent variables.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week3/quality.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb210-2" title="2"><span class="kw">str</span>(quality)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    131 obs. of  14 variables:
+##  $ MemberID            : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ InpatientDays       : int  0 1 0 0 8 2 16 2 2 4 ...
+##  $ ERVisits            : int  0 1 0 1 2 0 1 0 1 2 ...
+##  $ OfficeVisits        : int  18 6 5 19 19 9 8 8 4 0 ...
+##  $ Narcotics           : int  1 1 3 0 3 2 1 0 3 2 ...
+##  $ DaysSinceLastERVisit: num  731 411 731 158 449 ...
+##  $ Pain                : int  10 0 10 34 10 6 4 5 5 2 ...
+##  $ TotalVisits         : int  18 8 5 20 29 11 25 10 7 6 ...
+##  $ ProviderCount       : int  21 27 16 14 24 40 19 11 28 21 ...
+...</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">table</span>(quality<span class="op">$</span>PoorCare)</a></code></pre></div>
+<pre><code>## 
+##  0  1 
+## 98 33</code></pre>
+<p>In logistic regression, we’ll use the more common outcome as the baseline prediction, unlke the mean in linear regression models</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="dv">98</span><span class="op">/</span><span class="dv">131</span></a></code></pre></div>
+<pre><code>## [1] 0.7480916</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="co">#Split data into training set and testing set</span></a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb216-3" title="3"><span class="kw">set.seed</span>(<span class="dv">88</span>)</a>
+<a class="sourceLine" id="cb216-4" title="4">split =<span class="st"> </span><span class="kw">sample.split</span>(quality<span class="op">$</span>PoorCare, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>) <span class="co"># Split function uniformly splits dats to prevent skewing either dataset</span></a>
+<a class="sourceLine" id="cb216-5" title="5">qualityTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(quality, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb216-6" title="6">qualityTest &lt;-<span class="st"> </span><span class="kw">subset</span>(quality, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb216-7" title="7">qualityLog &lt;-<span class="st"> </span><span class="kw">glm</span>(PoorCare <span class="op">~</span><span class="st"> </span>OfficeVisits <span class="op">+</span><span class="st"> </span>Narcotics, <span class="dt">data =</span> qualityTrain, <span class="dt">family =</span> binomial)</a>
+<a class="sourceLine" id="cb216-8" title="8"><span class="kw">summary</span>(qualityLog)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = PoorCare ~ OfficeVisits + Narcotics, family = binomial, 
+##     data = qualityTrain)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.06303  -0.63155  -0.50503  -0.09689   2.16686  
+## 
+## Coefficients:
+...</code></pre>
+<div id="thresholding" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Thresholding</h3>
+<p>AIC can be used to determine quality of model based on specific data, can only be compared to the other models on the same dataset</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">predictTrain &lt;-<span class="st"> </span><span class="kw">predict</span>(qualityLog, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb218-2" title="2"><span class="kw">summary</span>(predictTrain)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.06623 0.11912 0.15967 0.25253 0.26765 0.98456</code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="kw">tapply</span>(predictTrain, qualityTrain<span class="op">$</span>PoorCare, mean)</a></code></pre></div>
+<pre><code>##         0         1 
+## 0.1894512 0.4392246</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"><span class="co">#Threshold value = 0.5</span></a>
+<a class="sourceLine" id="cb222-2" title="2"><span class="kw">table</span>(qualityTrain<span class="op">$</span>PoorCare, predictTrain <span class="op">&gt;</span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    70    4
+##   1    15   10</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"><span class="co">#Sensitiviy</span></a>
+<a class="sourceLine" id="cb224-2" title="2"><span class="dv">10</span><span class="op">/</span><span class="dv">25</span></a></code></pre></div>
+<pre><code>## [1] 0.4</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="co">#specificity</span></a>
+<a class="sourceLine" id="cb226-2" title="2"><span class="dv">70</span><span class="op">/</span><span class="dv">74</span></a></code></pre></div>
+<pre><code>## [1] 0.9459459</code></pre>
+<p>Increase threshold</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="kw">table</span>(qualityTrain<span class="op">$</span>PoorCare, predictTrain <span class="op">&gt;</span><span class="fl">0.7</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    73    1
+##   1    17    8</code></pre>
+</div>
+<div id="roc-curves" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> ROC Curves</h3>
+<p>Picking a good threshold value using the ROC(Reciever Operator Characteristic) curve</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">library</span>(<span class="st">&quot;ROCR&quot;</span>)</a>
+<a class="sourceLine" id="cb230-2" title="2">ROCRpred &lt;-<span class="st"> </span><span class="kw">prediction</span>(predictTrain, qualityTrain<span class="op">$</span>PoorCare)</a>
+<a class="sourceLine" id="cb230-3" title="3">ROCRperf &lt;-<span class="st"> </span><span class="kw">performance</span>(ROCRpred, <span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>)</a>
+<a class="sourceLine" id="cb230-4" title="4"><span class="kw">plot</span>(ROCRperf, <span class="dt">colorize=</span>T, <span class="dt">print.cutoffs.at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>), <span class="dt">text.adj=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>,<span class="fl">1.7</span>))</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+</div>
+<div id="making-predictions-2" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Making predictions</h3>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">predictTest &lt;-<span class="st"> </span><span class="kw">predict</span>(qualityLog, <span class="dt">type=</span> <span class="st">&quot;response&quot;</span>, <span class="dt">newdata =</span> qualityTest)</a>
+<a class="sourceLine" id="cb231-2" title="2"><span class="kw">summary</span>(predictTest)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.07631 0.12931 0.19699 0.27549 0.35731 0.95253</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1"><span class="kw">table</span>(qualityTest<span class="op">$</span>PoorCare, predictTest <span class="op">&gt;</span><span class="fl">0.3</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    19    5
+##   1     2    6</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1">ROCRpredTest =<span class="st"> </span><span class="kw">prediction</span>(predictTest, qualityTest<span class="op">$</span>PoorCare)</a>
+<a class="sourceLine" id="cb235-2" title="2">auc =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">performance</span>(ROCRpredTest, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)</a>
+<a class="sourceLine" id="cb235-3" title="3">auc</a></code></pre></div>
+<pre><code>## [1] 0.7994792</code></pre>
+</div>
+</div>
+<div id="framingham-heart-study" class="section level2">
+<h2><span class="header-section-number">4.2</span> Framingham Heart study</h2>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">framingham&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;week3/framingham.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb237-2" title="2"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb237-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb237-4" title="4">split &lt;-<span class="st"> </span><span class="kw">sample.split</span>(framingham<span class="op">$</span>TenYearCHD, <span class="dt">SplitRatio =</span> <span class="fl">0.65</span>)</a>
+<a class="sourceLine" id="cb237-5" title="5">framinghamTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(framingham, split <span class="op">==</span><span class="st"> </span>T)</a>
+<a class="sourceLine" id="cb237-6" title="6">framinghamTest &lt;-<span class="st"> </span><span class="kw">subset</span>(framingham, split <span class="op">==</span><span class="st"> </span>F)</a>
+<a class="sourceLine" id="cb237-7" title="7">framinghamLog&lt;-<span class="st"> </span><span class="kw">glm</span>(TenYearCHD <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> framinghamTrain, <span class="dt">family =</span> binomial)</a>
+<a class="sourceLine" id="cb237-8" title="8"><span class="kw">summary</span>(framinghamLog)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = TenYearCHD ~ ., family = binomial, data = framinghamTrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8487  -0.6007  -0.4257  -0.2842   2.8369  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">predictTest &lt;-<span class="st"> </span><span class="kw">predict</span>(framinghamLog, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>, <span class="dt">newdata =</span> framinghamTest)</a>
+<a class="sourceLine" id="cb239-2" title="2"><span class="kw">table</span>(framinghamTest<span class="op">$</span>TenYearCHD, predictTest <span class="op">&gt;</span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0  1069    6
+##   1   187   11</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">modelAccuracy &lt;-<span class="st"> </span>(<span class="dv">1069</span><span class="op">+</span><span class="dv">11</span>)<span class="op">/</span>(<span class="dv">1069</span><span class="op">+</span><span class="dv">6</span><span class="op">+</span><span class="dv">187</span><span class="op">+</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb241-2" title="2">modelAccuracy</a></code></pre></div>
+<pre><code>## [1] 0.8483896</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1">baselineAccuracy &lt;-<span class="st"> </span>(<span class="dv">1069</span><span class="op">+</span><span class="dv">6</span>)<span class="op">/</span>(<span class="dv">1069</span><span class="op">+</span><span class="dv">6</span><span class="op">+</span><span class="dv">187</span><span class="op">+</span><span class="dv">11</span>)<span class="co">#when always predict 0</span></a>
+<a class="sourceLine" id="cb243-2" title="2">baselineAccuracy</a></code></pre></div>
+<pre><code>## [1] 0.8444619</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1"><span class="co">#ROCR model analysis</span></a>
+<a class="sourceLine" id="cb245-2" title="2"><span class="kw">library</span>(ROCR)</a>
+<a class="sourceLine" id="cb245-3" title="3">ROCRpred &lt;-<span class="st"> </span><span class="kw">prediction</span>(predictTest, framinghamTest<span class="op">$</span>TenYearCHD)</a>
+<a class="sourceLine" id="cb245-4" title="4">auc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">performance</span>(ROCRpred, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)</a>
+<a class="sourceLine" id="cb245-5" title="5">auc <span class="co">#74.2% accuracy for model</span></a></code></pre></div>
+<pre><code>## [1] 0.7421095</code></pre>
+</div>
+<div id="recitation-3---election-forecasting" class="section level2">
+<h2><span class="header-section-number">4.3</span> Recitation 3 - Election Forecasting</h2>
+<div id="dealing-with-missing-data" class="section level4">
+<h4><span class="header-section-number">4.3.0.1</span> Dealing with missing data</h4>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">polling &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week3/PollingData.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb247-2" title="2"><span class="kw">table</span>(polling<span class="op">$</span>Year)</a></code></pre></div>
+<pre><code>## 
+## 2004 2008 2012 
+##   50   50   45</code></pre>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1"><span class="kw">summary</span>(polling)</a></code></pre></div>
+<pre><code>##          State          Year        Rasmussen          SurveyUSA       
+##  Arizona    :  3   Min.   :2004   Min.   :-41.0000   Min.   :-33.0000  
+##  Arkansas   :  3   1st Qu.:2004   1st Qu.: -8.0000   1st Qu.:-11.7500  
+##  California :  3   Median :2008   Median :  1.0000   Median : -2.0000  
+##  Colorado   :  3   Mean   :2008   Mean   :  0.0404   Mean   : -0.8243  
+##  Connecticut:  3   3rd Qu.:2012   3rd Qu.:  8.5000   3rd Qu.:  8.0000  
+##  Florida    :  3   Max.   :2012   Max.   : 39.0000   Max.   : 30.0000  
+##  (Other)    :127                  NA&#39;s   :46         NA&#39;s   :71        
+##    DiffCount           PropR          Republican    
+##  Min.   :-19.000   Min.   :0.0000   Min.   :0.0000  
+...</code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">head</span>(polling)</a></code></pre></div>
+<pre><code>##     State Year Rasmussen SurveyUSA DiffCount PropR Republican
+## 1 Alabama 2004        11        18         5     1          1
+## 2 Alabama 2008        21        25         5     1          1
+## 3  Alaska 2004        NA        NA         1     1          1
+## 4  Alaska 2008        16        NA         6     1          1
+## 5 Arizona 2004         5        15         8     1          1
+## 6 Arizona 2008         5        NA         9     1          1</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1"><span class="kw">library</span>(mice)</a>
+<a class="sourceLine" id="cb253-2" title="2">simple &lt;-<span class="st"> </span>polling[<span class="kw">c</span>(<span class="st">&quot;Rasmussen&quot;</span>, <span class="st">&quot;SurveyUSA&quot;</span>, <span class="st">&quot;PropR&quot;</span>, <span class="st">&quot;DiffCount&quot;</span>)]</a>
+<a class="sourceLine" id="cb253-3" title="3"><span class="kw">summary</span>(simple)</a></code></pre></div>
+<pre><code>##    Rasmussen          SurveyUSA            PropR          DiffCount      
+##  Min.   :-41.0000   Min.   :-33.0000   Min.   :0.0000   Min.   :-19.000  
+##  1st Qu.: -8.0000   1st Qu.:-11.7500   1st Qu.:0.0000   1st Qu.: -6.000  
+##  Median :  1.0000   Median : -2.0000   Median :0.6250   Median :  1.000  
+##  Mean   :  0.0404   Mean   : -0.8243   Mean   :0.5259   Mean   : -1.269  
+##  3rd Qu.:  8.5000   3rd Qu.:  8.0000   3rd Qu.:1.0000   3rd Qu.:  4.000  
+##  Max.   : 39.0000   Max.   : 30.0000   Max.   :1.0000   Max.   : 11.000  
+##  NA&#39;s   :46         NA&#39;s   :71</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">set.seed</span>(<span class="dv">144</span>)</a>
+<a class="sourceLine" id="cb255-2" title="2">imputed &lt;-<span class="st"> </span><span class="kw">complete</span>(<span class="kw">mice</span>(simple)) <span class="co">#Differnt from recition, so ill download the file instead</span></a></code></pre></div>
+<pre><code>## 
+##  iter imp variable
+##   1   1  Rasmussen  SurveyUSA
+##   1   2  Rasmussen  SurveyUSA
+##   1   3  Rasmussen  SurveyUSA
+##   1   4  Rasmussen  SurveyUSA
+##   1   5  Rasmussen  SurveyUSA
+##   2   1  Rasmussen  SurveyUSA
+##   2   2  Rasmussen  SurveyUSA
+##   2   3  Rasmussen  SurveyUSA
+...</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1">polling &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week3/PollingData_Imputed.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb257-2" title="2"><span class="kw">summary</span>(polling)</a></code></pre></div>
+<pre><code>##          State          Year        Rasmussen         SurveyUSA      
+##  Arizona    :  3   Min.   :2004   Min.   :-41.000   Min.   :-33.000  
+##  Arkansas   :  3   1st Qu.:2004   1st Qu.:-10.000   1st Qu.:-11.000  
+##  California :  3   Median :2008   Median :  3.000   Median :  1.000  
+##  Colorado   :  3   Mean   :2008   Mean   :  2.048   Mean   :  1.359  
+##  Connecticut:  3   3rd Qu.:2012   3rd Qu.: 12.000   3rd Qu.: 16.000  
+##  Florida    :  3   Max.   :2012   Max.   : 39.000   Max.   : 30.000  
+##  (Other)    :127                                                     
+##    DiffCount           PropR          Republican    
+##  Min.   :-19.000   Min.   :0.0000   Min.   :0.0000  
+...</code></pre>
+</div>
+<div id="a-sophisticated-baseline-model" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> A sophisticated baseline model</h3>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1">pollingTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(polling, Year <span class="op">==</span><span class="st"> </span><span class="dv">2004</span><span class="op">|</span><span class="st"> </span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2008</span>)</a>
+<a class="sourceLine" id="cb259-2" title="2">pollingTest &lt;-<span class="st"> </span><span class="kw">subset</span>(polling, Year <span class="op">==</span><span class="st"> </span><span class="dv">2012</span>)</a>
+<a class="sourceLine" id="cb259-3" title="3"><span class="kw">table</span>(pollingTrain<span class="op">$</span>Republican)</a></code></pre></div>
+<pre><code>## 
+##  0  1 
+## 47 53</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1"><span class="kw">table</span>(<span class="kw">sign</span>(polling<span class="op">$</span>Rasmussen)) <span class="co">#Table of Rasmussen polling </span></a></code></pre></div>
+<pre><code>## 
+## -1  0  1 
+## 60  4 81</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1"><span class="kw">table</span>(pollingTrain<span class="op">$</span>Republican, <span class="kw">sign</span>(pollingTrain<span class="op">$</span>Rasmussen)) <span class="co">#Table showing accuracy of Rasmussen polling as baseline model</span></a></code></pre></div>
+<pre><code>##    
+##     -1  0  1
+##   0 42  1  4
+##   1  0  1 52</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="co">#building the model</span></a>
+<a class="sourceLine" id="cb265-2" title="2"><span class="co">#Check collinearity</span></a>
+<a class="sourceLine" id="cb265-3" title="3"><span class="kw">cor</span>(pollingTrain[<span class="kw">c</span>(<span class="st">&quot;Rasmussen&quot;</span>, <span class="st">&quot;SurveyUSA&quot;</span>, <span class="st">&quot;PropR&quot;</span>, <span class="st">&quot;DiffCount&quot;</span>, <span class="st">&quot;Republican&quot;</span>)])</a></code></pre></div>
+<pre><code>##            Rasmussen SurveyUSA     PropR DiffCount Republican
+## Rasmussen  1.0000000 0.9365837 0.8431180 0.5109169  0.7929252
+## SurveyUSA  0.9365837 1.0000000 0.8616478 0.5222585  0.8101645
+## PropR      0.8431180 0.8616478 1.0000000 0.8273785  0.9484204
+## DiffCount  0.5109169 0.5222585 0.8273785 1.0000000  0.8092777
+## Republican 0.7929252 0.8101645 0.9484204 0.8092777  1.0000000</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">glm</span>(Republican<span class="op">~</span>PropR, <span class="dt">data =</span> pollingTrain, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb267-2" title="2"><span class="kw">summary</span>(mod1)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Republican ~ PropR, family = &quot;binomial&quot;, data = pollingTrain)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.22880  -0.06541   0.10260   0.10260   1.37392  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">pred1 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb269-2" title="2"><span class="kw">table</span>(pollingTrain<span class="op">$</span>Republican, pred1 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    45    2
+##   1     2   51</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">glm</span>(Republican<span class="op">~</span>SurveyUSA <span class="op">+</span><span class="st"> </span>DiffCount, <span class="dt">data =</span> pollingTrain, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb271-2" title="2">pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb271-3" title="3"><span class="kw">table</span>(pollingTrain<span class="op">$</span>Republican, pred2 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    45    2
+##   1     1   52</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="kw">table</span>(pollingTest<span class="op">$</span>Republican, <span class="kw">sign</span>(pollingTest<span class="op">$</span>Rasmussen))</a></code></pre></div>
+<pre><code>##    
+##     -1  0  1
+##   0 18  2  4
+##   1  0  0 21</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">TestPrediction &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">newdata =</span> pollingTest, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb275-2" title="2"><span class="kw">table</span>(pollingTest<span class="op">$</span>Republican, TestPrediction <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0    23    1
+##   1     0   21</code></pre>
+</div>
+</div>
+<div id="assignment-2" class="section level2">
+<h2><span class="header-section-number">4.4</span> Assignment</h2>
+<div id="part-1---popularity-of-music-records" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Part 1 - Popularity of Music Records</h3>
+<p>1.1 How many observations (songs) are from the year 2010?</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">songs &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week3/songs.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb277-2" title="2"><span class="kw">str</span>(songs)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    7574 obs. of  39 variables:
+##  $ year                    : int  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
+##  $ songtitle               : Factor w/ 7141 levels &quot;&#39;03 Bonnie &amp; Clyde&quot;,..: 6204 5522 241 3098 47 607 254 4419 2887 6756 ...
+##  $ artistname              : Factor w/ 1032 levels &quot;50 Cent&quot;,&quot;98 Degrees&quot;,..: 3 3 3 3 3 3 3 3 3 12 ...
+##  $ songID                  : Factor w/ 7549 levels &quot;SOAACNI1315CD4AC42&quot;,..: 595 5439 5252 1716 3431 1020 1831 3964 6904 2473 ...
+##  $ artistID                : Factor w/ 1047 levels &quot;AR00B1I1187FB433EB&quot;,..: 671 671 671 671 671 671 671 671 671 507 ...
+##  $ timesignature           : int  3 4 4 4 4 4 4 4 4 4 ...
+##  $ timesignature_confidence: num  0.853 1 1 1 0.788 1 0.968 0.861 0.622 0.938 ...
+##  $ loudness                : num  -4.26 -4.05 -3.57 -3.81 -4.71 ...
+##  $ tempo                   : num  91.5 140 160.5 97.5 140.1 ...
+...</code></pre>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1"><span class="kw">summary</span>(songs)</a></code></pre></div>
+<pre><code>##       year          songtitle              artistname  
+##  Min.   :1990   Intro    :  15   Various artists: 162  
+##  1st Qu.:1997   Forever  :   8   Anal Cunt      :  49  
+##  Median :2002   Home     :   7   Various Artists:  44  
+##  Mean   :2001   Goodbye  :   6   Tori Amos      :  41  
+##  3rd Qu.:2006   Again    :   5   Eels           :  37  
+##  Max.   :2010   Beautiful:   5   Napalm Death   :  37  
+##                 (Other)  :7528   (Other)        :7204  
+##                 songID                   artistID    timesignature  
+##  SOALSZJ1370F1A7C75:   2   ARAGWS81187FB3F768: 222   Min.   :0.000  
+...</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1"><span class="kw">nrow</span>(songs)</a></code></pre></div>
+<pre><code>## [1] 7574</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1">mj &lt;-<span class="st"> </span><span class="kw">subset</span>(songs, artistname <span class="op">==</span><span class="st"> &quot;Michael Jackson&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Top10 <span class="op">==</span><span class="st"> </span>T)</a>
+<a class="sourceLine" id="cb283-2" title="2">mj</a></code></pre></div>
+<pre><code>##      year         songtitle      artistname             songID
+## 4329 2001 You Rock My World Michael Jackson SOBLCOF13134393021
+## 6207 1995 You Are Not Alone Michael Jackson SOJKNNO13737CEB162
+## 6210 1995    Black or White Michael Jackson SOBBRFO137756C9CB7
+## 6218 1995 Remember the Time Michael Jackson SOIQZMT136C9704DA5
+## 6915 1992     In The Closet Michael Jackson SOKIOOC12AF729ED9E
+##                artistID timesignature timesignature_confidence loudness   tempo
+## 4329 ARXPPEY1187FB51DF4             4                    1.000   -2.768  95.003
+## 6207 ARXPPEY1187FB51DF4             4                    1.000   -9.408 120.566
+## 6210 ARXPPEY1187FB51DF4             4                    1.000   -4.017 115.027
+...</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1"><span class="kw">table</span>(songs<span class="op">$</span>timesignature)</a></code></pre></div>
+<pre><code>## 
+##    0    1    3    4    5    7 
+##   10  143  503 6787  112   19</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" title="1">songs<span class="op">$</span>songtitle[<span class="kw">which.max</span>(songs<span class="op">$</span>tempo)]</a></code></pre></div>
+<pre><code>## [1] Wanna Be Startin&#39; Somethin&#39;
+## 7141 Levels: &#39;03 Bonnie &amp; Clyde &#39;69 ... Zumbi</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1">SongsTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(songs, year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2009</span> )</a>
+<a class="sourceLine" id="cb289-2" title="2">SongsTest &lt;-<span class="st"> </span><span class="kw">subset</span>(songs, year <span class="op">==</span><span class="st"> </span><span class="dv">2010</span> )</a>
+<a class="sourceLine" id="cb289-3" title="3"><span class="kw">nrow</span>(SongsTrain)</a></code></pre></div>
+<pre><code>## [1] 7201</code></pre>
+<p>2.1 Building the model</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1">nonvars =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;songtitle&quot;</span>, <span class="st">&quot;artistname&quot;</span>, <span class="st">&quot;songID&quot;</span>, <span class="st">&quot;artistID&quot;</span>)</a>
+<a class="sourceLine" id="cb291-2" title="2">SongsTrain =<span class="st"> </span>SongsTrain[ , <span class="op">!</span>(<span class="kw">names</span>(SongsTrain) <span class="op">%in%</span><span class="st"> </span>nonvars) ]</a>
+<a class="sourceLine" id="cb291-3" title="3">SongsTest =<span class="st"> </span>SongsTest[ , <span class="op">!</span>(<span class="kw">names</span>(SongsTest) <span class="op">%in%</span><span class="st"> </span>nonvars) ]</a>
+<a class="sourceLine" id="cb291-4" title="4">SongsLog1 =<span class="st"> </span><span class="kw">glm</span>(Top10 <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>SongsTrain, <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb291-5" title="5"><span class="kw">summary</span>(SongsLog1)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Top10 ~ ., family = binomial, data = SongsTrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9220  -0.5399  -0.3459  -0.1845   3.0770  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<p>3.2 Beware of Multi-cllinearity. loudness and energy highly correlated. remove loudness</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1">SongsLog2 =<span class="st"> </span><span class="kw">glm</span>(Top10 <span class="op">~</span><span class="st"> </span>.<span class="op">-</span>loudness, <span class="dt">data=</span>SongsTrain, <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb293-2" title="2"><span class="kw">summary</span>(SongsLog2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Top10 ~ . - loudness, family = binomial, data = SongsTrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0983  -0.5607  -0.3602  -0.1902   3.3107  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1">SongsLog3 =<span class="st"> </span><span class="kw">glm</span>(Top10 <span class="op">~</span><span class="st"> </span>.<span class="op">-</span>energy, <span class="dt">data=</span>SongsTrain, <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb295-2" title="2"><span class="kw">summary</span>(SongsLog3)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Top10 ~ . - energy, family = binomial, data = SongsTrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9182  -0.5417  -0.3481  -0.1874   3.4171  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1">TestPrediction &lt;-<span class="st"> </span><span class="kw">predict</span>(SongsLog3, <span class="dt">newdata =</span> SongsTest, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb297-2" title="2"><span class="kw">table</span>(SongsTest<span class="op">$</span>Top10, TestPrediction <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.45</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0   309    5
+##   1    40   19</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="kw">table</span>(SongsTest<span class="op">$</span>Top10)</a></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 314  59</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="classification-and-regression-trees-cart.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"download": ["pdf", "epub"]
+}
+});
+});
+</script>
+
+</body>
+
+</html>

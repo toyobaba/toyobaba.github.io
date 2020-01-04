@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Unit 3 Linear Regression | Analytics Edge - EdX</title>
+  <meta name="description" content="EdX Analytics Edge, Notes and Assignments" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Unit 3 Linear Regression | Analytics Edge - EdX" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unit 3 Linear Regression | Analytics Edge - EdX" />
+  
+  <meta name="twitter:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+<meta name="author" content="omotoyosi Taiwo" />
+
+
+<meta name="date" content="2019-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="logistic-regression.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analytics Edge - EdX</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> EdX Analytics Edge Notebook</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#working-with-data"><i class="fa fa-check"></i><b>2.1</b> Working with data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#loading-data-files"><i class="fa fa-check"></i><b>2.1.1</b> Loading data files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#summary-statistics"><i class="fa fa-check"></i><b>2.1.2</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction.html"><a href="introduction.html#plots"><i class="fa fa-check"></i><b>2.1.3</b> Plots</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction.html"><a href="introduction.html#summary-tables"><i class="fa fa-check"></i><b>2.1.4</b> Summary tables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#recitation---usda-food-database"><i class="fa fa-check"></i><b>2.2</b> Recitation - USDA Food Database</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#data-analysis---recitation"><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis - Recitation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#histogram---recitation"><i class="fa fa-check"></i><b>2.2.2</b> Histogram - Recitation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#summary-tables---recitation"><i class="fa fa-check"></i><b>2.2.3</b> Summary tables - Recitation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#assignment"><i class="fa fa-check"></i><b>2.3</b> Assignment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction.html"><a href="introduction.html#part-1---analytical-detective"><i class="fa fa-check"></i><b>2.3.1</b> Part 1 - Analytical Detective</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction.html"><a href="introduction.html#part-2---stock-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Part 2 - Stock Dynamics</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction.html"><a href="introduction.html#part-3---demographics-and-employment-in-the-united-states"><i class="fa fa-check"></i><b>2.3.3</b> Part 3 - Demographics and Employment in the United States</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#introduction-to-linear-regression"><i class="fa fa-check"></i><b>3.1</b> Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#variable-linear-regression-model---predicting-wine-quality"><i class="fa fa-check"></i><b>3.1.1</b> 1 variable Linear Regression Model - Predicting Wine Quality</a></li>
+<li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-model"><i class="fa fa-check"></i><b>3.1.2</b> Multiple Linear Regression Model</a></li>
+<li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#correlation-and-muticollinearity"><i class="fa fa-check"></i><b>3.1.3</b> Correlation and Muticollinearity</a></li>
+<li class="chapter" data-level="3.1.4" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions"><i class="fa fa-check"></i><b>3.1.4</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#recitation-2---moneyball-in-the-nba"><i class="fa fa-check"></i><b>3.2</b> Recitation 2 - MOneyball in the NBA</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#regression-model-using-more-than-just-wins-variable"><i class="fa fa-check"></i><b>3.2.1</b> Regression model using more than just Wins variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions-1"><i class="fa fa-check"></i><b>3.2.2</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="linear-regression.html"><a href="linear-regression.html#assignment-1"><i class="fa fa-check"></i><b>3.3</b> Assignment</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linear-regression.html"><a href="linear-regression.html#part-1---climate-change"><i class="fa fa-check"></i><b>3.3.1</b> Part 1 - Climate Change</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linear-regression.html"><a href="linear-regression.html#part-2---detecting-flu-epidemics"><i class="fa fa-check"></i><b>3.3.2</b> Part 2 - Detecting Flu Epidemics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-to-logistic-regression"><i class="fa fa-check"></i><b>4.1</b> Introduction to Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#thresholding"><i class="fa fa-check"></i><b>4.1.1</b> Thresholding</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>4.1.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#making-predictions-2"><i class="fa fa-check"></i><b>4.1.3</b> Making predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#framingham-heart-study"><i class="fa fa-check"></i><b>4.2</b> Framingham Heart study</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#recitation-3---election-forecasting"><i class="fa fa-check"></i><b>4.3</b> Recitation 3 - Election Forecasting</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#a-sophisticated-baseline-model"><i class="fa fa-check"></i><b>4.3.1</b> A sophisticated baseline model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#assignment-2"><i class="fa fa-check"></i><b>4.4</b> Assignment</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#part-1---popularity-of-music-records"><i class="fa fa-check"></i><b>4.4.1</b> Part 1 - Popularity of Music Records</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html"><i class="fa fa-check"></i><b>5</b> Classification and Regression Trees (CART)</a><ul>
+<li class="chapter" data-level="5.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#introduction-to-trees---judge-jury-and-classifier"><i class="fa fa-check"></i><b>5.1</b> Introduction to trees - Judge, Jury, and Classifier</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#random-forests"><i class="fa fa-check"></i><b>5.1.1</b> Random Forests</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation"><i class="fa fa-check"></i><b>5.1.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#the-d2hawkeye-story"><i class="fa fa-check"></i><b>5.2</b> The D2Hawkeye Story</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#baseline-method-and-penalty-matrix"><i class="fa fa-check"></i><b>5.2.1</b> Baseline method and Penalty Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#recitation---boston-housing-data-regression-trees"><i class="fa fa-check"></i><b>5.3</b> Recitation - Boston Housing Data (Regression Trees)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#geographical-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Geographical Predictions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation-1"><i class="fa fa-check"></i><b>5.3.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#assignment-3"><i class="fa fa-check"></i><b>5.4</b> Assignment</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-1---understanding-why-people-vote"><i class="fa fa-check"></i><b>5.4.1</b> Part 1 - Understanding why people vote</a></li>
+<li class="chapter" data-level="5.4.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-2---letter-recognition"><i class="fa fa-check"></i><b>5.4.2</b> Part 2 - Letter Recognition</a></li>
+<li class="chapter" data-level="5.4.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-3---predicting-earnings-from-census-data"><i class="fa fa-check"></i><b>5.4.3</b> Part 3 - Predicting Earnings from Census Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-analytics.html"><a href="text-analytics.html"><i class="fa fa-check"></i><b>6</b> Text Analytics</a><ul>
+<li class="chapter" data-level="6.1" data-path="text-analytics.html"><a href="text-analytics.html#introduction-to-text-analytics"><i class="fa fa-check"></i><b>6.1</b> Introduction to Text Analytics</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="text-analytics.html"><a href="text-analytics.html#turning-tweets-into-knowledge"><i class="fa fa-check"></i><b>6.1.1</b> Turning Tweets into knowledge</a></li>
+<li class="chapter" data-level="6.1.2" data-path="text-analytics.html"><a href="text-analytics.html#preprocessing-data"><i class="fa fa-check"></i><b>6.1.2</b> Preprocessing data</a></li>
+<li class="chapter" data-level="6.1.3" data-path="text-analytics.html"><a href="text-analytics.html#build-a-cart-model"><i class="fa fa-check"></i><b>6.1.3</b> Build a CART model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="text-analytics.html"><a href="text-analytics.html#recitation---the-story-of-enron"><i class="fa fa-check"></i><b>6.2</b> Recitation - The Story of Enron</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="text-analytics.html"><a href="text-analytics.html#bag-of-words"><i class="fa fa-check"></i><b>6.2.1</b> Bag of Words</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="text-analytics.html"><a href="text-analytics.html#assignment-4"><i class="fa fa-check"></i><b>6.3</b> Assignment</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="text-analytics.html"><a href="text-analytics.html#part-1---detecting-vandalism-on-wikipedia"><i class="fa fa-check"></i><b>6.3.1</b> Part 1 - Detecting Vandalism on Wikipedia</a></li>
+<li class="chapter" data-level="6.3.2" data-path="text-analytics.html"><a href="text-analytics.html#part-2---automating-reviews-in-medicine"><i class="fa fa-check"></i><b>6.3.2</b> Part 2 - Automating Reviews in Medicine</a></li>
+<li class="chapter" data-level="6.3.3" data-path="text-analytics.html"><a href="text-analytics.html#part-3---separating-spam-from-ham"><i class="fa fa-check"></i><b>6.3.3</b> Part 3 - Separating Spam from Ham</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#introduction-to-clustering"><i class="fa fa-check"></i><b>7.1</b> Introduction to Clustering</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#heirarchical-clustering"><i class="fa fa-check"></i><b>7.1.1</b> Heirarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#recitation---segmenting-images"><i class="fa fa-check"></i><b>7.2</b> Recitation - Segmenting Images</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="clustering.html"><a href="clustering.html#flower-image"><i class="fa fa-check"></i><b>7.2.1</b> Flower Image</a></li>
+<li class="chapter" data-level="7.2.2" data-path="clustering.html"><a href="clustering.html#mri-image"><i class="fa fa-check"></i><b>7.2.2</b> MRI Image</a></li>
+<li class="chapter" data-level="7.2.3" data-path="clustering.html"><a href="clustering.html#k-means-clustering"><i class="fa fa-check"></i><b>7.2.3</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#assignment-5"><i class="fa fa-check"></i><b>7.3</b> Assignment</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#part-1---document-clustering-with-daily-kos"><i class="fa fa-check"></i><b>7.3.1</b> Part 1 - Document Clustering with Daily Kos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="clustering.html"><a href="clustering.html#part-2---market-segmentation-for-airlines"><i class="fa fa-check"></i><b>7.3.2</b> Part 2 - Market Segmentation for Airlines</a></li>
+<li class="chapter" data-level="7.3.3" data-path="clustering.html"><a href="clustering.html#part-3---predicting-stock-returns-with-cluster-then-predict"><i class="fa fa-check"></i><b>7.3.3</b> Part 3 - Predicting Stock Returns with Cluster-Then-Predict</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a><ul>
+<li class="chapter" data-level="8.1" data-path="visualization.html"><a href="visualization.html#scatterplots---visualizing-the-world"><i class="fa fa-check"></i><b>8.1</b> Scatterplots - Visualizing the world</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="visualization.html"><a href="visualization.html#basic-scatterplots-using-ggplot"><i class="fa fa-check"></i><b>8.1.1</b> Basic scatterplots using ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="visualization.html"><a href="visualization.html#visualizing-crime-over-time"><i class="fa fa-check"></i><b>8.2</b> Visualizing crime over time</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="visualization.html"><a href="visualization.html#heatmaps"><i class="fa fa-check"></i><b>8.2.1</b> Heatmaps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="visualization.html"><a href="visualization.html#a-geographical-hot-spot-map"><i class="fa fa-check"></i><b>8.2.2</b> A Geographical Hot Spot Map</a></li>
+<li class="chapter" data-level="8.2.3" data-path="visualization.html"><a href="visualization.html#a-heatmap-of-the-united-states"><i class="fa fa-check"></i><b>8.2.3</b> A Heatmap of the United States</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="visualization.html"><a href="visualization.html#recitation"><i class="fa fa-check"></i><b>8.3</b> Recitation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="visualization.html"><a href="visualization.html#bar-charts"><i class="fa fa-check"></i><b>8.3.1</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="visualization.html"><a href="visualization.html#assignment-6"><i class="fa fa-check"></i><b>8.4</b> Assignment</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="visualization.html"><a href="visualization.html#part-1---election-forecasting-revisited"><i class="fa fa-check"></i><b>8.4.1</b> Part 1 - Election Forecasting Revisited</a></li>
+<li class="chapter" data-level="8.4.2" data-path="visualization.html"><a href="visualization.html#part-2---visualizing-network-data"><i class="fa fa-check"></i><b>8.4.2</b> Part 2 - Visualizing Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="final-exam.html"><a href="final-exam.html"><i class="fa fa-check"></i><b>9</b> Final Exam</a><ul>
+<li class="chapter" data-level="9.1" data-path="final-exam.html"><a href="final-exam.html#part-1---estimating-miles-per-gallon"><i class="fa fa-check"></i><b>9.1</b> Part 1 - Estimating Miles Per Gallon</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="final-exam.html"><a href="final-exam.html#problem-1---exploratory-data-analysis"><i class="fa fa-check"></i><b>9.1.1</b> Problem 1 - Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="9.1.2" data-path="final-exam.html"><a href="final-exam.html#problem-2---simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Problem 2 - Simple Linear Regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables"><i class="fa fa-check"></i><b>9.1.3</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.1.4" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart-and-randomforest"><i class="fa fa-check"></i><b>9.1.4</b> Problem 4 - CART and Randomforest</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="final-exam.html"><a href="final-exam.html#part-2---predicting-heart-disease"><i class="fa fa-check"></i><b>9.2</b> Part 2 - Predicting Heart Disease</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="final-exam.html"><a href="final-exam.html#problem-12---exploratory-data-analysis-and-logistic-regression"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1&amp;2 - Exploratory Data Analysis and Logistic Regression</a></li>
+<li class="chapter" data-level="9.2.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables-1"><i class="fa fa-check"></i><b>9.2.2</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.2.3" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart"><i class="fa fa-check"></i><b>9.2.3</b> Problem 4 - CART</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="final-exam.html"><a href="final-exam.html#part-3---understanding-users-spending"><i class="fa fa-check"></i><b>9.3</b> Part 3 - Understanding User’s Spending</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="final-exam.html"><a href="final-exam.html#problem-1-and-2"><i class="fa fa-check"></i><b>9.3.1</b> Problem 1 and 2</a></li>
+<li class="chapter" data-level="9.3.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---clustering"><i class="fa fa-check"></i><b>9.3.2</b> Problem 3 - Clustering</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analytics Edge - EdX</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-regression" class="section level1">
+<h1><span class="header-section-number">Unit 3</span> Linear Regression</h1>
+<div id="introduction-to-linear-regression" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction to Linear Regression</h2>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">wine &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/wine.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="kw">str</span>(wine)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    25 obs. of  7 variables:
+##  $ Year       : int  1952 1953 1955 1957 1958 1959 1960 1961 1962 1963 ...
+##  $ Price      : num  7.5 8.04 7.69 6.98 6.78 ...
+##  $ WinterRain : int  600 690 502 420 582 485 763 830 697 608 ...
+##  $ AGST       : num  17.1 16.7 17.1 16.1 16.4 ...
+##  $ HarvestRain: int  160 80 130 110 187 187 290 38 52 155 ...
+##  $ Age        : int  31 30 28 26 25 24 23 22 21 20 ...
+##  $ FrancePop  : num  43184 43495 44218 45152 45654 ...</code></pre>
+<div id="variable-linear-regression-model---predicting-wine-quality" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> 1 variable Linear Regression Model - Predicting Wine Quality</h3>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Price <span class="op">~</span>AGST, <span class="dt">data=</span>wine)<span class="co">#linear_model = lm(dependent_variable ~ independent_variable)</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">summary</span>(model1)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Price ~ AGST, data = wine)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.78450 -0.23882 -0.03727  0.38992  0.90318 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co">#Sum of Squared Errors</span></a>
+<a class="sourceLine" id="cb89-2" title="2">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>(model1<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb89-3" title="3">SSE</a></code></pre></div>
+<pre><code>## [1] 5.734875</code></pre>
+</div>
+<div id="multiple-linear-regression-model" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Multiple Linear Regression Model</h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">model2&lt;-<span class="st"> </span><span class="kw">lm</span>(Price <span class="op">~</span>AGST <span class="op">+</span><span class="st"> </span>HarvestRain, <span class="dt">data=</span>wine)</a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="kw">summary</span>(model2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Price ~ AGST + HarvestRain, data = wine)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.88321 -0.19600  0.06178  0.15379  0.59722 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>(model2<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb93-2" title="2">SSE</a></code></pre></div>
+<pre><code>## [1] 2.970373</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">model3&lt;-<span class="st"> </span><span class="kw">lm</span>(Price <span class="op">~</span><span class="st"> </span>AGST <span class="op">+</span><span class="st"> </span>HarvestRain <span class="op">+</span><span class="st"> </span>WinterRain <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>FrancePop, wine)</a>
+<a class="sourceLine" id="cb95-2" title="2"><span class="kw">summary</span>(model3)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Price ~ AGST + HarvestRain + WinterRain + Age + 
+##     FrancePop, data = wine)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.48179 -0.24662 -0.00726  0.22012  0.51987 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>(model3<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb97-2" title="2">SSE</a></code></pre></div>
+<pre><code>## [1] 1.732113</code></pre>
+<p>Estimate - Estimate of beta value for model</p>
+<p>Multiple R-squared always increases</p>
+<p>Adjusted R-squared decreases if an unhelpful independent variable is added to model</p>
+<p>t-value = Estimate/Std. Error</p>
+<p>the larger the absolute t-value the more likely the coefficient is to be significant</p>
+<p>Last column gives a measure of how plausible (probability) it is that the coefficient is 0</p>
+<p>Age and France population are insignificant in model.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">model4 &lt;-<span class="st"> </span><span class="kw">lm</span> (Price <span class="op">~</span><span class="st"> </span>AGST <span class="op">+</span><span class="st"> </span>HarvestRain <span class="op">+</span><span class="st"> </span>WinterRain <span class="op">+</span><span class="st"> </span>Age, <span class="dt">data =</span> wine)</a>
+<a class="sourceLine" id="cb99-2" title="2"><span class="kw">summary</span>(model4)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Price ~ AGST + HarvestRain + WinterRain + Age, data = wine)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.45470 -0.24273  0.00752  0.19773  0.53637 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+</div>
+<div id="correlation-and-muticollinearity" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Correlation and Muticollinearity</h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">cor</span>(wine<span class="op">$</span>WinterRain, wine<span class="op">$</span>Price)</a></code></pre></div>
+<pre><code>## [1] 0.1366505</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">cor</span>(wine) <span class="co">#Table of correlation for all variables</span></a></code></pre></div>
+<pre><code>##                    Year      Price   WinterRain        AGST HarvestRain
+## Year         1.00000000 -0.4477679  0.016970024 -0.24691585  0.02800907
+## Price       -0.44776786  1.0000000  0.136650547  0.65956286 -0.56332190
+## WinterRain   0.01697002  0.1366505  1.000000000 -0.32109061 -0.27544085
+## AGST        -0.24691585  0.6595629 -0.321090611  1.00000000 -0.06449593
+## HarvestRain  0.02800907 -0.5633219 -0.275440854 -0.06449593  1.00000000
+## Age         -1.00000000  0.4477679 -0.016970024  0.24691585 -0.02800907
+## FrancePop    0.99448510 -0.4668616 -0.001621627 -0.25916227  0.04126439
+##                     Age    FrancePop
+## Year        -1.00000000  0.994485097
+...</code></pre>
+<p>multicollinearity - When 2 independent variables are highly correlated.
+Only remove 1 collinear variable at a time.</p>
+</div>
+<div id="making-predictions" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Making Predictions</h3>
+<p>Out of sample accuracy - Accuracy of model on new test data</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">wineTest &lt;-<span class="kw">read.csv</span>(<span class="st">&quot;week2/wine_test.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb105-2" title="2">predictTest =<span class="st"> </span><span class="kw">predict</span>(model4, <span class="dt">newdata=</span>wineTest)</a>
+<a class="sourceLine" id="cb105-3" title="3">predictTest</a></code></pre></div>
+<pre><code>##        1        2 
+## 6.768925 6.684910</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1">SSE =<span class="st"> </span><span class="kw">sum</span>((wineTest<span class="op">$</span>Price <span class="op">-</span><span class="st"> </span>predictTest)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb107-2" title="2">SST =<span class="st"> </span><span class="kw">sum</span>((wineTest<span class="op">$</span>Price <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(wine<span class="op">$</span>Price))<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb107-3" title="3"><span class="dv">1</span><span class="op">-</span><span class="st"> </span>SSE<span class="op">/</span>SST <span class="co">#R-squared</span></a></code></pre></div>
+<pre><code>## [1] 0.7944278</code></pre>
+<div id="the-story-of-moneyball" class="section level4">
+<h4><span class="header-section-number">3.1.4.1</span> The Story of Moneyball</h4>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">baseball &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/baseball.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb109-2" title="2"><span class="kw">str</span>(baseball)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    1232 obs. of  15 variables:
+##  $ Team        : Factor w/ 39 levels &quot;ANA&quot;,&quot;ARI&quot;,&quot;ATL&quot;,..: 2 3 4 5 7 8 9 10 11 12 ...
+##  $ League      : Factor w/ 2 levels &quot;AL&quot;,&quot;NL&quot;: 2 2 1 1 2 1 2 1 2 1 ...
+##  $ Year        : int  2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 ...
+##  $ RS          : int  734 700 712 734 613 748 669 667 758 726 ...
+##  $ RA          : int  688 600 705 806 759 676 588 845 890 670 ...
+##  $ W           : int  81 94 93 69 61 85 97 68 64 88 ...
+##  $ OBP         : num  0.328 0.32 0.311 0.315 0.302 0.318 0.315 0.324 0.33 0.335 ...
+##  $ SLG         : num  0.418 0.389 0.417 0.415 0.378 0.422 0.411 0.381 0.436 0.422 ...
+##  $ BA          : num  0.259 0.247 0.247 0.26 0.24 0.255 0.251 0.251 0.274 0.268 ...
+...</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">moneyball &lt;-<span class="st"> </span><span class="kw">subset</span>(baseball, Year <span class="op">&lt;</span><span class="dv">2002</span>)</a>
+<a class="sourceLine" id="cb111-2" title="2"><span class="kw">str</span>(moneyball)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    902 obs. of  15 variables:
+##  $ Team        : Factor w/ 39 levels &quot;ANA&quot;,&quot;ARI&quot;,&quot;ATL&quot;,..: 1 2 3 4 5 7 8 9 10 11 ...
+##  $ League      : Factor w/ 2 levels &quot;AL&quot;,&quot;NL&quot;: 1 2 2 1 1 2 1 2 1 2 ...
+##  $ Year        : int  2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 ...
+##  $ RS          : int  691 818 729 687 772 777 798 735 897 923 ...
+##  $ RA          : int  730 677 643 829 745 701 795 850 821 906 ...
+##  $ W           : int  75 92 88 63 82 88 83 66 91 73 ...
+##  $ OBP         : num  0.327 0.341 0.324 0.319 0.334 0.336 0.334 0.324 0.35 0.354 ...
+##  $ SLG         : num  0.405 0.442 0.412 0.38 0.439 0.43 0.451 0.419 0.458 0.483 ...
+##  $ BA          : num  0.261 0.267 0.26 0.248 0.266 0.261 0.268 0.262 0.278 0.292 ...
+...</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">moneyball<span class="op">$</span>RD &lt;-<span class="st"> </span>moneyball<span class="op">$</span>RS <span class="op">-</span><span class="st"> </span>moneyball<span class="op">$</span>RA <span class="co"># Difference between Rums Scored and runs against</span></a>
+<a class="sourceLine" id="cb113-2" title="2"><span class="kw">str</span>(moneyball)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    902 obs. of  16 variables:
+##  $ Team        : Factor w/ 39 levels &quot;ANA&quot;,&quot;ARI&quot;,&quot;ATL&quot;,..: 1 2 3 4 5 7 8 9 10 11 ...
+##  $ League      : Factor w/ 2 levels &quot;AL&quot;,&quot;NL&quot;: 1 2 2 1 1 2 1 2 1 2 ...
+##  $ Year        : int  2001 2001 2001 2001 2001 2001 2001 2001 2001 2001 ...
+##  $ RS          : int  691 818 729 687 772 777 798 735 897 923 ...
+##  $ RA          : int  730 677 643 829 745 701 795 850 821 906 ...
+##  $ W           : int  75 92 88 63 82 88 83 66 91 73 ...
+##  $ OBP         : num  0.327 0.341 0.324 0.319 0.334 0.336 0.334 0.324 0.35 0.354 ...
+##  $ SLG         : num  0.405 0.442 0.412 0.38 0.439 0.43 0.451 0.419 0.458 0.483 ...
+##  $ BA          : num  0.261 0.267 0.26 0.248 0.266 0.261 0.268 0.262 0.278 0.292 ...
+...</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">plot</span>(moneyball<span class="op">$</span>RD, moneyball<span class="op">$</span>W)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1">WinsReg &lt;-<span class="st"> </span><span class="kw">lm</span>(W<span class="op">~</span>RD, <span class="dt">data =</span> moneyball) <span class="co">#Regression model</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="kw">summary</span>(WinsReg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = W ~ RD, data = moneyball)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.2662  -2.6509   0.1234   2.9364  11.6570 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+</div>
+<div id="predicting-runs" class="section level4">
+<h4><span class="header-section-number">3.1.4.2</span> Predicting Runs</h4>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1">RunsReg &lt;-<span class="st"> </span><span class="kw">lm</span>(RS <span class="op">~</span>OBP <span class="op">+</span><span class="st"> </span>SLG <span class="op">+</span><span class="st"> </span>BA, <span class="dt">data=</span>moneyball) <span class="co">#On Base percentage, Slugging Percentage and Batting Average</span></a>
+<a class="sourceLine" id="cb118-2" title="2"><span class="kw">summary</span>(RunsReg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = RS ~ OBP + SLG + BA, data = moneyball)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -70.941 -17.247  -0.621  16.754  90.998 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">RunsReg &lt;-<span class="st"> </span><span class="kw">lm</span>(RS <span class="op">~</span>OBP <span class="op">+</span><span class="st"> </span>SLG, <span class="dt">data=</span>moneyball)</a>
+<a class="sourceLine" id="cb120-2" title="2"><span class="kw">summary</span>(RunsReg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = RS ~ OBP + SLG, data = moneyball)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -70.838 -17.174  -1.108  16.770  90.036 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+</div>
+</div>
+</div>
+<div id="recitation-2---moneyball-in-the-nba" class="section level2">
+<h2><span class="header-section-number">3.2</span> Recitation 2 - MOneyball in the NBA</h2>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1">NBA &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/NBA_train.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb122-2" title="2"><span class="kw">str</span>(NBA)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    835 obs. of  20 variables:
+##  $ SeasonEnd: int  1980 1980 1980 1980 1980 1980 1980 1980 1980 1980 ...
+##  $ Team     : Factor w/ 37 levels &quot;Atlanta Hawks&quot;,..: 1 2 5 6 8 9 10 11 12 13 ...
+##  $ Playoffs : int  1 1 0 0 0 0 0 1 0 1 ...
+##  $ W        : int  50 61 30 37 30 16 24 41 37 47 ...
+##  $ PTS      : int  8573 9303 8813 9360 8878 8933 8493 9084 9119 8860 ...
+##  $ oppPTS   : int  8334 8664 9035 9332 9240 9609 8853 9070 9176 8603 ...
+##  $ FG       : int  3261 3617 3362 3811 3462 3643 3527 3599 3639 3582 ...
+##  $ FGA      : int  7027 7387 6943 8041 7470 7596 7318 7496 7689 7489 ...
+##  $ X2P      : int  3248 3455 3292 3775 3379 3586 3500 3495 3551 3557 ...
+...</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1"><span class="kw">table</span>(NBA<span class="op">$</span>W, NBA<span class="op">$</span>Playoffs)</a></code></pre></div>
+<pre><code>##     
+##       0  1
+##   11  2  0
+##   12  2  0
+##   13  2  0
+##   14  2  0
+##   15 10  0
+##   16  2  0
+##   17 11  0
+##   18  5  0
+...</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1">NBA<span class="op">$</span>PTSdiff &lt;-<span class="st"> </span>NBA<span class="op">$</span>PTS <span class="op">-</span><span class="st"> </span>NBA<span class="op">$</span>oppPTS <span class="co"># Points difference</span></a>
+<a class="sourceLine" id="cb126-2" title="2"><span class="kw">plot</span>(NBA<span class="op">$</span>PTSdiff, NBA<span class="op">$</span>W)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1">WinsReg &lt;-<span class="st"> </span><span class="kw">lm</span>(W<span class="op">~</span>PTSdiff, <span class="dt">data =</span> NBA)</a>
+<a class="sourceLine" id="cb127-2" title="2"><span class="kw">summary</span>(WinsReg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = W ~ PTSdiff, data = NBA)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.7393 -2.1018 -0.0672  2.0265 10.6026 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<blockquote>
+<p>Regression Equation: W = 41+ 0.0326*PTSdiff</p>
+</blockquote>
+<div id="regression-model-using-more-than-just-wins-variable" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Regression model using more than just Wins variable</h3>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1">PointsReg &lt;-<span class="st"> </span><span class="kw">lm</span>(PTS <span class="op">~</span><span class="st"> </span>X2PA <span class="op">+</span><span class="st"> </span>X3PA <span class="op">+</span><span class="st"> </span>FTA <span class="op">+</span><span class="st"> </span>AST <span class="op">+</span><span class="st"> </span>ORB <span class="op">+</span>DRB <span class="op">+</span>TOV <span class="op">+</span>STL <span class="op">+</span><span class="st"> </span>BLK, <span class="dt">data =</span> NBA)</a>
+<a class="sourceLine" id="cb129-2" title="2"><span class="kw">summary</span>(PointsReg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = PTS ~ X2PA + X3PA + FTA + AST + ORB + DRB + TOV + 
+##     STL + BLK, data = NBA)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -527.40 -119.83    7.83  120.67  564.71 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">PointsReg<span class="op">$</span>residuals</a></code></pre></div>
+<pre><code>##            1            2            3            4            5            6 
+##   38.5722713  142.8720040  -92.8957180   -8.3913473 -258.4705615  171.4608325 
+##            7            8            9           10           11           12 
+##  150.4081623  169.3811429   40.7756197  -75.3256614  444.9088743   94.3864704 
+##           13           14           15           16           17           18 
+## -205.6809050  113.5969040   64.1993998  -76.5711999  249.4888007   28.0363236 
+##           19           20           21           22           23           24 
+##  329.4487991   96.3248342  349.2067913 -284.3765225  196.1611379  198.2493104 
+##           25           26           27           28           29           30 
+##  445.4100295   93.8946072 -316.2962802 -166.1909668   -5.8446359  211.2301997 
+...</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">SSE =<span class="st"> </span><span class="kw">sum</span>(PointsReg<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb133-2" title="2">SSE</a></code></pre></div>
+<pre><code>## [1] 28394314</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">RMSE &lt;-<span class="kw">sqrt</span>(SSE<span class="op">/</span><span class="kw">nrow</span>(NBA))</a></code></pre></div>
+<p>Remove TOV from model since it has highest p-value</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">PointsReg2 &lt;-<span class="st"> </span><span class="kw">lm</span>(PTS <span class="op">~</span><span class="st"> </span>X2PA <span class="op">+</span><span class="st"> </span>X3PA <span class="op">+</span><span class="st"> </span>FTA <span class="op">+</span><span class="st"> </span>AST <span class="op">+</span><span class="st"> </span>ORB <span class="op">+</span>DRB <span class="op">+</span>STL <span class="op">+</span><span class="st"> </span>BLK, <span class="dt">data =</span> NBA)</a>
+<a class="sourceLine" id="cb136-2" title="2"><span class="kw">summary</span>(PointsReg2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = PTS ~ X2PA + X3PA + FTA + AST + ORB + DRB + STL + 
+##     BLK, data = NBA)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -526.79 -121.09    6.37  120.74  565.94 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="co">#Remove DRB</span></a>
+<a class="sourceLine" id="cb138-2" title="2">PointsReg3 &lt;-<span class="st"> </span><span class="kw">lm</span>(PTS <span class="op">~</span><span class="st"> </span>X2PA <span class="op">+</span><span class="st"> </span>X3PA <span class="op">+</span><span class="st"> </span>FTA <span class="op">+</span><span class="st"> </span>AST <span class="op">+</span><span class="st"> </span>ORB <span class="op">+</span>STL <span class="op">+</span><span class="st"> </span>BLK, <span class="dt">data =</span> NBA)</a>
+<a class="sourceLine" id="cb138-3" title="3"><span class="kw">summary</span>(PointsReg3)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = PTS ~ X2PA + X3PA + FTA + AST + ORB + STL + BLK, 
+##     data = NBA)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -523.79 -121.64    6.07  120.81  573.64 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="co">#Remove Blocks</span></a>
+<a class="sourceLine" id="cb140-2" title="2">PointsReg4 &lt;-<span class="st"> </span><span class="kw">lm</span>(PTS <span class="op">~</span><span class="st"> </span>X2PA <span class="op">+</span><span class="st"> </span>X3PA <span class="op">+</span><span class="st"> </span>FTA <span class="op">+</span><span class="st"> </span>AST <span class="op">+</span><span class="st"> </span>ORB <span class="op">+</span>STL, <span class="dt">data =</span> NBA)</a>
+<a class="sourceLine" id="cb140-3" title="3"><span class="kw">summary</span>(PointsReg4)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = PTS ~ X2PA + X3PA + FTA + AST + ORB + STL, data = NBA)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -523.33 -122.02    6.93  120.68  568.26 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">RMSE_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(PointsReg4<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">nrow</span>(NBA))</a>
+<a class="sourceLine" id="cb142-2" title="2">RMSE_<span class="dv">4</span></a></code></pre></div>
+<pre><code>## [1] 184.493</code></pre>
+<p>R-squared remains virtually unchanged</p>
+</div>
+<div id="making-predictions-1" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Making Predictions</h3>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">RegVar &lt;-<span class="st"> </span>NBA[<span class="kw">c</span>(<span class="st">&quot;X2PA&quot;</span>, <span class="st">&quot;X3PA&quot;</span>, <span class="st">&quot;FTA&quot;</span>, <span class="st">&quot;AST&quot;</span>, <span class="st">&quot;ORB&quot;</span>, <span class="st">&quot;STL&quot;</span>)] <span class="co">#Regression Variables </span></a>
+<a class="sourceLine" id="cb144-2" title="2"><span class="kw">cor</span>(RegVar)</a></code></pre></div>
+<pre><code>##            X2PA       X3PA        FTA        AST        ORB        STL
+## X2PA  1.0000000 -0.9232442  0.5237567  0.6777075  0.7656147  0.4900862
+## X3PA -0.9232442  1.0000000 -0.5377829 -0.5927831 -0.6491727 -0.4090916
+## FTA   0.5237567 -0.5377829  1.0000000  0.4279722  0.4745584  0.3700552
+## AST   0.6777075 -0.5927831  0.4279722  1.0000000  0.4067656  0.4431383
+## ORB   0.7656147 -0.6491727  0.4745584  0.4067656  1.0000000  0.4929415
+## STL   0.4900862 -0.4090916  0.3700552  0.4431383  0.4929415  1.0000000</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1">NBA_test &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/NBA_test.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb146-2" title="2">PointsPredictions &lt;-<span class="st"> </span><span class="kw">predict</span>(PointsReg4, <span class="dt">newdata =</span> NBA_test)</a>
+<a class="sourceLine" id="cb146-3" title="3">PointsPredictions</a></code></pre></div>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 8086.446 7764.143 7965.348 7784.034 8004.349 8247.427 8601.200 7818.223 
+##        9       10       11       12       13       14       15       16 
+## 8127.482 8619.523 8072.525 8535.753 7527.693 8022.760 8283.675 8159.595 
+##       17       18       19       20       21       22       23       24 
+## 7507.084 7851.878 8197.481 7766.547 7727.529 7942.718 7947.870 8144.708 
+##       25       26       27       28 
+## 8335.840 8006.388 7975.788 7873.656</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>((PointsPredictions <span class="op">-</span><span class="st"> </span>NBA_test<span class="op">$</span>PTS)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb148-2" title="2">SST &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">mean</span>(NBA<span class="op">$</span>PTS)<span class="op">-</span>NBA_test<span class="op">$</span>PTS)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb148-3" title="3">Rsquared &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>SSE<span class="op">/</span>SST</a>
+<a class="sourceLine" id="cb148-4" title="4">Rsquared</a></code></pre></div>
+<pre><code>## [1] 0.8127142</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">RMSE &lt;-<span class="st"> </span><span class="kw">sqrt</span>(SSE<span class="op">/</span><span class="kw">nrow</span>(NBA_test))</a>
+<a class="sourceLine" id="cb150-2" title="2">RMSE</a></code></pre></div>
+<pre><code>## [1] 196.3723</code></pre>
+</div>
+</div>
+<div id="assignment-1" class="section level2">
+<h2><span class="header-section-number">3.3</span> Assignment</h2>
+<div id="part-1---climate-change" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Part 1 - Climate Change</h3>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1">climate_change &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/climate_change.csv&quot;</span>) </a>
+<a class="sourceLine" id="cb152-2" title="2"><span class="kw">summary</span>(climate_change)</a></code></pre></div>
+<pre><code>##       Year          Month             MEI               CO2       
+##  Min.   :1983   Min.   : 1.000   Min.   :-1.6350   Min.   :340.2  
+##  1st Qu.:1989   1st Qu.: 4.000   1st Qu.:-0.3987   1st Qu.:353.0  
+##  Median :1996   Median : 7.000   Median : 0.2375   Median :361.7  
+##  Mean   :1996   Mean   : 6.552   Mean   : 0.2756   Mean   :363.2  
+##  3rd Qu.:2002   3rd Qu.:10.000   3rd Qu.: 0.8305   3rd Qu.:373.5  
+##  Max.   :2008   Max.   :12.000   Max.   : 3.0010   Max.   :388.5  
+##       CH4            N2O            CFC.11          CFC.12           TSI      
+##  Min.   :1630   Min.   :303.7   Min.   :191.3   Min.   :350.1   Min.   :1365  
+##  1st Qu.:1722   1st Qu.:308.1   1st Qu.:246.3   1st Qu.:472.4   1st Qu.:1366  
+...</code></pre>
+<div id="problem-1-1" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> Problem 1</h4>
+<p>Split data into training dataset and testing dataset by year 2006. Training - Year &lt;= 2006, and Testing &gt;2006</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">training_set &lt;-<span class="st"> </span><span class="kw">subset</span>(climate_change, Year <span class="op">&lt;=</span><span class="dv">2006</span>)</a>
+<a class="sourceLine" id="cb154-2" title="2">testing_set &lt;-<span class="st"> </span><span class="kw">subset</span>(climate_change, Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2006</span>)</a>
+<a class="sourceLine" id="cb154-3" title="3"><span class="kw">summary</span>(training_set)</a></code></pre></div>
+<pre><code>##       Year          Month             MEI               CO2       
+##  Min.   :1983   Min.   : 1.000   Min.   :-1.5860   Min.   :340.2  
+##  1st Qu.:1989   1st Qu.: 4.000   1st Qu.:-0.3230   1st Qu.:352.3  
+##  Median :1995   Median : 7.000   Median : 0.3085   Median :359.9  
+##  Mean   :1995   Mean   : 6.556   Mean   : 0.3419   Mean   :361.4  
+##  3rd Qu.:2001   3rd Qu.:10.000   3rd Qu.: 0.8980   3rd Qu.:370.6  
+##  Max.   :2006   Max.   :12.000   Max.   : 3.0010   Max.   :385.0  
+##       CH4            N2O            CFC.11          CFC.12           TSI      
+##  Min.   :1630   Min.   :303.7   Min.   :191.3   Min.   :350.1   Min.   :1365  
+##  1st Qu.:1716   1st Qu.:307.7   1st Qu.:249.6   1st Qu.:462.5   1st Qu.:1366  
+...</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">climate_model &lt;-<span class="st"> </span><span class="kw">lm</span>(Temp <span class="op">~</span><span class="st"> </span>MEI <span class="op">+</span>CO2 <span class="op">+</span><span class="st"> </span>CH4 <span class="op">+</span><span class="st"> </span>N2O <span class="op">+</span><span class="st"> </span>CFC<span class="fl">.11</span> <span class="op">+</span><span class="st"> </span>CFC<span class="fl">.12</span> <span class="op">+</span><span class="st"> </span>TSI <span class="op">+</span><span class="st"> </span>Aerosols, <span class="dt">data=</span> training_set)</a>
+<a class="sourceLine" id="cb156-2" title="2"><span class="kw">summary</span>(climate_model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Temp ~ MEI + CO2 + CH4 + N2O + CFC.11 + CFC.12 + 
+##     TSI + Aerosols, data = training_set)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.25888 -0.05913 -0.00082  0.05649  0.32433 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="kw">cor</span>(training_set)</a></code></pre></div>
+<pre><code>##                 Year         Month           MEI         CO2         CH4
+## Year      1.00000000 -0.0279419602 -0.0369876842  0.98274939  0.91565945
+## Month    -0.02794196  1.0000000000  0.0008846905 -0.10673246  0.01856866
+## MEI      -0.03698768  0.0008846905  1.0000000000 -0.04114717 -0.03341930
+## CO2       0.98274939 -0.1067324607 -0.0411471651  1.00000000  0.87727963
+## CH4       0.91565945  0.0185686624 -0.0334193014  0.87727963  1.00000000
+## N2O       0.99384523  0.0136315303 -0.0508197755  0.97671982  0.89983864
+## CFC.11    0.56910643 -0.0131112236  0.0690004387  0.51405975  0.77990402
+## CFC.12    0.89701166  0.0006751102  0.0082855443  0.85268963  0.96361625
+## TSI       0.17030201 -0.0346061935 -0.1544919227  0.17742893  0.24552844
+...</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">SSE &lt;-<span class="st"> </span><span class="kw">sum</span>(climate_model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb160-2" title="2">RMSE &lt;-<span class="st"> </span><span class="kw">sqrt</span>(SSE<span class="op">/</span><span class="kw">nrow</span>(training_set))</a>
+<a class="sourceLine" id="cb160-3" title="3">RMSE</a></code></pre></div>
+<pre><code>## [1] 0.09024652</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">nrow</span>(training_set) <span class="co">#Observations in Trining set</span></a></code></pre></div>
+<pre><code>## [1] 284</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">training_set<span class="op">$</span>Year[<span class="kw">which.max</span>(training_set<span class="op">$</span>MEI)]</a></code></pre></div>
+<pre><code>## [1] 1997</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">climate_model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Temp <span class="op">~</span><span class="st"> </span>MEI <span class="op">+</span><span class="st"> </span>N2O <span class="op">+</span><span class="st">  </span>TSI <span class="op">+</span><span class="st"> </span>Aerosols, <span class="dt">data=</span> training_set)</a>
+<a class="sourceLine" id="cb166-2" title="2"><span class="kw">summary</span>(climate_model2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Temp ~ MEI + N2O + TSI + Aerosols, data = training_set)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.27916 -0.05975 -0.00595  0.05672  0.34195 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">step_model &lt;-<span class="st"> </span><span class="kw">step</span>(climate_model)<span class="co">#Try different combinatins of models to find good compromise</span></a></code></pre></div>
+<pre><code>## Start:  AIC=-1348.16
+## Temp ~ MEI + CO2 + CH4 + N2O + CFC.11 + CFC.12 + TSI + Aerosols
+## 
+##            Df Sum of Sq    RSS     AIC
+## - CH4       1   0.00049 2.3135 -1350.1
+## &lt;none&gt;                  2.3130 -1348.2
+## - N2O       1   0.03132 2.3443 -1346.3
+## - CO2       1   0.06719 2.3802 -1342.0
+## - CFC.12    1   0.11874 2.4318 -1335.9
+## - CFC.11    1   0.13986 2.4529 -1333.5
+...</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">summary</span>(step_model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Temp ~ MEI + CO2 + N2O + CFC.11 + CFC.12 + TSI + 
+##     Aerosols, data = training_set)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.25770 -0.05994 -0.00104  0.05588  0.32203 
+## 
+## Coefficients:
+...</code></pre>
+</div>
+</div>
+<div id="part-2---detecting-flu-epidemics" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Part 2 - Detecting Flu Epidemics</h3>
+<div id="problem-1-2" class="section level4">
+<h4><span class="header-section-number">3.3.2.1</span> Problem 1</h4>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">climate_regression_variables &lt;-<span class="st"> </span>climate_change[<span class="kw">c</span>(<span class="st">&quot;MEI&quot;</span>, <span class="st">&quot;CO2&quot;</span>, <span class="st">&quot;N2O&quot;</span>, <span class="st">&quot;CFC.11&quot;</span>, <span class="st">&quot;CFC.12&quot;</span>, <span class="st">&quot;TSI&quot;</span>, <span class="st">&quot;Aerosols&quot;</span>)]</a>
+<a class="sourceLine" id="cb172-2" title="2">testing_set<span class="op">$</span>predicted_temp &lt;-<span class="st"> </span><span class="kw">predict</span>(step_model, <span class="dt">newdata =</span> testing_set)</a>
+<a class="sourceLine" id="cb172-3" title="3"><span class="kw">summary</span>(testing_set)</a></code></pre></div>
+<pre><code>##       Year          Month            MEI               CO2       
+##  Min.   :2007   Min.   : 1.00   Min.   :-1.6350   Min.   :380.9  
+##  1st Qu.:2007   1st Qu.: 3.75   1st Qu.:-1.0437   1st Qu.:383.1  
+##  Median :2008   Median : 6.50   Median :-0.5305   Median :384.5  
+##  Mean   :2008   Mean   : 6.50   Mean   :-0.5098   Mean   :384.7  
+##  3rd Qu.:2008   3rd Qu.: 9.25   3rd Qu.:-0.0360   3rd Qu.:386.1  
+##  Max.   :2008   Max.   :12.00   Max.   : 0.9740   Max.   :388.5  
+##       CH4            N2O            CFC.11          CFC.12           TSI      
+##  Min.   :1772   Min.   :320.3   Min.   :244.1   Min.   :534.9   Min.   :1366  
+##  1st Qu.:1792   1st Qu.:320.6   1st Qu.:244.6   1st Qu.:535.1   1st Qu.:1366  
+...</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">SSE_test&lt;-<span class="st"> </span><span class="kw">sum</span>((testing_set<span class="op">$</span>predicted_temp <span class="op">-</span><span class="st"> </span>testing_set<span class="op">$</span>Temp)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb174-2" title="2">SST_test &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">mean</span>(training_set<span class="op">$</span>Temp)<span class="op">-</span>testing_set<span class="op">$</span>Temp)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb174-3" title="3">Rsquared_test &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="st"> </span>SSE_test<span class="op">/</span>SST_test</a>
+<a class="sourceLine" id="cb174-4" title="4">Rsquared_test</a></code></pre></div>
+<pre><code>## [1] 0.6286051</code></pre>
+</div>
+<div id="problem-2---reading-test-scores" class="section level4">
+<h4><span class="header-section-number">3.3.2.2</span> Problem 2 - Reading test scores</h4>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">pisa2009train &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/pisa2009train.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb176-2" title="2">pisa2009test &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/pisa2009test.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb176-3" title="3"><span class="kw">nrow</span>(pisa2009train)</a></code></pre></div>
+<pre><code>## [1] 3663</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">summary</span>(pisa2009train)</a></code></pre></div>
+<pre><code>##      grade            male                      raceeth       preschool     
+##  Min.   : 8.00   Min.   :0.0000   White             :2015   Min.   :0.0000  
+##  1st Qu.:10.00   1st Qu.:0.0000   Hispanic          : 834   1st Qu.:0.0000  
+##  Median :10.00   Median :1.0000   Black             : 444   Median :1.0000  
+##  Mean   :10.09   Mean   :0.5111   Asian             : 143   Mean   :0.7228  
+##  3rd Qu.:10.00   3rd Qu.:1.0000   More than one race: 124   3rd Qu.:1.0000  
+##  Max.   :12.00   Max.   :1.0000   (Other)           :  68   Max.   :1.0000  
+##                                   NA&#39;s              :  35   NA&#39;s   :56      
+##  expectBachelors     motherHS    motherBachelors    motherWork    
+##  Min.   :0.0000   Min.   :0.00   Min.   :0.0000   Min.   :0.0000  
+...</code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">str</span>(pisa2009train)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    3663 obs. of  24 variables:
+##  $ grade                : int  11 11 9 10 10 10 10 10 9 10 ...
+##  $ male                 : int  1 1 1 0 1 1 0 0 0 1 ...
+##  $ raceeth              : Factor w/ 7 levels &quot;American Indian/Alaska Native&quot;,..: NA 7 7 3 4 3 2 7 7 5 ...
+##  $ preschool            : int  NA 0 1 1 1 1 0 1 1 1 ...
+##  $ expectBachelors      : int  0 0 1 1 0 1 1 1 0 1 ...
+##  $ motherHS             : int  NA 1 1 0 1 NA 1 1 1 1 ...
+##  $ motherBachelors      : int  NA 1 1 0 0 NA 0 0 NA 1 ...
+##  $ motherWork           : int  1 1 1 1 1 1 1 0 1 1 ...
+##  $ fatherHS             : int  NA 1 1 1 1 1 NA 1 0 0 ...
+...</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">tapply</span>(pisa2009train<span class="op">$</span>readingScore, pisa2009train<span class="op">$</span>male, mean)</a></code></pre></div>
+<pre><code>##        0        1 
+## 512.9406 483.5325</code></pre>
+<p>Remove observations with missing data</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1">pisaTrain &lt;-<span class="st"> </span><span class="kw">na.omit</span>(pisa2009train)</a>
+<a class="sourceLine" id="cb184-2" title="2">pisaTest &lt;-<span class="st"> </span><span class="kw">na.omit</span>(pisa2009test)</a>
+<a class="sourceLine" id="cb184-3" title="3"><span class="kw">nrow</span>(pisaTrain)</a></code></pre></div>
+<pre><code>## [1] 2414</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co">#Set &quot;white&quot; as reference level for factor variable</span></a>
+<a class="sourceLine" id="cb186-2" title="2">pisaTrain<span class="op">$</span>raceeth =<span class="st"> </span><span class="kw">relevel</span>(pisaTrain<span class="op">$</span>raceeth, <span class="st">&quot;White&quot;</span>)</a>
+<a class="sourceLine" id="cb186-3" title="3">pisaTest<span class="op">$</span>raceeth =<span class="st"> </span><span class="kw">relevel</span>(pisaTest<span class="op">$</span>raceeth, <span class="st">&quot;White&quot;</span>)</a>
+<a class="sourceLine" id="cb186-4" title="4"><span class="kw">str</span>(pisaTrain)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2414 obs. of  24 variables:
+##  $ grade                : int  11 10 10 10 10 10 10 10 11 9 ...
+##  $ male                 : int  1 0 1 0 1 0 0 0 1 1 ...
+##  $ raceeth              : Factor w/ 7 levels &quot;White&quot;,&quot;American Indian/Alaska Native&quot;,..: 1 4 5 1 6 5 1 5 1 1 ...
+##  $ preschool            : int  0 1 1 1 1 1 1 1 1 1 ...
+##  $ expectBachelors      : int  0 1 0 1 1 1 1 0 1 1 ...
+##  $ motherHS             : int  1 0 1 1 1 1 1 0 1 1 ...
+##  $ motherBachelors      : int  1 0 0 0 1 0 0 0 0 1 ...
+##  $ motherWork           : int  1 1 1 0 1 1 1 0 0 1 ...
+##  $ fatherHS             : int  1 1 1 1 0 1 1 0 1 1 ...
+...</code></pre>
+<p>Build Model</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">score_model &lt;-<span class="st"> </span><span class="kw">lm</span>(readingScore <span class="op">~</span><span class="st"> </span>.,<span class="dt">data =</span> pisaTrain) <span class="co"># . means use all other variables in data to build model</span></a>
+<a class="sourceLine" id="cb188-2" title="2"><span class="kw">summary</span>(score_model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = readingScore ~ ., data = pisaTrain)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -247.44  -48.86    1.86   49.77  217.18 
+## 
+## Coefficients:
+##                                                 Estimate Std. Error t value
+...</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">predict_test &lt;-<span class="st"> </span><span class="kw">predict</span>(score_model, <span class="dt">newdata =</span> pisaTest)</a>
+<a class="sourceLine" id="cb190-2" title="2"><span class="kw">summary</span>(predict_test)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   353.2   482.0   524.0   516.7   555.7   637.7</code></pre>
+</div>
+<div id="problem-3---reading-test-scores" class="section level4">
+<h4><span class="header-section-number">3.3.2.3</span> Problem 3 - Reading test scores</h4>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">flu_train &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/FluTrain.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb192-2" title="2">flu_test &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week2/FluTest.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb192-3" title="3"><span class="kw">hist</span>(flu_train<span class="op">$</span>ILI)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="kw">plot</span>(<span class="kw">log</span>(flu_train<span class="op">$</span>ILI), flu_train<span class="op">$</span>Queries)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">flu_train<span class="op">$</span>Week[<span class="kw">which.max</span>(flu_train<span class="op">$</span>ILI)] </a></code></pre></div>
+<pre><code>## [1] 2009-10-18 - 2009-10-24
+## 417 Levels: 2004-01-04 - 2004-01-10 ... 2011-12-25 - 2011-12-31</code></pre>
+<p>Creating Regression model with log of variable</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="kw">library</span>(zoo)</a>
+<a class="sourceLine" id="cb196-2" title="2">flu_model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(ILI) <span class="op">~</span><span class="st"> </span>Queries, <span class="dt">data =</span> flu_train)</a>
+<a class="sourceLine" id="cb196-3" title="3"><span class="kw">summary</span>(flu_model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(ILI) ~ Queries, data = flu_train)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.76003 -0.19696 -0.01657  0.18685  1.06450 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">cor</span>(<span class="kw">log</span>(flu_train<span class="op">$</span>ILI), flu_train<span class="op">$</span>Queries)</a></code></pre></div>
+<pre><code>## [1] 0.8420333</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">PredTest1 =<span class="st"> </span><span class="kw">predict</span>(flu_model, <span class="dt">newdata=</span>flu_test)</a>
+<a class="sourceLine" id="cb200-2" title="2"><span class="kw">which</span>(flu_test<span class="op">$</span>Week <span class="op">==</span><span class="st"> &quot;2012-03-11 - 2012-03-17&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">PredTest1[<span class="dv">11</span>]</a></code></pre></div>
+<pre><code>##        11 
+## 0.7827034</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">ILILag2 =<span class="st"> </span><span class="kw">lag</span>(<span class="kw">zoo</span>(flu_train<span class="op">$</span>ILI), <span class="dv">-2</span>, <span class="dt">na.pad=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb204-2" title="2"></a>
+<a class="sourceLine" id="cb204-3" title="3">flu_model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(ILI) <span class="op">~</span><span class="st"> </span>Queries <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(ILILag2), <span class="dt">data =</span> flu_train)</a>
+<a class="sourceLine" id="cb204-4" title="4"><span class="kw">summary</span>(flu_model2)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(ILI) ~ Queries + log(ILILag2), data = flu_train)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.52209 -0.11082 -0.01819  0.08143  0.76785 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">ILILag2_test =<span class="st"> </span><span class="kw">lag</span>(<span class="kw">zoo</span>(flu_test<span class="op">$</span>ILI), <span class="dv">-2</span>, <span class="dt">na.pad=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb206-2" title="2">flu_test<span class="op">$</span>ILILag2 &lt;-<span class="st"> </span>ILILag2_test</a>
+<a class="sourceLine" id="cb206-3" title="3"><span class="kw">summary</span>(flu_test)</a></code></pre></div>
+<pre><code>##                       Week         ILI            Queries      
+##  2012-01-01 - 2012-01-07: 1   Min.   :0.9018   Min.   :0.2390  
+##  2012-01-08 - 2012-01-14: 1   1st Qu.:1.1535   1st Qu.:0.2772  
+##  2012-01-15 - 2012-01-21: 1   Median :1.3592   Median :0.3924  
+##  2012-01-22 - 2012-01-28: 1   Mean   :1.6638   Mean   :0.4094  
+##  2012-01-29 - 2012-02-04: 1   3rd Qu.:1.8637   3rd Qu.:0.4874  
+##  2012-02-05 - 2012-02-11: 1   Max.   :6.0336   Max.   :0.8054  
+##  (Other)                :46                                    
+##    ILILag2.Index       ILILag2.X[[i]]  
+##  Min.   : 1.00       Min.   :0.901787  
+...</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"><span class="kw">plot</span>(<span class="kw">log</span>(ILILag2), <span class="kw">log</span>(flu_train<span class="op">$</span>ILI))</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">flu_test<span class="op">$</span>ILILag2[<span class="dv">1</span>] &lt;-<span class="st"> </span>flu_train<span class="op">$</span>ILI[<span class="dv">416</span>]</a>
+<a class="sourceLine" id="cb209-2" title="2">flu_test<span class="op">$</span>ILILag2[<span class="dv">2</span>] &lt;-<span class="st"> </span>flu_train<span class="op">$</span>ILI[<span class="dv">417</span>]</a></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"download": ["pdf", "epub"]
+}
+});
+});
+</script>
+
+</body>
+
+</html>

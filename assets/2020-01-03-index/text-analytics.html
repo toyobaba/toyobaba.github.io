@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Unit 6 Text Analytics | Analytics Edge - EdX</title>
+  <meta name="description" content="EdX Analytics Edge, Notes and Assignments" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Unit 6 Text Analytics | Analytics Edge - EdX" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unit 6 Text Analytics | Analytics Edge - EdX" />
+  
+  <meta name="twitter:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+<meta name="author" content="omotoyosi Taiwo" />
+
+
+<meta name="date" content="2019-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="classification-and-regression-trees-cart.html"/>
+<link rel="next" href="clustering.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analytics Edge - EdX</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> EdX Analytics Edge Notebook</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#working-with-data"><i class="fa fa-check"></i><b>2.1</b> Working with data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#loading-data-files"><i class="fa fa-check"></i><b>2.1.1</b> Loading data files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#summary-statistics"><i class="fa fa-check"></i><b>2.1.2</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction.html"><a href="introduction.html#plots"><i class="fa fa-check"></i><b>2.1.3</b> Plots</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction.html"><a href="introduction.html#summary-tables"><i class="fa fa-check"></i><b>2.1.4</b> Summary tables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#recitation---usda-food-database"><i class="fa fa-check"></i><b>2.2</b> Recitation - USDA Food Database</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#data-analysis---recitation"><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis - Recitation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#histogram---recitation"><i class="fa fa-check"></i><b>2.2.2</b> Histogram - Recitation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#summary-tables---recitation"><i class="fa fa-check"></i><b>2.2.3</b> Summary tables - Recitation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#assignment"><i class="fa fa-check"></i><b>2.3</b> Assignment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction.html"><a href="introduction.html#part-1---analytical-detective"><i class="fa fa-check"></i><b>2.3.1</b> Part 1 - Analytical Detective</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction.html"><a href="introduction.html#part-2---stock-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Part 2 - Stock Dynamics</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction.html"><a href="introduction.html#part-3---demographics-and-employment-in-the-united-states"><i class="fa fa-check"></i><b>2.3.3</b> Part 3 - Demographics and Employment in the United States</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#introduction-to-linear-regression"><i class="fa fa-check"></i><b>3.1</b> Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#variable-linear-regression-model---predicting-wine-quality"><i class="fa fa-check"></i><b>3.1.1</b> 1 variable Linear Regression Model - Predicting Wine Quality</a></li>
+<li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-model"><i class="fa fa-check"></i><b>3.1.2</b> Multiple Linear Regression Model</a></li>
+<li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#correlation-and-muticollinearity"><i class="fa fa-check"></i><b>3.1.3</b> Correlation and Muticollinearity</a></li>
+<li class="chapter" data-level="3.1.4" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions"><i class="fa fa-check"></i><b>3.1.4</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#recitation-2---moneyball-in-the-nba"><i class="fa fa-check"></i><b>3.2</b> Recitation 2 - MOneyball in the NBA</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#regression-model-using-more-than-just-wins-variable"><i class="fa fa-check"></i><b>3.2.1</b> Regression model using more than just Wins variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions-1"><i class="fa fa-check"></i><b>3.2.2</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="linear-regression.html"><a href="linear-regression.html#assignment-1"><i class="fa fa-check"></i><b>3.3</b> Assignment</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linear-regression.html"><a href="linear-regression.html#part-1---climate-change"><i class="fa fa-check"></i><b>3.3.1</b> Part 1 - Climate Change</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linear-regression.html"><a href="linear-regression.html#part-2---detecting-flu-epidemics"><i class="fa fa-check"></i><b>3.3.2</b> Part 2 - Detecting Flu Epidemics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-to-logistic-regression"><i class="fa fa-check"></i><b>4.1</b> Introduction to Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#thresholding"><i class="fa fa-check"></i><b>4.1.1</b> Thresholding</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>4.1.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#making-predictions-2"><i class="fa fa-check"></i><b>4.1.3</b> Making predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#framingham-heart-study"><i class="fa fa-check"></i><b>4.2</b> Framingham Heart study</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#recitation-3---election-forecasting"><i class="fa fa-check"></i><b>4.3</b> Recitation 3 - Election Forecasting</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#a-sophisticated-baseline-model"><i class="fa fa-check"></i><b>4.3.1</b> A sophisticated baseline model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#assignment-2"><i class="fa fa-check"></i><b>4.4</b> Assignment</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#part-1---popularity-of-music-records"><i class="fa fa-check"></i><b>4.4.1</b> Part 1 - Popularity of Music Records</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html"><i class="fa fa-check"></i><b>5</b> Classification and Regression Trees (CART)</a><ul>
+<li class="chapter" data-level="5.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#introduction-to-trees---judge-jury-and-classifier"><i class="fa fa-check"></i><b>5.1</b> Introduction to trees - Judge, Jury, and Classifier</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#random-forests"><i class="fa fa-check"></i><b>5.1.1</b> Random Forests</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation"><i class="fa fa-check"></i><b>5.1.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#the-d2hawkeye-story"><i class="fa fa-check"></i><b>5.2</b> The D2Hawkeye Story</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#baseline-method-and-penalty-matrix"><i class="fa fa-check"></i><b>5.2.1</b> Baseline method and Penalty Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#recitation---boston-housing-data-regression-trees"><i class="fa fa-check"></i><b>5.3</b> Recitation - Boston Housing Data (Regression Trees)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#geographical-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Geographical Predictions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation-1"><i class="fa fa-check"></i><b>5.3.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#assignment-3"><i class="fa fa-check"></i><b>5.4</b> Assignment</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-1---understanding-why-people-vote"><i class="fa fa-check"></i><b>5.4.1</b> Part 1 - Understanding why people vote</a></li>
+<li class="chapter" data-level="5.4.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-2---letter-recognition"><i class="fa fa-check"></i><b>5.4.2</b> Part 2 - Letter Recognition</a></li>
+<li class="chapter" data-level="5.4.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-3---predicting-earnings-from-census-data"><i class="fa fa-check"></i><b>5.4.3</b> Part 3 - Predicting Earnings from Census Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-analytics.html"><a href="text-analytics.html"><i class="fa fa-check"></i><b>6</b> Text Analytics</a><ul>
+<li class="chapter" data-level="6.1" data-path="text-analytics.html"><a href="text-analytics.html#introduction-to-text-analytics"><i class="fa fa-check"></i><b>6.1</b> Introduction to Text Analytics</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="text-analytics.html"><a href="text-analytics.html#turning-tweets-into-knowledge"><i class="fa fa-check"></i><b>6.1.1</b> Turning Tweets into knowledge</a></li>
+<li class="chapter" data-level="6.1.2" data-path="text-analytics.html"><a href="text-analytics.html#preprocessing-data"><i class="fa fa-check"></i><b>6.1.2</b> Preprocessing data</a></li>
+<li class="chapter" data-level="6.1.3" data-path="text-analytics.html"><a href="text-analytics.html#build-a-cart-model"><i class="fa fa-check"></i><b>6.1.3</b> Build a CART model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="text-analytics.html"><a href="text-analytics.html#recitation---the-story-of-enron"><i class="fa fa-check"></i><b>6.2</b> Recitation - The Story of Enron</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="text-analytics.html"><a href="text-analytics.html#bag-of-words"><i class="fa fa-check"></i><b>6.2.1</b> Bag of Words</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="text-analytics.html"><a href="text-analytics.html#assignment-4"><i class="fa fa-check"></i><b>6.3</b> Assignment</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="text-analytics.html"><a href="text-analytics.html#part-1---detecting-vandalism-on-wikipedia"><i class="fa fa-check"></i><b>6.3.1</b> Part 1 - Detecting Vandalism on Wikipedia</a></li>
+<li class="chapter" data-level="6.3.2" data-path="text-analytics.html"><a href="text-analytics.html#part-2---automating-reviews-in-medicine"><i class="fa fa-check"></i><b>6.3.2</b> Part 2 - Automating Reviews in Medicine</a></li>
+<li class="chapter" data-level="6.3.3" data-path="text-analytics.html"><a href="text-analytics.html#part-3---separating-spam-from-ham"><i class="fa fa-check"></i><b>6.3.3</b> Part 3 - Separating Spam from Ham</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#introduction-to-clustering"><i class="fa fa-check"></i><b>7.1</b> Introduction to Clustering</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#heirarchical-clustering"><i class="fa fa-check"></i><b>7.1.1</b> Heirarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#recitation---segmenting-images"><i class="fa fa-check"></i><b>7.2</b> Recitation - Segmenting Images</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="clustering.html"><a href="clustering.html#flower-image"><i class="fa fa-check"></i><b>7.2.1</b> Flower Image</a></li>
+<li class="chapter" data-level="7.2.2" data-path="clustering.html"><a href="clustering.html#mri-image"><i class="fa fa-check"></i><b>7.2.2</b> MRI Image</a></li>
+<li class="chapter" data-level="7.2.3" data-path="clustering.html"><a href="clustering.html#k-means-clustering"><i class="fa fa-check"></i><b>7.2.3</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#assignment-5"><i class="fa fa-check"></i><b>7.3</b> Assignment</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#part-1---document-clustering-with-daily-kos"><i class="fa fa-check"></i><b>7.3.1</b> Part 1 - Document Clustering with Daily Kos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="clustering.html"><a href="clustering.html#part-2---market-segmentation-for-airlines"><i class="fa fa-check"></i><b>7.3.2</b> Part 2 - Market Segmentation for Airlines</a></li>
+<li class="chapter" data-level="7.3.3" data-path="clustering.html"><a href="clustering.html#part-3---predicting-stock-returns-with-cluster-then-predict"><i class="fa fa-check"></i><b>7.3.3</b> Part 3 - Predicting Stock Returns with Cluster-Then-Predict</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a><ul>
+<li class="chapter" data-level="8.1" data-path="visualization.html"><a href="visualization.html#scatterplots---visualizing-the-world"><i class="fa fa-check"></i><b>8.1</b> Scatterplots - Visualizing the world</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="visualization.html"><a href="visualization.html#basic-scatterplots-using-ggplot"><i class="fa fa-check"></i><b>8.1.1</b> Basic scatterplots using ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="visualization.html"><a href="visualization.html#visualizing-crime-over-time"><i class="fa fa-check"></i><b>8.2</b> Visualizing crime over time</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="visualization.html"><a href="visualization.html#heatmaps"><i class="fa fa-check"></i><b>8.2.1</b> Heatmaps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="visualization.html"><a href="visualization.html#a-geographical-hot-spot-map"><i class="fa fa-check"></i><b>8.2.2</b> A Geographical Hot Spot Map</a></li>
+<li class="chapter" data-level="8.2.3" data-path="visualization.html"><a href="visualization.html#a-heatmap-of-the-united-states"><i class="fa fa-check"></i><b>8.2.3</b> A Heatmap of the United States</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="visualization.html"><a href="visualization.html#recitation"><i class="fa fa-check"></i><b>8.3</b> Recitation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="visualization.html"><a href="visualization.html#bar-charts"><i class="fa fa-check"></i><b>8.3.1</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="visualization.html"><a href="visualization.html#assignment-6"><i class="fa fa-check"></i><b>8.4</b> Assignment</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="visualization.html"><a href="visualization.html#part-1---election-forecasting-revisited"><i class="fa fa-check"></i><b>8.4.1</b> Part 1 - Election Forecasting Revisited</a></li>
+<li class="chapter" data-level="8.4.2" data-path="visualization.html"><a href="visualization.html#part-2---visualizing-network-data"><i class="fa fa-check"></i><b>8.4.2</b> Part 2 - Visualizing Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="final-exam.html"><a href="final-exam.html"><i class="fa fa-check"></i><b>9</b> Final Exam</a><ul>
+<li class="chapter" data-level="9.1" data-path="final-exam.html"><a href="final-exam.html#part-1---estimating-miles-per-gallon"><i class="fa fa-check"></i><b>9.1</b> Part 1 - Estimating Miles Per Gallon</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="final-exam.html"><a href="final-exam.html#problem-1---exploratory-data-analysis"><i class="fa fa-check"></i><b>9.1.1</b> Problem 1 - Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="9.1.2" data-path="final-exam.html"><a href="final-exam.html#problem-2---simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Problem 2 - Simple Linear Regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables"><i class="fa fa-check"></i><b>9.1.3</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.1.4" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart-and-randomforest"><i class="fa fa-check"></i><b>9.1.4</b> Problem 4 - CART and Randomforest</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="final-exam.html"><a href="final-exam.html#part-2---predicting-heart-disease"><i class="fa fa-check"></i><b>9.2</b> Part 2 - Predicting Heart Disease</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="final-exam.html"><a href="final-exam.html#problem-12---exploratory-data-analysis-and-logistic-regression"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1&amp;2 - Exploratory Data Analysis and Logistic Regression</a></li>
+<li class="chapter" data-level="9.2.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables-1"><i class="fa fa-check"></i><b>9.2.2</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.2.3" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart"><i class="fa fa-check"></i><b>9.2.3</b> Problem 4 - CART</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="final-exam.html"><a href="final-exam.html#part-3---understanding-users-spending"><i class="fa fa-check"></i><b>9.3</b> Part 3 - Understanding User’s Spending</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="final-exam.html"><a href="final-exam.html#problem-1-and-2"><i class="fa fa-check"></i><b>9.3.1</b> Problem 1 and 2</a></li>
+<li class="chapter" data-level="9.3.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---clustering"><i class="fa fa-check"></i><b>9.3.2</b> Problem 3 - Clustering</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analytics Edge - EdX</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="text-analytics" class="section level1">
+<h1><span class="header-section-number">Unit 6</span> Text Analytics</h1>
+<div id="introduction-to-text-analytics" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction to Text Analytics</h2>
+<div id="turning-tweets-into-knowledge" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Turning Tweets into knowledge</h3>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" title="1">tweets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week5/tweets.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb476-2" title="2"><span class="kw">str</span>(tweets)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    1181 obs. of  2 variables:
+##  $ Tweet: chr  &quot;I have to say, Apple has by far the best customer care service I have ever received! @Apple @AppStore&quot; &quot;iOS 7 is so fricking smooth &amp; beautiful!! #ThanxApple @Apple&quot; &quot;LOVE U @APPLE&quot; &quot;Thank you @apple, loving my new iPhone 5S!!!!!  #apple #iphone5S pic.twitter.com/XmHJCU4pcb&quot; ...
+##  $ Avg  : num  2 2 1.8 1.8 1.8 1.8 1.8 1.6 1.6 1.6 ...</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1">tweets<span class="op">$</span>Negative =<span class="st"> </span><span class="kw">as.factor</span>(tweets<span class="op">$</span>Avg <span class="op">&lt;=</span><span class="st"> </span><span class="dv">-1</span>) <span class="co"># Tweet is Negative if the sentiment score is less than -1</span></a>
+<a class="sourceLine" id="cb478-2" title="2"><span class="kw">table</span>(tweets<span class="op">$</span>Negative)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   999   182</code></pre>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" title="1"><span class="kw">library</span>(tm)</a>
+<a class="sourceLine" id="cb480-2" title="2"><span class="kw">library</span>(SnowballC)</a>
+<a class="sourceLine" id="cb480-3" title="3"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb480-4" title="4"><span class="co">#Convert tweets to Corpus (collection of documents)</span></a>
+<a class="sourceLine" id="cb480-5" title="5">corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(tweets<span class="op">$</span>Tweet)) </a>
+<a class="sourceLine" id="cb480-6" title="6">corpus</a></code></pre></div>
+<pre><code>## &lt;&lt;VCorpus&gt;&gt;
+## Metadata:  corpus specific: 0, document level (indexed): 0
+## Content:  documents: 1181</code></pre>
+</div>
+<div id="preprocessing-data" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Preprocessing data</h3>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" title="1">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, <span class="kw">content_transformer</span>(tolower))<span class="co">#Change all documents to lower case</span></a>
+<a class="sourceLine" id="cb482-2" title="2">corpus[[<span class="dv">1</span>]]<span class="op">$</span>content</a></code></pre></div>
+<pre><code>## [1] &quot;i have to say, apple has by far the best customer care service i have ever received! @apple @appstore&quot;</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removePunctuation)<span class="co">#Remove all punctuation</span></a>
+<a class="sourceLine" id="cb484-2" title="2">corpus[[<span class="dv">1</span>]]<span class="op">$</span>content</a></code></pre></div>
+<pre><code>## [1] &quot;i have to say apple has by far the best customer care service i have ever received apple appstore&quot;</code></pre>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" title="1"><span class="co">#Remove stopwords</span></a>
+<a class="sourceLine" id="cb486-2" title="2"><span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] <span class="co"># Show first 10 stopwords provided by tm package</span></a></code></pre></div>
+<pre><code>##  [1] &quot;i&quot;         &quot;me&quot;        &quot;my&quot;        &quot;myself&quot;    &quot;we&quot;        &quot;our&quot;      
+##  [7] &quot;ours&quot;      &quot;ourselves&quot; &quot;you&quot;       &quot;your&quot;</code></pre>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" title="1">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removeWords, <span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>))) <span class="co">#Remove all english stopwords and apple</span></a>
+<a class="sourceLine" id="cb488-2" title="2">corpus[[<span class="dv">1</span>]]<span class="op">$</span>content</a></code></pre></div>
+<pre><code>## [1] &quot;   say    far  best customer care service   ever received  appstore&quot;</code></pre>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" title="1"><span class="co">#Stem all words</span></a>
+<a class="sourceLine" id="cb490-2" title="2">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, stemDocument)</a>
+<a class="sourceLine" id="cb490-3" title="3">corpus[[<span class="dv">1</span>]]<span class="op">$</span>content</a></code></pre></div>
+<pre><code>## [1] &quot;say far best custom care servic ever receiv appstor&quot;</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" title="1"><span class="co">#Word Frequency matrix, columns are unique words in dataset</span></a>
+<a class="sourceLine" id="cb492-2" title="2">frequencies &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpus)</a>
+<a class="sourceLine" id="cb492-3" title="3">frequencies <span class="co">#Wide matrix, sso lets inspect a selection</span></a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 1181, terms: 3289)&gt;&gt;
+## Non-/sparse entries: 8980/3875329
+## Sparsity           : 100%
+## Maximal term length: 115
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" title="1"><span class="kw">inspect</span>(frequencies[<span class="dv">1000</span><span class="op">:</span><span class="dv">1005</span>,<span class="dv">505</span><span class="op">:</span><span class="dv">515</span>])</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 6, terms: 11)&gt;&gt;
+## Non-/sparse entries: 1/65
+## Sparsity           : 98%
+## Maximal term length: 9
+## Weighting          : term frequency (tf)
+## Sample             :
+##       Terms
+## Docs   cheapen cheaper check cheep cheer cheerio cherylcol chief chiiiiqu child
+##   1000       0       0     0     0     0       0         0     0        0     0
+##   1001       0       0     0     0     0       0         0     0        0     0
+...</code></pre>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" title="1"><span class="kw">findFreqTerms</span>(frequencies, <span class="dt">lowfreq=</span><span class="dv">20</span>) <span class="co">#Check words that appear more than 20 times (sparsity)</span></a></code></pre></div>
+<pre><code>##  [1] &quot;android&quot;              &quot;anyon&quot;                &quot;app&quot;                 
+##  [4] &quot;appl&quot;                 &quot;back&quot;                 &quot;batteri&quot;             
+##  [7] &quot;better&quot;               &quot;buy&quot;                  &quot;can&quot;                 
+## [10] &quot;cant&quot;                 &quot;come&quot;                 &quot;dont&quot;                
+## [13] &quot;fingerprint&quot;          &quot;freak&quot;                &quot;get&quot;                 
+## [16] &quot;googl&quot;                &quot;ios7&quot;                 &quot;ipad&quot;                
+## [19] &quot;iphon&quot;                &quot;iphone5&quot;              &quot;iphone5c&quot;            
+## [22] &quot;ipod&quot;                 &quot;ipodplayerpromo&quot;      &quot;itun&quot;                
+## [25] &quot;just&quot;                 &quot;like&quot;                 &quot;lol&quot;                 
+## [28] &quot;look&quot;                 &quot;love&quot;                 &quot;make&quot;                
+...</code></pre>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" title="1"><span class="co">#Sparsity handling</span></a>
+<a class="sourceLine" id="cb498-2" title="2">sparse &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(frequencies, <span class="fl">0.995</span>) <span class="co">#Remove terms that appear in less than 0.5%(approx. 16) of observations(tweets)</span></a>
+<a class="sourceLine" id="cb498-3" title="3">sparse</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 1181, terms: 309)&gt;&gt;
+## Non-/sparse entries: 4669/360260
+## Sparsity           : 99%
+## Maximal term length: 20
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" title="1">tweetsSparse &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(sparse))</a>
+<a class="sourceLine" id="cb500-2" title="2"><span class="kw">colnames</span>(tweetsSparse) &lt;-<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(tweetsSparse))<span class="co"># Make all variable names R-friendly, R does not like numbers starting variable names</span></a>
+<a class="sourceLine" id="cb500-3" title="3">tweetsSparse<span class="op">$</span>Negative &lt;-<span class="st"> </span>tweets<span class="op">$</span>Negative <span class="co">#Add negative column</span></a>
+<a class="sourceLine" id="cb500-4" title="4"></a>
+<a class="sourceLine" id="cb500-5" title="5"><span class="co">#Split data for training and testing</span></a>
+<a class="sourceLine" id="cb500-6" title="6"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb500-7" title="7">split &lt;-<span class="st"> </span><span class="kw">sample.split</span>(tweetsSparse<span class="op">$</span>Negative, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb500-8" title="8">trainSparse &lt;-<span class="st"> </span><span class="kw">subset</span>(tweetsSparse, split<span class="op">==</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb500-9" title="9">testSparse &lt;-<span class="st"> </span><span class="kw">subset</span>(tweetsSparse, split<span class="op">==</span><span class="ot">FALSE</span>)</a></code></pre></div>
+</div>
+<div id="build-a-cart-model" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Build a CART model</h3>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb501-2" title="2"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb501-3" title="3">tweetCART &lt;-<span class="st"> </span><span class="kw">rpart</span>(Negative <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>trainSparse, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb501-4" title="4"><span class="kw">prp</span>(tweetCART, <span class="dt">roundint =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" title="1">predictCART &lt;-<span class="st"> </span><span class="kw">predict</span>(tweetCART, <span class="dt">newdata=</span>testSparse, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb502-2" title="2"><span class="kw">table</span>(testSparse<span class="op">$</span>Negative, predictCART)</a></code></pre></div>
+<pre><code>##        predictCART
+##         FALSE TRUE
+##   FALSE   294    6
+##   TRUE     37   18</code></pre>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" title="1">(<span class="dv">294</span><span class="op">+</span><span class="dv">18</span>)<span class="op">/</span>(<span class="dv">294</span><span class="op">+</span><span class="dv">6</span><span class="op">+</span><span class="dv">37</span><span class="op">+</span><span class="dv">18</span>) <span class="co">#Accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.8788732</code></pre>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" title="1"><span class="co">#Baseline accuracy</span></a>
+<a class="sourceLine" id="cb506-2" title="2"><span class="kw">table</span>(testSparse<span class="op">$</span>Negative)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   300    55</code></pre>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1"><span class="dv">300</span><span class="op">/</span>(<span class="dv">300</span><span class="op">+</span><span class="dv">55</span>) <span class="co">#Baseline accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.8450704</code></pre>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1"><span class="co">#Random Forest model</span></a>
+<a class="sourceLine" id="cb510-2" title="2"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb510-3" title="3"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb510-4" title="4">tweetRF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Negative <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>trainSparse)</a>
+<a class="sourceLine" id="cb510-5" title="5"></a>
+<a class="sourceLine" id="cb510-6" title="6"><span class="co"># Make predictions:</span></a>
+<a class="sourceLine" id="cb510-7" title="7">predictRF &lt;-<span class="st"> </span><span class="kw">predict</span>(tweetRF, <span class="dt">newdata=</span>testSparse)</a>
+<a class="sourceLine" id="cb510-8" title="8"><span class="kw">table</span>(testSparse<span class="op">$</span>Negative, predictRF)</a></code></pre></div>
+<pre><code>##        predictRF
+##         FALSE TRUE
+##   FALSE   293    7
+##   TRUE     34   21</code></pre>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" title="1"><span class="co"># Accuracy:</span></a>
+<a class="sourceLine" id="cb512-2" title="2">(<span class="dv">293</span><span class="op">+</span><span class="dv">21</span>)<span class="op">/</span>(<span class="dv">293</span><span class="op">+</span><span class="dv">7</span><span class="op">+</span><span class="dv">34</span><span class="op">+</span><span class="dv">21</span>) <span class="co">#Accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.884507</code></pre>
+</div>
+</div>
+<div id="recitation---the-story-of-enron" class="section level2">
+<h2><span class="header-section-number">6.2</span> Recitation - The Story of Enron</h2>
+<blockquote>
+<p>Responsive emails are pertinent to the search query, marked by attorneys handling the case</p>
+</blockquote>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" title="1">emails &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week5/energy_bids.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb514-2" title="2"><span class="kw">str</span>(emails)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    855 obs. of  2 variables:
+##  $ email     : chr  &quot;North America&#39;s integrated electricity market requires cooperation on environmental policies Commission for Env&quot;| __truncated__ &quot;FYI -----Original Message----- From: \t\&quot;Ginny Feliciano\&quot; &lt;gfeliciano@earthlink.net&gt;@ENRON [mailto:IMCEANOTES-&quot;| __truncated__ &quot;14:13:53 Synchronizing Mailbox &#39;Kean, Steven J.&#39; 14:13:53 Synchronizing Hierarchy 14:13:53 Synchronizing Favori&quot;| __truncated__ &quot;^ ----- Forwarded by Steven J Kean/NA/Enron on 03/02/2001 12:27 PM ----- Suzanne_Nimocks@mckinsey.com Sent by: &quot;| __truncated__ ...
+##  $ responsive: int  0 1 0 1 0 0 1 0 0 0 ...</code></pre>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" title="1">emails<span class="op">$</span>email[<span class="dv">1</span>]<span class="co">#Inspect first email</span></a></code></pre></div>
+<pre><code>## [1] &quot;North America&#39;s integrated electricity market requires cooperation on environmental policies Commission for Environmental Cooperation releases working paper on North America&#39;s electricity market Montreal, 27 November 2001 -- The North American Commission for Environmental Cooperation (CEC) is releasing a working paper highlighting the trend towards increasing trade, competition and cross-border investment in electricity between Canada, Mexico and the United States. It is hoped that the working paper, Environmental Challenges and Opportunities in the Evolving North American Electricity Market, will stimulate public discussion around a CEC symposium of the same title about the need to coordinate environmental policies trinationally as a North America-wide electricity market develops. The CEC symposium will take place in San Diego on 29-30 November, and will bring together leading experts from industry, academia, NGOs and the governments of Canada, Mexico and the United States to consider the impact of the evolving continental electricity market on human health and the environment. \&quot;Our goal [with the working paper and the symposium] is to highlight key environmental issues that must be addressed as the electricity markets in North America become more and more integrated,\&quot; said Janine Ferretti, executive director of the CEC. \&quot;We want to stimulate discussion around the important policy questions being raised so that countries can cooperate in their approach to energy and the environment.\&quot; The CEC, an international organization created under an environmental side agreement to NAFTA known as the North American Agreement on Environmental Cooperation, was established to address regional environmental concerns, help prevent potential trade and environmental conflicts, and promote the effective enforcement of environmental law. The CEC Secretariat believes that greater North American cooperation on environmental policies regarding the continental electricity market is necessary to: *  protect air quality and mitigate climate change, *  minimize the possibility of environment-based trade disputes, *  ensure a dependable supply of reasonably priced electricity across North America *  avoid creation of pollution havens, and *  ensure local and national environmental measures remain effective. The Changing Market The working paper profiles the rapid changing North American electricity market. For example, in 2001, the US is projected to export 13.1 thousand gigawatt-hours (GWh) of electricity to Canada and Mexico. By 2007, this number is projected to grow to 16.9 thousand GWh of electricity. \&quot;Over the past few decades, the North American electricity market has developed into a complex array of cross-border transactions and relationships,\&quot; said Phil Sharp, former US congressman and chairman of the CEC&#39;s Electricity Advisory Board. \&quot;We need to achieve this new level of cooperation in our environmental approaches as well.\&quot; The Environmental Profile of the Electricity Sector The electricity sector is the single largest source of nationally reported toxins in the United States and Canada and a large source in Mexico. In the US, the electricity sector emits approximately 25 percent of all NOx emissions, roughly 35 percent of all CO2 emissions, 25 percent of all mercury emissions and almost 70 percent of SO2 emissions. These emissions have a large impact on airsheds, watersheds and migratory species corridors that are often shared between the three North American countries. \&quot;We want to discuss the possible outcomes from greater efforts to coordinate federal, state or provincial environmental laws and policies that relate to the electricity sector,\&quot; said Ferretti. \&quot;How can we develop more compatible environmental approaches to help make domestic environmental policies more effective?\&quot; The Effects of an Integrated Electricity Market One key issue raised in the paper is the effect of market integration on the competitiveness of particular fuels such as coal, natural gas or renewables. Fuel choice largely determines environmental impacts from a specific facility, along with pollution control technologies, performance standards and regulations. The paper highlights other impacts of a highly competitive market as well. For example, concerns about so called \&quot;pollution havens\&quot; arise when significant differences in environmental laws or enforcement practices induce power companies to locate their operations in jurisdictions with lower standards. \&quot;The CEC Secretariat is exploring what additional environmental policies will work in this restructured market and how these policies can be adapted to ensure that they enhance competitiveness and benefit the entire region,\&quot; said Sharp. Because trade rules and policy measures directly influence the variables that drive a successfully integrated North American electricity market, the working paper also addresses fuel choice, technology, pollution control strategies and subsidies. The CEC will use the information gathered during the discussion period to develop a final report that will be submitted to the Council in early 2002. For more information or to view the live video webcast of the symposium, please go to: http://www.cec.org/electricity. You may download the working paper and other supporting documents from: http://www.cec.org/programs_projects/other_initiatives/electricity/docs.cfm?varlan=english. Commission for Environmental Cooperation 393, rue St-Jacques Ouest, Bureau 200 MontrÃ©al (QuÃ©bec) Canada H2Y 1N9 Tel: (514) 350-4300; Fax: (514) 350-4314 E-mail: info@ccemtl.org ***********&quot;</code></pre>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" title="1">emails<span class="op">$</span>responsive[<span class="dv">1</span>] <span class="co">#Is it responsive - NO</span></a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb520-1" title="1">corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(emails<span class="op">$</span>email)) <span class="co"># Create corpus - collection of dcouments</span></a>
+<a class="sourceLine" id="cb520-2" title="2">corpus[[<span class="dv">1</span>]]<span class="op">$</span>content <span class="co">#First email</span></a></code></pre></div>
+<pre><code>## [1] &quot;North America&#39;s integrated electricity market requires cooperation on environmental policies Commission for Environmental Cooperation releases working paper on North America&#39;s electricity market Montreal, 27 November 2001 -- The North American Commission for Environmental Cooperation (CEC) is releasing a working paper highlighting the trend towards increasing trade, competition and cross-border investment in electricity between Canada, Mexico and the United States. It is hoped that the working paper, Environmental Challenges and Opportunities in the Evolving North American Electricity Market, will stimulate public discussion around a CEC symposium of the same title about the need to coordinate environmental policies trinationally as a North America-wide electricity market develops. The CEC symposium will take place in San Diego on 29-30 November, and will bring together leading experts from industry, academia, NGOs and the governments of Canada, Mexico and the United States to consider the impact of the evolving continental electricity market on human health and the environment. \&quot;Our goal [with the working paper and the symposium] is to highlight key environmental issues that must be addressed as the electricity markets in North America become more and more integrated,\&quot; said Janine Ferretti, executive director of the CEC. \&quot;We want to stimulate discussion around the important policy questions being raised so that countries can cooperate in their approach to energy and the environment.\&quot; The CEC, an international organization created under an environmental side agreement to NAFTA known as the North American Agreement on Environmental Cooperation, was established to address regional environmental concerns, help prevent potential trade and environmental conflicts, and promote the effective enforcement of environmental law. The CEC Secretariat believes that greater North American cooperation on environmental policies regarding the continental electricity market is necessary to: *  protect air quality and mitigate climate change, *  minimize the possibility of environment-based trade disputes, *  ensure a dependable supply of reasonably priced electricity across North America *  avoid creation of pollution havens, and *  ensure local and national environmental measures remain effective. The Changing Market The working paper profiles the rapid changing North American electricity market. For example, in 2001, the US is projected to export 13.1 thousand gigawatt-hours (GWh) of electricity to Canada and Mexico. By 2007, this number is projected to grow to 16.9 thousand GWh of electricity. \&quot;Over the past few decades, the North American electricity market has developed into a complex array of cross-border transactions and relationships,\&quot; said Phil Sharp, former US congressman and chairman of the CEC&#39;s Electricity Advisory Board. \&quot;We need to achieve this new level of cooperation in our environmental approaches as well.\&quot; The Environmental Profile of the Electricity Sector The electricity sector is the single largest source of nationally reported toxins in the United States and Canada and a large source in Mexico. In the US, the electricity sector emits approximately 25 percent of all NOx emissions, roughly 35 percent of all CO2 emissions, 25 percent of all mercury emissions and almost 70 percent of SO2 emissions. These emissions have a large impact on airsheds, watersheds and migratory species corridors that are often shared between the three North American countries. \&quot;We want to discuss the possible outcomes from greater efforts to coordinate federal, state or provincial environmental laws and policies that relate to the electricity sector,\&quot; said Ferretti. \&quot;How can we develop more compatible environmental approaches to help make domestic environmental policies more effective?\&quot; The Effects of an Integrated Electricity Market One key issue raised in the paper is the effect of market integration on the competitiveness of particular fuels such as coal, natural gas or renewables. Fuel choice largely determines environmental impacts from a specific facility, along with pollution control technologies, performance standards and regulations. The paper highlights other impacts of a highly competitive market as well. For example, concerns about so called \&quot;pollution havens\&quot; arise when significant differences in environmental laws or enforcement practices induce power companies to locate their operations in jurisdictions with lower standards. \&quot;The CEC Secretariat is exploring what additional environmental policies will work in this restructured market and how these policies can be adapted to ensure that they enhance competitiveness and benefit the entire region,\&quot; said Sharp. Because trade rules and policy measures directly influence the variables that drive a successfully integrated North American electricity market, the working paper also addresses fuel choice, technology, pollution control strategies and subsidies. The CEC will use the information gathered during the discussion period to develop a final report that will be submitted to the Council in early 2002. For more information or to view the live video webcast of the symposium, please go to: http://www.cec.org/electricity. You may download the working paper and other supporting documents from: http://www.cec.org/programs_projects/other_initiatives/electricity/docs.cfm?varlan=english. Commission for Environmental Cooperation 393, rue St-Jacques Ouest, Bureau 200 MontrÃ©al (QuÃ©bec) Canada H2Y 1N9 Tel: (514) 350-4300; Fax: (514) 350-4314 E-mail: info@ccemtl.org ***********&quot;</code></pre>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1"><span class="co">#Preprocess - Stemming, convert all to lower cap, removePunctuations and remove stopwords</span></a>
+<a class="sourceLine" id="cb522-2" title="2">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, <span class="kw">content_transformer</span>(tolower))</a>
+<a class="sourceLine" id="cb522-3" title="3">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removePunctuation)</a>
+<a class="sourceLine" id="cb522-4" title="4">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>))</a>
+<a class="sourceLine" id="cb522-5" title="5">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, stemDocument)</a></code></pre></div>
+<div id="bag-of-words" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Bag of Words</h3>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" title="1"><span class="co">#Bag of Words</span></a>
+<a class="sourceLine" id="cb523-2" title="2">dtm =<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpus)</a>
+<a class="sourceLine" id="cb523-3" title="3">dtm <span class="co"># Too many variable colums</span></a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 855, terms: 22164)&gt;&gt;
+## Non-/sparse entries: 102863/18847357
+## Sparsity           : 99%
+## Maximal term length: 156
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1">dtm =<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtm, <span class="fl">0.97</span>) <span class="co">#3% threshold</span></a>
+<a class="sourceLine" id="cb525-2" title="2">dtm</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 855, terms: 788)&gt;&gt;
+## Non-/sparse entries: 51612/622128
+## Sparsity           : 92%
+## Maximal term length: 19
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1">labeledTerms =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(dtm)) <span class="co">#make matrix  data frame</span></a>
+<a class="sourceLine" id="cb527-2" title="2">labeledTerms<span class="op">$</span>responsive =<span class="st"> </span>emails<span class="op">$</span>responsive <span class="co"># Add responsive column from original data</span></a>
+<a class="sourceLine" id="cb527-3" title="3"></a>
+<a class="sourceLine" id="cb527-4" title="4"><span class="co">#Building models</span></a>
+<a class="sourceLine" id="cb527-5" title="5"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb527-6" title="6"><span class="kw">set.seed</span>(<span class="dv">144</span>)</a>
+<a class="sourceLine" id="cb527-7" title="7">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(labeledTerms<span class="op">$</span>responsive, <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb527-8" title="8">train &lt;-<span class="st"> </span><span class="kw">subset</span>(labeledTerms, spl <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb527-9" title="9">test &lt;-<span class="st"> </span><span class="kw">subset</span>(labeledTerms, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb527-10" title="10"></a>
+<a class="sourceLine" id="cb527-11" title="11"><span class="co">#CART model</span></a>
+<a class="sourceLine" id="cb527-12" title="12">emailCART =<span class="st"> </span><span class="kw">rpart</span>(responsive<span class="op">~</span>., <span class="dt">data=</span>train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb527-13" title="13"><span class="kw">prp</span>(emailCART)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1"><span class="co">#predictions</span></a>
+<a class="sourceLine" id="cb528-2" title="2">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(emailCART, <span class="dt">newdata =</span> test)</a>
+<a class="sourceLine" id="cb528-3" title="3"><span class="kw">table</span>(test<span class="op">$</span>responsive, pred[,<span class="dv">2</span>] <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>) <span class="co">#Confusion matrix</span></a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0   195   20
+##   1    17   25</code></pre>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" title="1">(<span class="dv">195</span><span class="op">+</span><span class="dv">25</span>)<span class="op">/</span>(<span class="dv">195</span><span class="op">+</span><span class="dv">25</span><span class="op">+</span><span class="dv">17</span><span class="op">+</span><span class="dv">20</span>) <span class="co">#Accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.8560311</code></pre>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" title="1"><span class="kw">library</span>(ROCR)</a>
+<a class="sourceLine" id="cb532-2" title="2">predROCR =<span class="st"> </span><span class="kw">prediction</span>(pred[,<span class="dv">2</span>], test<span class="op">$</span>responsive)</a>
+<a class="sourceLine" id="cb532-3" title="3">perfROCR =<span class="st"> </span><span class="kw">performance</span>(predROCR, <span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>)<span class="co">#tpr - true positive rate, fpr- false postive rate</span></a>
+<a class="sourceLine" id="cb532-4" title="4"><span class="kw">plot</span>(perfROCR, <span class="dt">colorize=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-88-2.png" width="672" /></p>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1"><span class="kw">performance</span>(predROCR, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] 0.7936323</code></pre>
+</div>
+</div>
+<div id="assignment-4" class="section level2">
+<h2><span class="header-section-number">6.3</span> Assignment</h2>
+<div id="part-1---detecting-vandalism-on-wikipedia" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Part 1 - Detecting Vandalism on Wikipedia</h3>
+<div id="problem-1---bag-of-words" class="section level4">
+<h4><span class="header-section-number">6.3.1.1</span> Problem 1 - Bag of Words</h4>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1"><span class="kw">library</span>(tm)</a>
+<a class="sourceLine" id="cb535-2" title="2"><span class="kw">library</span>(SnowballC)</a>
+<a class="sourceLine" id="cb535-3" title="3"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb535-4" title="4"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb535-5" title="5"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb535-6" title="6"><span class="kw">library</span>(ROCR)</a>
+<a class="sourceLine" id="cb535-7" title="7">wiki &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week5/wiki.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb535-8" title="8">wiki<span class="op">$</span>Vandal &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wiki<span class="op">$</span>Vandal)</a>
+<a class="sourceLine" id="cb535-9" title="9"></a>
+<a class="sourceLine" id="cb535-10" title="10"><span class="co">#1.1 - How many cases of vandalism were detected in the history of this page?</span></a>
+<a class="sourceLine" id="cb535-11" title="11"><span class="kw">table</span>(wiki<span class="op">$</span>Vandal) <span class="co">#1815</span></a></code></pre></div>
+<pre><code>## 
+##    0    1 
+## 2061 1815</code></pre>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" title="1"><span class="co">#1.2 Pre-processing and matrix creation</span></a>
+<a class="sourceLine" id="cb537-2" title="2">corpusAdded &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(wiki<span class="op">$</span>Added)) </a>
+<a class="sourceLine" id="cb537-3" title="3">corpusAdded &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAdded, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)) <span class="co">#Remove all english stopwords</span></a>
+<a class="sourceLine" id="cb537-4" title="4">corpusAdded &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAdded, stemDocument)</a>
+<a class="sourceLine" id="cb537-5" title="5">dtmAdded &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpusAdded)</a>
+<a class="sourceLine" id="cb537-6" title="6">dtmAdded</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 3876, terms: 6675)&gt;&gt;
+## Non-/sparse entries: 15368/25856932
+## Sparsity           : 100%
+## Maximal term length: 784
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" title="1"><span class="co">#1.3 - Filter sparse terms</span></a>
+<a class="sourceLine" id="cb539-2" title="2">sparseAdded &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtmAdded, <span class="fl">0.997</span>)</a>
+<a class="sourceLine" id="cb539-3" title="3">sparseAdded</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 3876, terms: 166)&gt;&gt;
+## Non-/sparse entries: 2681/640735
+## Sparsity           : 100%
+## Maximal term length: 28
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb541-1" title="1">wordsAdded &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(sparseAdded))</a>
+<a class="sourceLine" id="cb541-2" title="2"><span class="kw">colnames</span>(wordsAdded) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;A&quot;</span>, <span class="kw">colnames</span>(wordsAdded))</a>
+<a class="sourceLine" id="cb541-3" title="3"></a>
+<a class="sourceLine" id="cb541-4" title="4"><span class="co">#1.4 Repeat dbove steps for remove</span></a>
+<a class="sourceLine" id="cb541-5" title="5">corpusRemoved &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(wiki<span class="op">$</span>Removed)) </a>
+<a class="sourceLine" id="cb541-6" title="6">corpusRemoved &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusRemoved, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)) <span class="co">#Remove all english stopwords</span></a>
+<a class="sourceLine" id="cb541-7" title="7">corpusRemoved &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusRemoved, stemDocument)</a>
+<a class="sourceLine" id="cb541-8" title="8">dtmRemoved &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpusRemoved)</a>
+<a class="sourceLine" id="cb541-9" title="9">sparseRemoved &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtmRemoved, <span class="fl">0.997</span>)</a>
+<a class="sourceLine" id="cb541-10" title="10">wordsRemoved &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(sparseRemoved))</a>
+<a class="sourceLine" id="cb541-11" title="11"><span class="kw">colnames</span>(wordsRemoved) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;R&quot;</span>, <span class="kw">colnames</span>(wordsRemoved))</a>
+<a class="sourceLine" id="cb541-12" title="12"><span class="kw">dim</span>(wordsRemoved)</a></code></pre></div>
+<pre><code>## [1] 3876  162</code></pre>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb543-1" title="1"><span class="co">#1.5 - Combine datas frames and create test and training dataset</span></a>
+<a class="sourceLine" id="cb543-2" title="2">wikiWords &lt;-<span class="st"> </span><span class="kw">cbind</span>(wordsAdded, wordsRemoved)</a>
+<a class="sourceLine" id="cb543-3" title="3">wikiWords<span class="op">$</span>Vandal &lt;-<span class="st"> </span>wiki<span class="op">$</span>Vandal</a>
+<a class="sourceLine" id="cb543-4" title="4"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb543-5" title="5">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(wikiWords<span class="op">$</span>Vandal, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb543-6" title="6">trainWiki &lt;-<span class="st"> </span><span class="kw">subset</span>(wikiWords, spl<span class="op">==</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb543-7" title="7">testWiki &lt;-<span class="st"> </span><span class="kw">subset</span>(wikiWords, spl<span class="op">==</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb543-8" title="8"><span class="dv">2061</span><span class="op">/</span>(<span class="dv">2061</span><span class="op">+</span><span class="dv">1815</span>) <span class="co">#baselinf accuacy</span></a></code></pre></div>
+<pre><code>## [1] 0.5317337</code></pre>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb545-1" title="1"><span class="co">#1.6 - CART model accuracy</span></a>
+<a class="sourceLine" id="cb545-2" title="2">wikiCART &lt;-<span class="st"> </span><span class="kw">rpart</span>(Vandal <span class="op">~</span>., <span class="dt">data =</span> trainWiki, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb545-3" title="3">vandalPred &lt;-<span class="st"> </span><span class="kw">predict</span>(wikiCART, <span class="dt">newdata =</span> testWiki, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb545-4" title="4"><span class="kw">table</span>(vandalPred, testWiki<span class="op">$</span>Vandal)</a></code></pre></div>
+<pre><code>##           
+## vandalPred   0   1
+##          0 618 533
+##          1   0  12</code></pre>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" title="1">(<span class="dv">618</span><span class="op">+</span><span class="dv">12</span>)<span class="op">/</span><span class="kw">nrow</span>(testWiki)</a></code></pre></div>
+<pre><code>## [1] 0.5417025</code></pre>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" title="1"><span class="co">#1.7 - Plot CART tree</span></a>
+<a class="sourceLine" id="cb549-2" title="2"><span class="kw">prp</span>(wikiCART)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+</div>
+<div id="problem-2---problem-specific-knowledge" class="section level4">
+<h4><span class="header-section-number">6.3.1.2</span> Problem 2 - Problem specific knowledge</h4>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" title="1"><span class="co">#2.1 - How many revisions added link(i.e. http)</span></a>
+<a class="sourceLine" id="cb550-2" title="2">wikiWords2 &lt;-<span class="st"> </span>wikiWords</a>
+<a class="sourceLine" id="cb550-3" title="3">wikiWords2<span class="op">$</span>HTTP &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&quot;http&quot;</span>,wiki<span class="op">$</span>Added,<span class="dt">fixed=</span><span class="ot">TRUE</span>), <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb550-4" title="4"><span class="kw">table</span>(wikiWords2<span class="op">$</span>HTTP) <span class="co">#217</span></a></code></pre></div>
+<pre><code>## 
+##    0    1 
+## 3659  217</code></pre>
+<blockquote>
+<p>Skipping the remaining questions, it’s just adding new variables and creating CART models with them included. Pretty repetitive.</p>
+</blockquote>
+</div>
+</div>
+<div id="part-2---automating-reviews-in-medicine" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Part 2 - Automating Reviews in Medicine</h3>
+<div id="problem-1---loading-data-1" class="section level4">
+<h4><span class="header-section-number">6.3.2.1</span> Problem 1 - Loading Data</h4>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" title="1">trials &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week5/clinical_trial.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb552-2" title="2"><span class="kw">summary</span>(trials)</a></code></pre></div>
+<pre><code>##     title             abstract             trial       
+##  Length:1860        Length:1860        Min.   :0.0000  
+##  Class :character   Class :character   1st Qu.:0.0000  
+##  Mode  :character   Mode  :character   Median :0.0000  
+##                                        Mean   :0.4392  
+##                                        3rd Qu.:1.0000  
+##                                        Max.   :1.0000</code></pre>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb554-1" title="1"><span class="co">#1.1 How many chars in the longest abstract</span></a>
+<a class="sourceLine" id="cb554-2" title="2"><span class="kw">max</span>(<span class="kw">nchar</span>(trials<span class="op">$</span>abstract))</a></code></pre></div>
+<pre><code>## [1] 3708</code></pre>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" title="1"><span class="kw">nrow</span>(<span class="kw">subset</span>(trials, <span class="kw">nchar</span>(abstract)<span class="op">==</span><span class="dv">0</span>)) <span class="co">#112</span></a></code></pre></div>
+<pre><code>## [1] 112</code></pre>
+</div>
+<div id="problem-2---preparing-the-corpus" class="section level4">
+<h4><span class="header-section-number">6.3.2.2</span> Problem 2 - Preparing the Corpus</h4>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" title="1">corpusTitle &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(trials<span class="op">$</span>title)) </a>
+<a class="sourceLine" id="cb558-2" title="2">corpusAbstract &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(trials<span class="op">$</span>abstract)) </a>
+<a class="sourceLine" id="cb558-3" title="3"></a>
+<a class="sourceLine" id="cb558-4" title="4">corpusTitle &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusTitle, <span class="kw">content_transformer</span>(tolower))<span class="co">#Change all documents to lower case</span></a>
+<a class="sourceLine" id="cb558-5" title="5">corpusTitle &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusTitle, removePunctuation)</a>
+<a class="sourceLine" id="cb558-6" title="6">corpusTitle &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusTitle, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)) <span class="co">#Remove all english stopwords</span></a>
+<a class="sourceLine" id="cb558-7" title="7">corpusTitle &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusTitle, stemDocument)</a>
+<a class="sourceLine" id="cb558-8" title="8">dtmTitle &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpusTitle)</a>
+<a class="sourceLine" id="cb558-9" title="9">dtmTitle &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtmTitle, <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb558-10" title="10">dtmTitle &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(dtmTitle))</a>
+<a class="sourceLine" id="cb558-11" title="11">                          </a>
+<a class="sourceLine" id="cb558-12" title="12">corpusAbstract &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAbstract, <span class="kw">content_transformer</span>(tolower))<span class="co">#Change all documents to lower case</span></a>
+<a class="sourceLine" id="cb558-13" title="13">corpusAbstract &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAbstract, removePunctuation)</a>
+<a class="sourceLine" id="cb558-14" title="14">corpusAbstract &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAbstract, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>)) <span class="co">#Remove all english stopwords</span></a>
+<a class="sourceLine" id="cb558-15" title="15">corpusAbstract &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpusAbstract, stemDocument)</a>
+<a class="sourceLine" id="cb558-16" title="16">dtmAbstract &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpusAbstract)</a>
+<a class="sourceLine" id="cb558-17" title="17">dtmAbstract &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtmAbstract, <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb558-18" title="18">dtmAbstract &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(dtmAbstract))</a>
+<a class="sourceLine" id="cb558-19" title="19"></a>
+<a class="sourceLine" id="cb558-20" title="20"><span class="co">#2.2 How many terms remain in dtmTitle after removing sparse terms</span></a>
+<a class="sourceLine" id="cb558-21" title="21"><span class="kw">dim</span>(dtmTitle)</a></code></pre></div>
+<pre><code>## [1] 1860   31</code></pre>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" title="1"><span class="kw">dim</span>(dtmAbstract)</a></code></pre></div>
+<pre><code>## [1] 1860  335</code></pre>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" title="1"><span class="kw">which.max</span>(<span class="kw">colSums</span>(dtmAbstract)) <span class="co">#2.3 - Word that occurs the most frequently in abstracts</span></a></code></pre></div>
+<pre><code>## patient 
+##     212</code></pre>
+</div>
+<div id="problem-3---building-a-model" class="section level4">
+<h4><span class="header-section-number">6.3.2.3</span> Problem 3 - Building a model</h4>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" title="1"><span class="kw">colnames</span>(dtmTitle) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;T&quot;</span>, <span class="kw">colnames</span>(dtmTitle))</a>
+<a class="sourceLine" id="cb564-2" title="2"><span class="kw">colnames</span>(dtmAbstract) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="kw">colnames</span>(dtmAbstract))</a>
+<a class="sourceLine" id="cb564-3" title="3">dtm &lt;-<span class="st"> </span><span class="kw">cbind</span>(dtmTitle, dtmAbstract)</a>
+<a class="sourceLine" id="cb564-4" title="4">dtm<span class="op">$</span>trial &lt;-<span class="st"> </span>trials<span class="op">$</span>trial</a>
+<a class="sourceLine" id="cb564-5" title="5"></a>
+<a class="sourceLine" id="cb564-6" title="6"><span class="co">#.3.3 - Split data and get baseline mdoel accuracy</span></a>
+<a class="sourceLine" id="cb564-7" title="7"><span class="kw">set.seed</span>(<span class="dv">144</span>)</a>
+<a class="sourceLine" id="cb564-8" title="8">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(dtm<span class="op">$</span>trial, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb564-9" title="9">train &lt;-<span class="st"> </span><span class="kw">subset</span>(dtm, spl<span class="op">==</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb564-10" title="10">test &lt;-<span class="st"> </span><span class="kw">subset</span>(dtm, spl<span class="op">==</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb564-11" title="11"><span class="kw">table</span>(train<span class="op">$</span>trial)</a></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 730 572</code></pre>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" title="1"><span class="dv">730</span><span class="op">/</span>(<span class="dv">572</span><span class="op">+</span><span class="dv">730</span>) <span class="co">#Accuracy - 0.5606759</span></a></code></pre></div>
+<pre><code>## [1] 0.5606759</code></pre>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1"><span class="co">#3.4 - CART model</span></a>
+<a class="sourceLine" id="cb568-2" title="2">trialCART &lt;-<span class="st"> </span><span class="kw">rpart</span>(trial <span class="op">~</span>., <span class="dt">data =</span> train, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb568-3" title="3"><span class="kw">prp</span>(trialCART)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" title="1">predProb &lt;-<span class="st"> </span><span class="kw">predict</span>(trialCART)</a>
+<a class="sourceLine" id="cb569-2" title="2"><span class="kw">summary</span>(predProb[,<span class="dv">2</span>])</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.05455 0.13636 0.28750 0.43932 0.78231 0.87189</code></pre>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" title="1"><span class="co">#3.7</span></a>
+<a class="sourceLine" id="cb571-2" title="2"><span class="kw">table</span>(train<span class="op">$</span>trial, predProb[,<span class="dv">2</span>] <span class="op">&gt;=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0   631   99
+##   1   131  441</code></pre>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" title="1">(<span class="dv">648</span><span class="op">+</span><span class="dv">396</span>)<span class="op">/</span><span class="kw">nrow</span>(train) <span class="co">#Accuracy - 0.8018433</span></a></code></pre></div>
+<pre><code>## [1] 0.8018433</code></pre>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" title="1"><span class="dv">396</span><span class="op">/</span>(<span class="dv">396</span><span class="op">+</span><span class="dv">176</span>) <span class="co">#Sensitivity - 0.6923077</span></a></code></pre></div>
+<pre><code>## [1] 0.6923077</code></pre>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb577-1" title="1"><span class="dv">648</span><span class="op">/</span>(<span class="dv">648</span><span class="op">+</span><span class="dv">82</span>) <span class="co">#Specificity - 0.8876712</span></a></code></pre></div>
+<pre><code>## [1] 0.8876712</code></pre>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1"><span class="co">#3.8</span></a>
+<a class="sourceLine" id="cb579-2" title="2">predT &lt;-<span class="st"> </span><span class="kw">predict</span>(trialCART, <span class="dt">newdata =</span> test, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb579-3" title="3"><span class="kw">table</span>(test<span class="op">$</span>trial, predT)</a></code></pre></div>
+<pre><code>##    predT
+##       0   1
+##   0 261  52
+##   1  83 162</code></pre>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1"><span class="co">#4.2 </span></a>
+<a class="sourceLine" id="cb581-2" title="2">predT &lt;-<span class="st"> </span><span class="kw">predict</span>(trialCART, <span class="dt">newdata =</span> test)</a>
+<a class="sourceLine" id="cb581-3" title="3">pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(predT[,<span class="dv">2</span>], test<span class="op">$</span>trial)</a>
+<a class="sourceLine" id="cb581-4" title="4"><span class="kw">as.numeric</span>(<span class="kw">performance</span>(pred, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)</a></code></pre></div>
+<pre><code>## [1] 0.8371063</code></pre>
+</div>
+</div>
+<div id="part-3---separating-spam-from-ham" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Part 3 - Separating Spam from Ham</h3>
+<div id="problem-1---loading-the-dataset" class="section level4">
+<h4><span class="header-section-number">6.3.3.1</span> Problem 1 - Loading the Dataset</h4>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1"><span class="co">#1.1 - Loading the Dataset </span></a>
+<a class="sourceLine" id="cb583-2" title="2">emails &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week5/emails.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> F)</a>
+<a class="sourceLine" id="cb583-3" title="3"><span class="kw">nrow</span>(emails)</a></code></pre></div>
+<pre><code>## [1] 5728</code></pre>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1"><span class="kw">table</span>(emails<span class="op">$</span>spam)</a></code></pre></div>
+<pre><code>## 
+##    0    1 
+## 4360 1368</code></pre>
+</div>
+<div id="problem-2---preparing-the-corpus-1" class="section level4">
+<h4><span class="header-section-number">6.3.3.2</span> Problem 2 - Preparing the corpus</h4>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">corpus &lt;-<span class="st"> </span><span class="kw">VCorpus</span>(<span class="kw">VectorSource</span>(emails<span class="op">$</span>text)) <span class="co"># Create corpus - collection of dcouments</span></a>
+<a class="sourceLine" id="cb587-2" title="2">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, <span class="kw">content_transformer</span>(tolower))</a>
+<a class="sourceLine" id="cb587-3" title="3">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removePunctuation)</a>
+<a class="sourceLine" id="cb587-4" title="4">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, removeWords, <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>))</a>
+<a class="sourceLine" id="cb587-5" title="5">corpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(corpus, stemDocument)</a>
+<a class="sourceLine" id="cb587-6" title="6"></a>
+<a class="sourceLine" id="cb587-7" title="7">dtm &lt;-<span class="st"> </span><span class="kw">DocumentTermMatrix</span>(corpus)</a>
+<a class="sourceLine" id="cb587-8" title="8">dtm</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 5728, terms: 28687)&gt;&gt;
+## Non-/sparse entries: 481719/163837417
+## Sparsity           : 100%
+## Maximal term length: 24
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1"><span class="co">#2.3 - What is the word stem that shows up most frequently across all the emails in the dataset?</span></a>
+<a class="sourceLine" id="cb589-2" title="2">spdtm &lt;-<span class="st"> </span><span class="kw">removeSparseTerms</span>(dtm, <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb589-3" title="3">spdtm</a></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 5728, terms: 330)&gt;&gt;
+## Non-/sparse entries: 213551/1676689
+## Sparsity           : 89%
+## Maximal term length: 10
+## Weighting          : term frequency (tf)</code></pre>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" title="1">emailsSparse &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(spdtm))</a>
+<a class="sourceLine" id="cb591-2" title="2"><span class="kw">colnames</span>(emailsSparse) &lt;-<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(emailsSparse))</a>
+<a class="sourceLine" id="cb591-3" title="3"><span class="kw">which.max</span>(<span class="kw">colSums</span>(emailsSparse)) </a></code></pre></div>
+<pre><code>## enron 
+##    92</code></pre>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" title="1"><span class="co">#2.4</span></a>
+<a class="sourceLine" id="cb593-2" title="2">emailsSparse<span class="op">$</span>spam &lt;-<span class="st"> </span>emails<span class="op">$</span>spam</a></code></pre></div>
+</div>
+<div id="problem-3---building-machine-learning-models" class="section level4">
+<h4><span class="header-section-number">6.3.3.3</span> Problem 3 - Building machine learning models</h4>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1"><span class="co">#3.1</span></a>
+<a class="sourceLine" id="cb594-2" title="2">emailsSparse<span class="op">$</span>spam =<span class="st"> </span><span class="kw">as.factor</span>(emailsSparse<span class="op">$</span>spam)</a>
+<a class="sourceLine" id="cb594-3" title="3"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb594-4" title="4">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(emailsSparse<span class="op">$</span>spam, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb594-5" title="5">train &lt;-<span class="st"> </span><span class="kw">subset</span>(emailsSparse, spl<span class="op">==</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb594-6" title="6">test &lt;-<span class="st"> </span><span class="kw">subset</span>(emailsSparse, spl<span class="op">==</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb594-7" title="7"></a>
+<a class="sourceLine" id="cb594-8" title="8">spamLog &lt;-<span class="st"> </span><span class="kw">glm</span>(spam <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb597-1" title="1">spamCART &lt;-<span class="st"> </span><span class="kw">rpart</span>(spam <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb597-2" title="2"></a>
+<a class="sourceLine" id="cb597-3" title="3"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb597-4" title="4">spamRF =<span class="st"> </span><span class="kw">randomForest</span>(spam<span class="op">~</span>., <span class="dt">data=</span>train) </a>
+<a class="sourceLine" id="cb597-5" title="5"></a>
+<a class="sourceLine" id="cb597-6" title="6">predTrainLog =<span class="st"> </span><span class="kw">predict</span>(spamLog, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb597-7" title="7">predTrainCART =<span class="st"> </span><span class="kw">predict</span>(spamCART)[,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb597-8" title="8">predTrainRF =<span class="st"> </span><span class="kw">predict</span>(spamRF, <span class="dt">type=</span><span class="st">&quot;prob&quot;</span>)[,<span class="dv">2</span>] </a>
+<a class="sourceLine" id="cb597-9" title="9"></a>
+<a class="sourceLine" id="cb597-10" title="10"><span class="kw">table</span>(predTrainLog <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.00001</span>)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   964  3046</code></pre>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" title="1"><span class="kw">table</span>(predTrainLog <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99999</span>)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##  3056   954</code></pre>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" title="1"><span class="kw">table</span>(predTrainLog <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.00001</span> <span class="op">&amp;</span><span class="st"> </span>predTrainLog <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.99999</span>)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##  4000    10</code></pre>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" title="1"><span class="co">#3.2 - Building Machine Learning Models </span></a>
+<a class="sourceLine" id="cb603-2" title="2"><span class="kw">summary</span>(spamLog)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = spam ~ ., family = &quot;binomial&quot;, data = train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -1.011   0.000   0.000   0.000   1.354  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)
+...</code></pre>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" title="1"><span class="co">#3.3 Cart tree</span></a>
+<a class="sourceLine" id="cb605-2" title="2"><span class="kw">prp</span>(spamCART)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb606-1" title="1"><span class="co">#3.4 - Accuracy</span></a>
+<a class="sourceLine" id="cb606-2" title="2"><span class="kw">table</span>(train<span class="op">$</span>spam, predTrainLog <span class="op">&gt;=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0  3052    0
+##   1     4  954</code></pre>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb608-1" title="1">(<span class="dv">3052</span><span class="op">+</span><span class="dv">954</span>)<span class="op">/</span><span class="kw">nrow</span>(train) <span class="co">#Acc - 0.9990025</span></a></code></pre></div>
+<pre><code>## [1] 0.9990025</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="classification-and-regression-trees-cart.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"download": ["pdf", "epub"]
+}
+});
+});
+</script>
+
+</body>
+
+</html>

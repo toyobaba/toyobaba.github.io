@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Unit 5 Classification and Regression Trees (CART) | Analytics Edge - EdX</title>
+  <meta name="description" content="EdX Analytics Edge, Notes and Assignments" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Unit 5 Classification and Regression Trees (CART) | Analytics Edge - EdX" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unit 5 Classification and Regression Trees (CART) | Analytics Edge - EdX" />
+  
+  <meta name="twitter:description" content="EdX Analytics Edge, Notes and Assignments" />
+  
+
+<meta name="author" content="omotoyosi Taiwo" />
+
+
+<meta name="date" content="2019-12-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="logistic-regression.html"/>
+<link rel="next" href="text-analytics.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analytics Edge - EdX</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> EdX Analytics Edge Notebook</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#working-with-data"><i class="fa fa-check"></i><b>2.1</b> Working with data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#loading-data-files"><i class="fa fa-check"></i><b>2.1.1</b> Loading data files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#summary-statistics"><i class="fa fa-check"></i><b>2.1.2</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction.html"><a href="introduction.html#plots"><i class="fa fa-check"></i><b>2.1.3</b> Plots</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction.html"><a href="introduction.html#summary-tables"><i class="fa fa-check"></i><b>2.1.4</b> Summary tables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#recitation---usda-food-database"><i class="fa fa-check"></i><b>2.2</b> Recitation - USDA Food Database</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#data-analysis---recitation"><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis - Recitation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#histogram---recitation"><i class="fa fa-check"></i><b>2.2.2</b> Histogram - Recitation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#summary-tables---recitation"><i class="fa fa-check"></i><b>2.2.3</b> Summary tables - Recitation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#assignment"><i class="fa fa-check"></i><b>2.3</b> Assignment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction.html"><a href="introduction.html#part-1---analytical-detective"><i class="fa fa-check"></i><b>2.3.1</b> Part 1 - Analytical Detective</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction.html"><a href="introduction.html#part-2---stock-dynamics"><i class="fa fa-check"></i><b>2.3.2</b> Part 2 - Stock Dynamics</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction.html"><a href="introduction.html#part-3---demographics-and-employment-in-the-united-states"><i class="fa fa-check"></i><b>2.3.3</b> Part 3 - Demographics and Employment in the United States</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#introduction-to-linear-regression"><i class="fa fa-check"></i><b>3.1</b> Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#variable-linear-regression-model---predicting-wine-quality"><i class="fa fa-check"></i><b>3.1.1</b> 1 variable Linear Regression Model - Predicting Wine Quality</a></li>
+<li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-model"><i class="fa fa-check"></i><b>3.1.2</b> Multiple Linear Regression Model</a></li>
+<li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#correlation-and-muticollinearity"><i class="fa fa-check"></i><b>3.1.3</b> Correlation and Muticollinearity</a></li>
+<li class="chapter" data-level="3.1.4" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions"><i class="fa fa-check"></i><b>3.1.4</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#recitation-2---moneyball-in-the-nba"><i class="fa fa-check"></i><b>3.2</b> Recitation 2 - MOneyball in the NBA</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#regression-model-using-more-than-just-wins-variable"><i class="fa fa-check"></i><b>3.2.1</b> Regression model using more than just Wins variable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#making-predictions-1"><i class="fa fa-check"></i><b>3.2.2</b> Making Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="linear-regression.html"><a href="linear-regression.html#assignment-1"><i class="fa fa-check"></i><b>3.3</b> Assignment</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linear-regression.html"><a href="linear-regression.html#part-1---climate-change"><i class="fa fa-check"></i><b>3.3.1</b> Part 1 - Climate Change</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linear-regression.html"><a href="linear-regression.html#part-2---detecting-flu-epidemics"><i class="fa fa-check"></i><b>3.3.2</b> Part 2 - Detecting Flu Epidemics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-to-logistic-regression"><i class="fa fa-check"></i><b>4.1</b> Introduction to Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#thresholding"><i class="fa fa-check"></i><b>4.1.1</b> Thresholding</a></li>
+<li class="chapter" data-level="4.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>4.1.2</b> ROC Curves</a></li>
+<li class="chapter" data-level="4.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#making-predictions-2"><i class="fa fa-check"></i><b>4.1.3</b> Making predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#framingham-heart-study"><i class="fa fa-check"></i><b>4.2</b> Framingham Heart study</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#recitation-3---election-forecasting"><i class="fa fa-check"></i><b>4.3</b> Recitation 3 - Election Forecasting</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#a-sophisticated-baseline-model"><i class="fa fa-check"></i><b>4.3.1</b> A sophisticated baseline model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#assignment-2"><i class="fa fa-check"></i><b>4.4</b> Assignment</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#part-1---popularity-of-music-records"><i class="fa fa-check"></i><b>4.4.1</b> Part 1 - Popularity of Music Records</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html"><i class="fa fa-check"></i><b>5</b> Classification and Regression Trees (CART)</a><ul>
+<li class="chapter" data-level="5.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#introduction-to-trees---judge-jury-and-classifier"><i class="fa fa-check"></i><b>5.1</b> Introduction to trees - Judge, Jury, and Classifier</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#random-forests"><i class="fa fa-check"></i><b>5.1.1</b> Random Forests</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation"><i class="fa fa-check"></i><b>5.1.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#the-d2hawkeye-story"><i class="fa fa-check"></i><b>5.2</b> The D2Hawkeye Story</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#baseline-method-and-penalty-matrix"><i class="fa fa-check"></i><b>5.2.1</b> Baseline method and Penalty Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#recitation---boston-housing-data-regression-trees"><i class="fa fa-check"></i><b>5.3</b> Recitation - Boston Housing Data (Regression Trees)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#geographical-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Geographical Predictions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#cross-validation-1"><i class="fa fa-check"></i><b>5.3.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#assignment-3"><i class="fa fa-check"></i><b>5.4</b> Assignment</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-1---understanding-why-people-vote"><i class="fa fa-check"></i><b>5.4.1</b> Part 1 - Understanding why people vote</a></li>
+<li class="chapter" data-level="5.4.2" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-2---letter-recognition"><i class="fa fa-check"></i><b>5.4.2</b> Part 2 - Letter Recognition</a></li>
+<li class="chapter" data-level="5.4.3" data-path="classification-and-regression-trees-cart.html"><a href="classification-and-regression-trees-cart.html#part-3---predicting-earnings-from-census-data"><i class="fa fa-check"></i><b>5.4.3</b> Part 3 - Predicting Earnings from Census Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-analytics.html"><a href="text-analytics.html"><i class="fa fa-check"></i><b>6</b> Text Analytics</a><ul>
+<li class="chapter" data-level="6.1" data-path="text-analytics.html"><a href="text-analytics.html#introduction-to-text-analytics"><i class="fa fa-check"></i><b>6.1</b> Introduction to Text Analytics</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="text-analytics.html"><a href="text-analytics.html#turning-tweets-into-knowledge"><i class="fa fa-check"></i><b>6.1.1</b> Turning Tweets into knowledge</a></li>
+<li class="chapter" data-level="6.1.2" data-path="text-analytics.html"><a href="text-analytics.html#preprocessing-data"><i class="fa fa-check"></i><b>6.1.2</b> Preprocessing data</a></li>
+<li class="chapter" data-level="6.1.3" data-path="text-analytics.html"><a href="text-analytics.html#build-a-cart-model"><i class="fa fa-check"></i><b>6.1.3</b> Build a CART model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="text-analytics.html"><a href="text-analytics.html#recitation---the-story-of-enron"><i class="fa fa-check"></i><b>6.2</b> Recitation - The Story of Enron</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="text-analytics.html"><a href="text-analytics.html#bag-of-words"><i class="fa fa-check"></i><b>6.2.1</b> Bag of Words</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="text-analytics.html"><a href="text-analytics.html#assignment-4"><i class="fa fa-check"></i><b>6.3</b> Assignment</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="text-analytics.html"><a href="text-analytics.html#part-1---detecting-vandalism-on-wikipedia"><i class="fa fa-check"></i><b>6.3.1</b> Part 1 - Detecting Vandalism on Wikipedia</a></li>
+<li class="chapter" data-level="6.3.2" data-path="text-analytics.html"><a href="text-analytics.html#part-2---automating-reviews-in-medicine"><i class="fa fa-check"></i><b>6.3.2</b> Part 2 - Automating Reviews in Medicine</a></li>
+<li class="chapter" data-level="6.3.3" data-path="text-analytics.html"><a href="text-analytics.html#part-3---separating-spam-from-ham"><i class="fa fa-check"></i><b>6.3.3</b> Part 3 - Separating Spam from Ham</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#introduction-to-clustering"><i class="fa fa-check"></i><b>7.1</b> Introduction to Clustering</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#heirarchical-clustering"><i class="fa fa-check"></i><b>7.1.1</b> Heirarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#recitation---segmenting-images"><i class="fa fa-check"></i><b>7.2</b> Recitation - Segmenting Images</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="clustering.html"><a href="clustering.html#flower-image"><i class="fa fa-check"></i><b>7.2.1</b> Flower Image</a></li>
+<li class="chapter" data-level="7.2.2" data-path="clustering.html"><a href="clustering.html#mri-image"><i class="fa fa-check"></i><b>7.2.2</b> MRI Image</a></li>
+<li class="chapter" data-level="7.2.3" data-path="clustering.html"><a href="clustering.html#k-means-clustering"><i class="fa fa-check"></i><b>7.2.3</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#assignment-5"><i class="fa fa-check"></i><b>7.3</b> Assignment</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#part-1---document-clustering-with-daily-kos"><i class="fa fa-check"></i><b>7.3.1</b> Part 1 - Document Clustering with Daily Kos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="clustering.html"><a href="clustering.html#part-2---market-segmentation-for-airlines"><i class="fa fa-check"></i><b>7.3.2</b> Part 2 - Market Segmentation for Airlines</a></li>
+<li class="chapter" data-level="7.3.3" data-path="clustering.html"><a href="clustering.html#part-3---predicting-stock-returns-with-cluster-then-predict"><i class="fa fa-check"></i><b>7.3.3</b> Part 3 - Predicting Stock Returns with Cluster-Then-Predict</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a><ul>
+<li class="chapter" data-level="8.1" data-path="visualization.html"><a href="visualization.html#scatterplots---visualizing-the-world"><i class="fa fa-check"></i><b>8.1</b> Scatterplots - Visualizing the world</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="visualization.html"><a href="visualization.html#basic-scatterplots-using-ggplot"><i class="fa fa-check"></i><b>8.1.1</b> Basic scatterplots using ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="visualization.html"><a href="visualization.html#visualizing-crime-over-time"><i class="fa fa-check"></i><b>8.2</b> Visualizing crime over time</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="visualization.html"><a href="visualization.html#heatmaps"><i class="fa fa-check"></i><b>8.2.1</b> Heatmaps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="visualization.html"><a href="visualization.html#a-geographical-hot-spot-map"><i class="fa fa-check"></i><b>8.2.2</b> A Geographical Hot Spot Map</a></li>
+<li class="chapter" data-level="8.2.3" data-path="visualization.html"><a href="visualization.html#a-heatmap-of-the-united-states"><i class="fa fa-check"></i><b>8.2.3</b> A Heatmap of the United States</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="visualization.html"><a href="visualization.html#recitation"><i class="fa fa-check"></i><b>8.3</b> Recitation</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="visualization.html"><a href="visualization.html#bar-charts"><i class="fa fa-check"></i><b>8.3.1</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="visualization.html"><a href="visualization.html#assignment-6"><i class="fa fa-check"></i><b>8.4</b> Assignment</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="visualization.html"><a href="visualization.html#part-1---election-forecasting-revisited"><i class="fa fa-check"></i><b>8.4.1</b> Part 1 - Election Forecasting Revisited</a></li>
+<li class="chapter" data-level="8.4.2" data-path="visualization.html"><a href="visualization.html#part-2---visualizing-network-data"><i class="fa fa-check"></i><b>8.4.2</b> Part 2 - Visualizing Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="final-exam.html"><a href="final-exam.html"><i class="fa fa-check"></i><b>9</b> Final Exam</a><ul>
+<li class="chapter" data-level="9.1" data-path="final-exam.html"><a href="final-exam.html#part-1---estimating-miles-per-gallon"><i class="fa fa-check"></i><b>9.1</b> Part 1 - Estimating Miles Per Gallon</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="final-exam.html"><a href="final-exam.html#problem-1---exploratory-data-analysis"><i class="fa fa-check"></i><b>9.1.1</b> Problem 1 - Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="9.1.2" data-path="final-exam.html"><a href="final-exam.html#problem-2---simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Problem 2 - Simple Linear Regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables"><i class="fa fa-check"></i><b>9.1.3</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.1.4" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart-and-randomforest"><i class="fa fa-check"></i><b>9.1.4</b> Problem 4 - CART and Randomforest</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="final-exam.html"><a href="final-exam.html#part-2---predicting-heart-disease"><i class="fa fa-check"></i><b>9.2</b> Part 2 - Predicting Heart Disease</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="final-exam.html"><a href="final-exam.html#problem-12---exploratory-data-analysis-and-logistic-regression"><i class="fa fa-check"></i><b>9.2.1</b> Problem 1&amp;2 - Exploratory Data Analysis and Logistic Regression</a></li>
+<li class="chapter" data-level="9.2.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---adding-more-variables-1"><i class="fa fa-check"></i><b>9.2.2</b> Problem 3 - Adding More Variables</a></li>
+<li class="chapter" data-level="9.2.3" data-path="final-exam.html"><a href="final-exam.html#problem-4---cart"><i class="fa fa-check"></i><b>9.2.3</b> Problem 4 - CART</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="final-exam.html"><a href="final-exam.html#part-3---understanding-users-spending"><i class="fa fa-check"></i><b>9.3</b> Part 3 - Understanding User’s Spending</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="final-exam.html"><a href="final-exam.html#problem-1-and-2"><i class="fa fa-check"></i><b>9.3.1</b> Problem 1 and 2</a></li>
+<li class="chapter" data-level="9.3.2" data-path="final-exam.html"><a href="final-exam.html#problem-3---clustering"><i class="fa fa-check"></i><b>9.3.2</b> Problem 3 - Clustering</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analytics Edge - EdX</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="classification-and-regression-trees-cart" class="section level1">
+<h1><span class="header-section-number">Unit 5</span> Classification and Regression Trees (CART)</h1>
+<div id="introduction-to-trees---judge-jury-and-classifier" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction to trees - Judge, Jury, and Classifier</h2>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1">stevens &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week4/stevens.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb301-2" title="2"><span class="kw">str</span>(stevens)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    566 obs. of  9 variables:
+##  $ Docket    : Factor w/ 566 levels &quot;00-1011&quot;,&quot;00-1045&quot;,..: 63 69 70 145 97 181 242 289 334 436 ...
+##  $ Term      : int  1994 1994 1994 1994 1995 1995 1996 1997 1997 1999 ...
+##  $ Circuit   : Factor w/ 13 levels &quot;10th&quot;,&quot;11th&quot;,..: 4 11 7 3 9 11 13 11 12 2 ...
+##  $ Issue     : Factor w/ 11 levels &quot;Attorneys&quot;,&quot;CivilRights&quot;,..: 5 5 5 5 9 5 5 5 5 3 ...
+##  $ Petitioner: Factor w/ 12 levels &quot;AMERICAN.INDIAN&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Respondent: Factor w/ 12 levels &quot;AMERICAN.INDIAN&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ LowerCourt: Factor w/ 2 levels &quot;conser&quot;,&quot;liberal&quot;: 2 2 2 1 1 1 1 1 1 1 ...
+##  $ Unconst   : int  0 0 0 0 0 1 0 1 0 0 ...
+##  $ Reverse   : int  1 1 1 1 1 0 1 1 1 1 ...
+...</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="co">#Split data into Training and Testing data set</span></a>
+<a class="sourceLine" id="cb303-2" title="2"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb303-3" title="3"><span class="kw">set.seed</span>(<span class="dv">3000</span>)</a>
+<a class="sourceLine" id="cb303-4" title="4">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(stevens<span class="op">$</span>Reverse, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb303-5" title="5">Train &lt;-<span class="st"> </span><span class="kw">subset</span>(stevens, spl <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb303-6" title="6">Test &lt;-<span class="st"> </span><span class="kw">subset</span>(stevens, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb303-7" title="7"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb303-8" title="8"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb303-9" title="9"></a>
+<a class="sourceLine" id="cb303-10" title="10"><span class="co">#Build classification Tree</span></a>
+<a class="sourceLine" id="cb303-11" title="11">stevensTree &lt;-<span class="st"> </span><span class="kw">rpart</span>(Reverse<span class="op">~</span><span class="st"> </span>Circuit<span class="op">+</span><span class="st"> </span>Issue <span class="op">+</span><span class="st"> </span>Petitioner <span class="op">+</span><span class="st"> </span>Respondent <span class="op">+</span><span class="st"> </span>LowerCourt <span class="op">+</span><span class="st"> </span>Unconst, <span class="dt">data =</span> Train, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">minbucket=</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb303-12" title="12"></a>
+<a class="sourceLine" id="cb303-13" title="13"><span class="co">#Plotting rpart trees</span></a>
+<a class="sourceLine" id="cb303-14" title="14"><span class="kw">prp</span>(stevensTree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1"><span class="co">#Predict with tree</span></a>
+<a class="sourceLine" id="cb304-2" title="2">predictCART &lt;-<span class="st"> </span><span class="kw">predict</span>(stevensTree, <span class="dt">newdata =</span> Test, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) </a>
+<a class="sourceLine" id="cb304-3" title="3"><span class="kw">table</span>(Test<span class="op">$</span>Reverse, predictCART) <span class="co">#Confusion matrix</span></a></code></pre></div>
+<pre><code>##    predictCART
+##      0  1
+##   0 41 36
+##   1 22 71</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1"><span class="co">#Generate ROC Curve</span></a>
+<a class="sourceLine" id="cb306-2" title="2"><span class="kw">library</span>(ROCR) <span class="co">#load ROCR library</span></a>
+<a class="sourceLine" id="cb306-3" title="3"></a>
+<a class="sourceLine" id="cb306-4" title="4"><span class="co">#Probability Prediction</span></a>
+<a class="sourceLine" id="cb306-5" title="5">PredictROC &lt;-<span class="st"> </span><span class="kw">predict</span>(stevensTree, <span class="dt">newdata=</span>Test) <span class="co">#ROC prediction</span></a>
+<a class="sourceLine" id="cb306-6" title="6">pred&lt;-<span class="st"> </span><span class="kw">prediction</span>(PredictROC[,<span class="dv">2</span>], Test<span class="op">$</span>Reverse) <span class="co">#Use second column as we are trying to predict Reverse = 1.</span></a>
+<a class="sourceLine" id="cb306-7" title="7">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>) <span class="co"># performance Object to be plotted</span></a>
+<a class="sourceLine" id="cb306-8" title="8"><span class="kw">plot</span>(perf) <span class="co">#Plot ROC Curve</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-62-2.png" width="672" /></p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">performance</span>(pred, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)<span class="co">#AUC - Area under curve to measure accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.6927105</code></pre>
+<div id="random-forests" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Random Forests</h3>
+<p>Designed to improve prediction accuracy of CART.</p>
+<p>Works by building a large number of CART trees ans prediction is made by each tree voting on outcome</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb309-2" title="2"><span class="co">#For classification problems, make sure dependent variable is a factor</span></a>
+<a class="sourceLine" id="cb309-3" title="3">Train<span class="op">$</span>Reverse &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Train<span class="op">$</span>Reverse)</a>
+<a class="sourceLine" id="cb309-4" title="4">Test<span class="op">$</span>Reverse &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Test<span class="op">$</span>Reverse)</a>
+<a class="sourceLine" id="cb309-5" title="5"></a>
+<a class="sourceLine" id="cb309-6" title="6"><span class="co">#create random forests</span></a>
+<a class="sourceLine" id="cb309-7" title="7">StevensForest &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Reverse<span class="op">~</span><span class="st"> </span>Circuit<span class="op">+</span><span class="st"> </span>Issue <span class="op">+</span><span class="st"> </span>Petitioner <span class="op">+</span><span class="st"> </span>Respondent <span class="op">+</span><span class="st"> </span>LowerCourt <span class="op">+</span><span class="st"> </span>Unconst, <span class="dt">data =</span> Train, <span class="dt">nodesize=</span><span class="dv">25</span>, <span class="dt">ntree=</span><span class="dv">200</span>) </a>
+<a class="sourceLine" id="cb309-8" title="8">PredictForest &lt;-<span class="st"> </span><span class="kw">predict</span>(StevensForest, <span class="dt">newdata =</span> Test)<span class="co"># prediction using random forest</span></a>
+<a class="sourceLine" id="cb309-9" title="9"><span class="kw">table</span>(Test<span class="op">$</span>Reverse, PredictForest) <span class="co"># confusion Matrix</span></a></code></pre></div>
+<pre><code>##    PredictForest
+##      0  1
+##   0 43 34
+##   1 16 77</code></pre>
+</div>
+<div id="cross-validation" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Cross validation</h3>
+<p>Selecting minbucket should not be selected by best accuracy as it does not translate well to new data prediction accuracy</p>
+<div id="k-fold-cross-validation" class="section level4">
+<h4><span class="header-section-number">5.1.2.1</span> K-fold cross validation</h4>
+<p>Split training set into k pieces/folds</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb311-2" title="2"><span class="kw">library</span>(e1071)</a>
+<a class="sourceLine" id="cb311-3" title="3">numFolds &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>) <span class="co"># cv = croos validation; numer = number of folds(buckets)</span></a>
+<a class="sourceLine" id="cb311-4" title="4">cpGrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.cp=</span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="fl">0.5</span>,<span class="fl">0.01</span>))<span class="co">#cp paramaeters to teast as numbers from 0.01 to 0.5, in increments of 0.01.</span></a>
+<a class="sourceLine" id="cb311-5" title="5"><span class="kw">train</span>(Reverse<span class="op">~</span><span class="st"> </span>Circuit<span class="op">+</span><span class="st"> </span>Issue <span class="op">+</span><span class="st"> </span>Petitioner <span class="op">+</span><span class="st"> </span>Respondent <span class="op">+</span><span class="st"> </span>LowerCourt <span class="op">+</span><span class="st"> </span>Unconst, <span class="dt">data =</span> Train, <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl=</span>numFolds, <span class="dt">tuneGrid =</span> cpGrid)</a></code></pre></div>
+<pre><code>## CART 
+## 
+## 396 samples
+##   6 predictor
+##   2 classes: &#39;0&#39;, &#39;1&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 356, 356, 357, 357, 356, 356, ... 
+## Resampling results across tuning parameters:
+...</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="co">#New CART model with new cp value instead on minbucket</span></a>
+<a class="sourceLine" id="cb313-2" title="2">StevensTreeCV &lt;-<span class="st"> </span><span class="kw">rpart</span>(Reverse <span class="op">~</span><span class="st"> </span>Circuit <span class="op">+</span><span class="st"> </span>Issue <span class="op">+</span><span class="st"> </span>Petitioner <span class="op">+</span><span class="st"> </span>Respondent <span class="op">+</span><span class="st"> </span>LowerCourt <span class="op">+</span><span class="st"> </span>Unconst, <span class="dt">data =</span> Train, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="st">&quot;0.19&quot;</span>)</a>
+<a class="sourceLine" id="cb313-3" title="3">PredictCV &lt;-<span class="st"> </span><span class="kw">predict</span>(StevensTreeCV, <span class="dt">newdata=</span> Test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb313-4" title="4"><span class="kw">table</span>(Test<span class="op">$</span>Reverse, PredictCV) <span class="co">#Confusion Matrix shows increased accuracy to 0.7235294</span></a></code></pre></div>
+<pre><code>##    PredictCV
+##      0  1
+##   0 59 18
+##   1 29 64</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="co">#Plot tree</span></a>
+<a class="sourceLine" id="cb315-2" title="2"><span class="kw">prp</span>(StevensTreeCV)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="the-d2hawkeye-story" class="section level2">
+<h2><span class="header-section-number">5.2</span> The D2Hawkeye Story</h2>
+<p>Predict cost bucket patient fell into in 2009 using a CART model</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">Claims&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;week4/ClaimsData.csv&quot;</span>)<span class="co">#read in data</span></a>
+<a class="sourceLine" id="cb316-2" title="2"><span class="kw">str</span>(Claims) <span class="co"># display variable structures</span></a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    458005 obs. of  16 variables:
+##  $ age              : int  85 59 67 52 67 68 75 70 67 67 ...
+##  $ alzheimers       : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ arthritis        : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ cancer           : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ copd             : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ depression       : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ diabetes         : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ heart.failure    : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ ihd              : int  0 0 0 0 0 0 0 0 0 0 ...
+...</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">table</span>(Claims<span class="op">$</span>bucket2009)<span class="op">/</span><span class="kw">nrow</span>(Claims)<span class="co">#Number of patients in each cost bucket</span></a></code></pre></div>
+<pre><code>## 
+##           1           2           3           4           5 
+## 0.671267781 0.190170413 0.089466272 0.043324855 0.005770679</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="co">#Split data into training and testing sets</span></a>
+<a class="sourceLine" id="cb320-2" title="2"><span class="kw">library</span>(caTools) <span class="co"># helps in seed setting for splitting data randomly while maintaining ratio of specified variable</span></a>
+<a class="sourceLine" id="cb320-3" title="3"></a>
+<a class="sourceLine" id="cb320-4" title="4"><span class="co"># Put 60% of data in training set</span></a>
+<a class="sourceLine" id="cb320-5" title="5"><span class="kw">set.seed</span>(<span class="dv">88</span>)</a>
+<a class="sourceLine" id="cb320-6" title="6">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(Claims<span class="op">$</span>bucket2009, <span class="dt">SplitRatio =</span> <span class="fl">0.6</span>)</a>
+<a class="sourceLine" id="cb320-7" title="7">ClaimsTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(Claims, <span class="dt">spl =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb320-8" title="8">ClaimsTest &lt;-<span class="st"> </span><span class="kw">subset</span>(Claims, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div id="baseline-method-and-penalty-matrix" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Baseline method and Penalty Matrix</h3>
+<p>Baseline method will perdict that cost bucket for a patient in 2009 will be the same as it was in 2008</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="co">#Classification matrix</span></a>
+<a class="sourceLine" id="cb321-2" title="2">ClassificationMatrix &lt;-<span class="st"> </span><span class="kw">table</span>(ClaimsTest<span class="op">$</span>bucket2009, ClaimsTest<span class="op">$</span>bucket2008) <span class="co">#Outcome = bucket2009, prediction = bucket2008</span></a>
+<a class="sourceLine" id="cb321-3" title="3">ClassificationMatrix</a></code></pre></div>
+<pre><code>##    
+##          1      2      3      4      5
+##   1 110138   7787   3427   1452    174
+##   2  16000  10721   4629   2931    559
+##   3   7006   4629   2774   1621    360
+##   4   2688   1943   1415   1539    352
+##   5    293    191    160    309    104</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1">(<span class="dv">110138</span> <span class="op">+</span><span class="st"> </span><span class="dv">10721</span> <span class="op">+</span><span class="st"> </span><span class="dv">2774</span> <span class="op">+</span><span class="st"> </span><span class="dv">1539</span> <span class="op">+</span><span class="st"> </span><span class="dv">104</span>)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest)<span class="co">#Baseline model accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.6838135</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1">PenaltyMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>),<span class="dt">byrow =</span> T, <span class="dt">nrow=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb325-2" title="2">PenaltyMatrix</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    0    1    2    3    4
+## [2,]    2    0    1    2    3
+## [3,]    4    2    0    1    2
+## [4,]    6    4    2    0    1
+## [5,]    8    6    4    2    0</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="co">#penalty Error = sum(Penalty matrix multiplied by classification matrix)/number of observations</span></a>
+<a class="sourceLine" id="cb327-2" title="2"><span class="kw">sum</span>(PenaltyMatrix<span class="op">*</span>ClassificationMatrix)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest)</a></code></pre></div>
+<pre><code>## [1] 0.7386055</code></pre>
+<p>Now, we’ll create a CART model to improve the penalty error and accuracy</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb329-2" title="2"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb329-3" title="3"><span class="co">#cp value was selected from cross validation. Skipped due to time </span></a>
+<a class="sourceLine" id="cb329-4" title="4">ClaimsTree &lt;-<span class="st"> </span><span class="kw">rpart</span>(bucket2009 <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>arthritis <span class="op">+</span><span class="st"> </span>alzheimers <span class="op">+</span><span class="st"> </span>cancer <span class="op">+</span><span class="st"> </span>copd <span class="op">+</span><span class="st"> </span>depression <span class="op">+</span><span class="st"> </span>diabetes <span class="op">+</span><span class="st"> </span>heart.failure <span class="op">+</span><span class="st"> </span>ihd <span class="op">+</span><span class="st"> </span>kidney <span class="op">+</span><span class="st"> </span>osteoporosis <span class="op">+</span><span class="st"> </span>stroke <span class="op">+</span><span class="st">  </span>bucket2008 <span class="op">+</span><span class="st"> </span>reimbursement2008, <span class="dt">data=</span> ClaimsTrain, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.00005</span> )</a>
+<a class="sourceLine" id="cb329-5" title="5"></a>
+<a class="sourceLine" id="cb329-6" title="6"><span class="kw">prp</span>(ClaimsTree) <span class="co">#display tree</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1">PredictTest &lt;-<span class="st"> </span><span class="kw">predict</span> (ClaimsTree, <span class="dt">newdata =</span> ClaimsTest, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb330-2" title="2">ClassificationMatrix &lt;-<span class="st"> </span><span class="kw">table</span>(ClaimsTest<span class="op">$</span>bucket2009, PredictTest)</a>
+<a class="sourceLine" id="cb330-3" title="3">ClassificationMatrix</a></code></pre></div>
+<pre><code>##    PredictTest
+##          1      2      3      4      5
+##   1 114987   7884      0    107      0
+##   2  18692  16051      0     97      0
+##   3   8188   8120      0     82      0
+##   4   3176   4567      0    194      0
+##   5    349    671      0     37      0</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1">(<span class="dv">114141</span> <span class="op">+</span><span class="st"> </span><span class="dv">16102</span> <span class="op">+</span><span class="st"> </span><span class="dv">118</span> <span class="op">+</span><span class="st"> </span><span class="dv">201</span> <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest) <span class="co"># accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.7126669</code></pre>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1"><span class="kw">sum</span>(PenaltyMatrix<span class="op">*</span>ClassificationMatrix)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest) <span class="co">#Penalty error</span></a></code></pre></div>
+<pre><code>## [1] 0.7591238</code></pre>
+<p>CART model predicts 3,4,5 rarely because data has few observations in these classes. Can be rectified by adding penalty matrix to model</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1">ClaimsTree &lt;-<span class="st"> </span><span class="kw">rpart</span>(bucket2009 <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>arthritis <span class="op">+</span><span class="st"> </span>alzheimers <span class="op">+</span><span class="st"> </span>cancer <span class="op">+</span><span class="st"> </span>copd <span class="op">+</span><span class="st"> </span>depression <span class="op">+</span><span class="st"> </span>diabetes <span class="op">+</span><span class="st"> </span>heart.failure <span class="op">+</span><span class="st"> </span>ihd <span class="op">+</span><span class="st"> </span>kidney <span class="op">+</span><span class="st"> </span>osteoporosis <span class="op">+</span><span class="st"> </span>stroke <span class="op">+</span><span class="st">  </span>bucket2008 <span class="op">+</span><span class="st"> </span>reimbursement2008, <span class="dt">data=</span> ClaimsTrain, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.00005</span>, <span class="dt">parms=</span><span class="kw">list</span>(<span class="dt">loss=</span>PenaltyMatrix) )</a>
+<a class="sourceLine" id="cb336-2" title="2"><span class="kw">prp</span>(ClaimsTree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">PredictTest &lt;-<span class="st"> </span><span class="kw">predict</span> (ClaimsTree, <span class="dt">newdata =</span> ClaimsTest, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb337-2" title="2">ClassificationMatrix &lt;-<span class="st"> </span><span class="kw">table</span>(ClaimsTest<span class="op">$</span>bucket2009, PredictTest)</a>
+<a class="sourceLine" id="cb337-3" title="3">ClassificationMatrix</a></code></pre></div>
+<pre><code>##    PredictTest
+##         1     2     3     4     5
+##   1 93651 26529  2571   227     0
+##   2  6913 20324  7049   554     0
+##   3  3499  8184  4370   337     0
+##   4  1264  3403  2702   568     0
+##   5   129   375   411   142     0</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">(<span class="dv">93651</span><span class="op">+</span><span class="dv">20324</span><span class="op">+</span><span class="dv">4370</span><span class="op">+</span><span class="dv">568</span>)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest)<span class="co"># accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.6490813</code></pre>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1"><span class="kw">sum</span>(PenaltyMatrix<span class="op">*</span>ClassificationMatrix)<span class="op">/</span><span class="kw">nrow</span>(ClaimsTest) <span class="co">#Penalty error</span></a></code></pre></div>
+<pre><code>## [1] 0.6377987</code></pre>
+</div>
+</div>
+<div id="recitation---boston-housing-data-regression-trees" class="section level2">
+<h2><span class="header-section-number">5.3</span> Recitation - Boston Housing Data (Regression Trees)</h2>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1">boston &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week4/boston.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb343-2" title="2"><span class="kw">str</span>(boston)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    506 obs. of  16 variables:
+##  $ TOWN   : Factor w/ 92 levels &quot;Arlington&quot;,&quot;Ashland&quot;,..: 54 77 77 46 46 46 69 69 69 69 ...
+##  $ TRACT  : int  2011 2021 2022 2031 2032 2033 2041 2042 2043 2044 ...
+##  $ LON    : num  -71 -71 -70.9 -70.9 -70.9 ...
+##  $ LAT    : num  42.3 42.3 42.3 42.3 42.3 ...
+##  $ MEDV   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 22.1 16.5 18.9 ...
+##  $ CRIM   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
+##  $ ZN     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
+##  $ INDUS  : num  2.31 7.07 7.07 2.18 2.18 2.18 7.87 7.87 7.87 7.87 ...
+##  $ CHAS   : int  0 0 0 0 0 0 0 0 0 0 ...
+...</code></pre>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>LAT)</a>
+<a class="sourceLine" id="cb345-2" title="2"></a>
+<a class="sourceLine" id="cb345-3" title="3"><span class="co">#See which points lie along the Charles River</span></a>
+<a class="sourceLine" id="cb345-4" title="4"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>CHAS <span class="op">==</span><span class="dv">1</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>CHAS <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb345-5" title="5"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>TRACT <span class="op">==</span><span class="dv">3531</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>TRACT <span class="op">==</span><span class="st"> </span><span class="dv">3531</span>], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb345-6" title="6"><span class="kw">summary</span>(boston<span class="op">$</span>NOX) <span class="co">#air pollution distribution</span></a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.3850  0.4490  0.5380  0.5547  0.6240  0.8710</code></pre>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>NOX <span class="op">&gt;</span><span class="fl">0.55</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>NOX <span class="op">&gt;</span><span class="fl">0.55</span>], <span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>LAT)</a>
+<a class="sourceLine" id="cb348-2" title="2"><span class="kw">summary</span>(boston<span class="op">$</span>MEDV)<span class="co">#thousands of dollars</span></a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    5.00   17.02   21.20   22.53   25.00   50.00</code></pre>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-69-2.png" width="672" /></p>
+<div id="geographical-predictions" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Geographical Predictions</h3>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" title="1"><span class="kw">plot</span>(boston<span class="op">$</span>LAT, boston<span class="op">$</span>MEDV)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>MEDV)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-70-2.png" width="672" /></p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" title="1"><span class="co">#linear regression model</span></a>
+<a class="sourceLine" id="cb353-2" title="2">latlonlm &lt;-<span class="st"> </span><span class="kw">lm</span>(MEDV<span class="op">~</span>LAT<span class="op">+</span>LON, <span class="dt">data =</span> boston) </a>
+<a class="sourceLine" id="cb353-3" title="3"><span class="kw">summary</span>(latlonlm)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = MEDV ~ LAT + LON, data = boston)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -16.460  -5.590  -1.299   3.695  28.129 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+...</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1"><span class="co">#above median cencus tracts</span></a>
+<a class="sourceLine" id="cb355-2" title="2"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>LAT)</a>
+<a class="sourceLine" id="cb355-3" title="3"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>) </a>
+<a class="sourceLine" id="cb355-4" title="4"></a>
+<a class="sourceLine" id="cb355-5" title="5"><span class="co">#See performance of linear model</span></a>
+<a class="sourceLine" id="cb355-6" title="6"><span class="kw">points</span>(boston<span class="op">$</span>LON[latlonlm<span class="op">$</span>fitted.values <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[latlonlm<span class="op">$</span>fitted.values <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="st">&quot;$&quot;</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-70-3.png" width="672" /></p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1"><span class="co">#Regeression Trees</span></a>
+<a class="sourceLine" id="cb356-2" title="2"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb356-3" title="3"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb356-4" title="4">latlontree&lt;-<span class="st"> </span><span class="kw">rpart</span>(MEDV <span class="op">~</span><span class="st"> </span>LAT <span class="op">+</span><span class="st"> </span>LON, <span class="dt">data =</span> boston)</a>
+<a class="sourceLine" id="cb356-5" title="5"><span class="kw">prp</span>(latlontree)<span class="co">#Regression trees predcit average of dependent variable(MEDV-median value) in the selected bucket</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-70-4.png" width="672" /></p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1"><span class="co">#See performance of Regression tree</span></a>
+<a class="sourceLine" id="cb357-2" title="2"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>LAT)</a>
+<a class="sourceLine" id="cb357-3" title="3"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb357-4" title="4">fittedvalues &lt;-<span class="st"> </span><span class="kw">predict</span>(latlontree)</a>
+<a class="sourceLine" id="cb357-5" title="5"><span class="kw">points</span>(boston<span class="op">$</span>LON[fittedvalues <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[fittedvalues <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="st">&quot;$&quot;</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-70-5.png" width="672" /></p>
+<p>The tree is much better at estimating above median value houses.
+Athough still complex. We’ll try specifying a simpler tree with a min bucket and observe performance.</p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1">latlontree&lt;-<span class="st"> </span><span class="kw">rpart</span>(MEDV <span class="op">~</span><span class="st"> </span>LAT <span class="op">+</span><span class="st"> </span>LON, <span class="dt">data =</span> boston, <span class="dt">minbucket=</span><span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb358-2" title="2"><span class="kw">prp</span>(latlontree) <span class="co">#Tree has only 5 splits now </span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1"><span class="co">#Or we can use R base plot function to visualize trees</span></a>
+<a class="sourceLine" id="cb359-2" title="2"><span class="kw">plot</span>(latlontree)</a>
+<a class="sourceLine" id="cb359-3" title="3"><span class="kw">text</span>(latlontree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-71-2.png" width="672" /></p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1"><span class="kw">plot</span>(boston<span class="op">$</span>LON, boston<span class="op">$</span>LAT)</a>
+<a class="sourceLine" id="cb360-2" title="2"><span class="kw">abline</span>(<span class="dt">v=</span><span class="op">-</span><span class="fl">71.07</span>)<span class="co"># First split on tree</span></a>
+<a class="sourceLine" id="cb360-3" title="3"><span class="kw">abline</span>(<span class="dt">h=</span><span class="fl">42.21</span>)<span class="co"># Second split on tree to the left</span></a>
+<a class="sourceLine" id="cb360-4" title="4"><span class="kw">abline</span>(<span class="dt">h =</span><span class="fl">42.17</span>)<span class="co"># third left split</span></a>
+<a class="sourceLine" id="cb360-5" title="5"><span class="kw">points</span>(boston<span class="op">$</span>LON[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], boston<span class="op">$</span>LAT[boston<span class="op">$</span>MEDV <span class="op">&gt;</span><span class="fl">21.2</span>], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-71-3.png" width="672" /></p>
+<p>Regression tree has carved out the low value area in the center, that linear Regression in incapable of.</p>
+<p>Now we’ll usee more variables than Longitude and Latitude to build a more accurate model</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb361-2" title="2">split &lt;-<span class="st"> </span><span class="kw">sample.split</span>(boston<span class="op">$</span>MEDV, <span class="dt">SplitRatio =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb361-3" title="3">train &lt;-<span class="st"> </span><span class="kw">subset</span>(boston, split<span class="op">==</span>T)</a>
+<a class="sourceLine" id="cb361-4" title="4">test &lt;-<span class="st"> </span><span class="kw">subset</span>(boston, split<span class="op">==</span>F)</a>
+<a class="sourceLine" id="cb361-5" title="5">linreg &lt;-<span class="st"> </span><span class="kw">lm</span>(MEDV <span class="op">~</span><span class="st"> </span>. , <span class="dt">data =</span> train[<span class="op">!</span>(<span class="kw">names</span>(train) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;TOWN&#39;</span>,<span class="st">&#39;TRACT&#39;</span>))])</a>
+<a class="sourceLine" id="cb361-6" title="6"><span class="kw">summary</span>(linreg)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = MEDV ~ ., data = train[!(names(train) %in% c(&quot;TOWN&quot;, 
+##     &quot;TRACT&quot;))])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -14.511  -2.712  -0.676   1.793  36.883 
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" title="1">linreg.pred &lt;-<span class="st"> </span><span class="kw">predict</span>(linreg, <span class="dt">newdata =</span> test)</a>
+<a class="sourceLine" id="cb363-2" title="2">linreg.sse &lt;-<span class="st"> </span><span class="kw">sum</span>((linreg.pred <span class="op">-</span><span class="st"> </span>test<span class="op">$</span>MEDV)<span class="op">^</span><span class="dv">2</span>) <span class="co">#Sum of squared errors </span></a>
+<a class="sourceLine" id="cb363-3" title="3">linreg.sse </a></code></pre></div>
+<pre><code>## [1] 3037.088</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" title="1"><span class="co">#Can we Improve sse with regression trees?</span></a>
+<a class="sourceLine" id="cb365-2" title="2">tree&lt;-<span class="st"> </span><span class="kw">rpart</span>(MEDV <span class="op">~</span><span class="st"> </span>. , <span class="dt">data =</span> train[<span class="op">!</span>(<span class="kw">names</span>(train) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;TOWN&#39;</span>,<span class="st">&#39;TRACT&#39;</span>))])</a>
+<a class="sourceLine" id="cb365-3" title="3"><span class="kw">prp</span>(tree)</a></code></pre></div>
+<pre><code>## Warning: Bad &#39;data&#39; field in model &#39;call&#39; (expected a data.frame or a matrix).
+## To silence this warning:
+##     Call prp with roundint=FALSE,
+##     or rebuild the rpart model with model=TRUE.</code></pre>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1">tree.pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, <span class="dt">newdata =</span> test)</a>
+<a class="sourceLine" id="cb367-2" title="2">tree.sse &lt;-<span class="st"> </span><span class="kw">sum</span>((tree.pred <span class="op">-</span>test<span class="op">$</span>MEDV)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb367-3" title="3">tree.sse <span class="co">#increased sse...</span></a></code></pre></div>
+<pre><code>## [1] 4328.988</code></pre>
+</div>
+<div id="cross-validation-1" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Cross validation</h3>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1"><span class="kw">library</span>(e1071)</a>
+<a class="sourceLine" id="cb369-2" title="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb369-3" title="3">tr.control &lt;-<span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb369-4" title="4">cp.grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.cp=</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>)<span class="op">*</span><span class="fl">0.001</span>) <span class="co">#cp range of values to be tried</span></a>
+<a class="sourceLine" id="cb369-5" title="5">tr &lt;-<span class="st"> </span><span class="kw">train</span>(MEDV <span class="op">~</span><span class="st"> </span>. , <span class="dt">data =</span> train[<span class="op">!</span>(<span class="kw">names</span>(train) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;TOWN&#39;</span>,<span class="st">&#39;TRACT&#39;</span>))], <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl =</span> tr.control, <span class="dt">tuneGrid =</span> cp.grid)</a>
+<a class="sourceLine" id="cb369-6" title="6">tr <span class="co">#cp f 0.001 was the best</span></a></code></pre></div>
+<pre><code>## CART 
+## 
+## 364 samples
+##  13 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 327, 326, 328, 329, 328, 328, ... 
+## Resampling results across tuning parameters:
+## 
+...</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" title="1">best.tree &lt;-<span class="st"> </span>tr<span class="op">$</span>finalModel <span class="co"># model with cp =0.001</span></a>
+<a class="sourceLine" id="cb371-2" title="2"><span class="kw">prp</span>(best.tree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1">best.tree.pred=<span class="kw">predict</span>(best.tree, <span class="dt">newdata=</span>test)</a>
+<a class="sourceLine" id="cb372-2" title="2"></a>
+<a class="sourceLine" id="cb372-3" title="3"><span class="co">#Sum of squared errors</span></a>
+<a class="sourceLine" id="cb372-4" title="4">best.tree.sse =<span class="st"> </span><span class="kw">sum</span>((best.tree.pred <span class="op">-</span><span class="st"> </span>test<span class="op">$</span>MEDV)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb372-5" title="5">best.tree.sse</a></code></pre></div>
+<pre><code>## [1] 3660.149</code></pre>
+</div>
+</div>
+<div id="assignment-3" class="section level2">
+<h2><span class="header-section-number">5.4</span> Assignment</h2>
+<div id="part-1---understanding-why-people-vote" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Part 1 - Understanding why people vote</h3>
+<div id="problem-1---exploration-and-logistic-regression" class="section level4">
+<h4><span class="header-section-number">5.4.1.1</span> Problem 1 - Exploration and Logistic Regression</h4>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" title="1"><span class="co">#1.1 - What proportion of people in this dataset voted in this election?</span></a>
+<a class="sourceLine" id="cb374-2" title="2">gerber &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week4/gerber.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb374-3" title="3"><span class="kw">summary</span>(gerber) <span class="co"># Answer - 0.3159</span></a></code></pre></div>
+<pre><code>##       sex              yob           voting         hawthorne    
+##  Min.   :0.0000   Min.   :1900   Min.   :0.0000   Min.   :0.000  
+##  1st Qu.:0.0000   1st Qu.:1947   1st Qu.:0.0000   1st Qu.:0.000  
+##  Median :0.0000   Median :1956   Median :0.0000   Median :0.000  
+##  Mean   :0.4993   Mean   :1956   Mean   :0.3159   Mean   :0.111  
+##  3rd Qu.:1.0000   3rd Qu.:1965   3rd Qu.:1.0000   3rd Qu.:0.000  
+##  Max.   :1.0000   Max.   :1986   Max.   :1.0000   Max.   :1.000  
+##    civicduty        neighbors          self           control      
+##  Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:0.0000  
+...</code></pre>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" title="1"><span class="co">#1.2 - Which of the four &quot;treatment groups&quot; had the largest percentage of people who actually voted (voting = 1)?</span></a>
+<a class="sourceLine" id="cb376-2" title="2"><span class="kw">table</span>(gerber<span class="op">$</span>voting, gerber<span class="op">$</span>civicduty)</a></code></pre></div>
+<pre><code>##    
+##          0      1
+##   0 209191  26197
+##   1  96675  12021</code></pre>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" title="1">votedGerber &lt;-<span class="st"> </span><span class="kw">subset</span>(gerber, voting <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb378-2" title="2"><span class="kw">summary</span>(votedGerber) <span class="co"># Answer - Neighbors</span></a></code></pre></div>
+<pre><code>##       sex              yob           voting    hawthorne        civicduty     
+##  Min.   :0.0000   Min.   :1900   Min.   :1   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:1945   1st Qu.:1   1st Qu.:0.0000   1st Qu.:0.0000  
+##  Median :0.0000   Median :1954   Median :1   Median :0.0000   Median :0.0000  
+##  Mean   :0.4898   Mean   :1953   Mean   :1   Mean   :0.1133   Mean   :0.1106  
+##  3rd Qu.:1.0000   3rd Qu.:1962   3rd Qu.:1   3rd Qu.:0.0000   3rd Qu.:0.0000  
+##  Max.   :1.0000   Max.   :1986   Max.   :1   Max.   :1.0000   Max.   :1.0000  
+##    neighbors           self           control      
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+...</code></pre>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1"><span class="co">#1.3 - Logistic regression model for voting. Which coeffs are significant</span></a>
+<a class="sourceLine" id="cb380-2" title="2">logModel &lt;-<span class="st"> </span><span class="kw">glm</span>(voting <span class="op">~</span><span class="st"> </span>hawthorne <span class="op">+</span><span class="st"> </span>civicduty <span class="op">+</span>neighbors <span class="op">+</span>self, <span class="dt">data =</span> gerber, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb380-3" title="3"><span class="kw">summary</span>(logModel)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = voting ~ hawthorne + civicduty + neighbors + self, 
+##     family = &quot;binomial&quot;, data = gerber)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9744  -0.8691  -0.8389   1.4586   1.5590  
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" title="1"><span class="co">#1.4 - Accuracy of model</span></a>
+<a class="sourceLine" id="cb382-2" title="2">votingLogPrediction &lt;-<span class="st"> </span><span class="kw">predict</span>(logModel, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb382-3" title="3"><span class="kw">table</span>(gerber<span class="op">$</span>voting, votingLogPrediction <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.3</span>)</a></code></pre></div>
+<pre><code>##    
+##      FALSE   TRUE
+##   0 134513 100875
+##   1  56730  51966</code></pre>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1">(<span class="dv">134513</span><span class="op">+</span><span class="dv">51966</span>)<span class="op">/</span>(<span class="dv">134513</span><span class="op">+</span><span class="dv">100875</span><span class="op">+</span><span class="dv">56730</span><span class="op">+</span><span class="dv">51966</span>) <span class="co"># 0.5419578</span></a></code></pre></div>
+<pre><code>## [1] 0.5419578</code></pre>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1"><span class="co">#1.6 AUC</span></a>
+<a class="sourceLine" id="cb386-2" title="2"><span class="kw">library</span>(ROCR)</a>
+<a class="sourceLine" id="cb386-3" title="3">pred&lt;-<span class="st"> </span><span class="kw">prediction</span>(votingLogPrediction, gerber<span class="op">$</span>voting)</a>
+<a class="sourceLine" id="cb386-4" title="4">perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>) <span class="co"># performance Object to be plotted</span></a>
+<a class="sourceLine" id="cb386-5" title="5"><span class="kw">plot</span>(perf) <span class="co">#Plot ROC Curve</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">performance</span>(pred, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)<span class="co">#AUC - Area under curve to measure accuracy</span></a></code></pre></div>
+<pre><code>## [1] 0.5308461</code></pre>
+</div>
+<div id="problem-2---trees" class="section level4">
+<h4><span class="header-section-number">5.4.1.2</span> Problem 2 - Trees</h4>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb389-2" title="2"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb389-3" title="3"></a>
+<a class="sourceLine" id="cb389-4" title="4"><span class="co">#2.1</span></a>
+<a class="sourceLine" id="cb389-5" title="5">CARTmodel =<span class="st"> </span><span class="kw">rpart</span>(voting <span class="op">~</span><span class="st"> </span>civicduty <span class="op">+</span><span class="st"> </span>hawthorne <span class="op">+</span><span class="st"> </span>self <span class="op">+</span><span class="st"> </span>neighbors, <span class="dt">data=</span>gerber)</a>
+<a class="sourceLine" id="cb389-6" title="6"><span class="kw">prp</span>(CARTmodel)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="co">#2.2</span></a>
+<a class="sourceLine" id="cb390-2" title="2">CARTmodel2 =<span class="st"> </span><span class="kw">rpart</span>(voting <span class="op">~</span><span class="st"> </span>civicduty <span class="op">+</span><span class="st"> </span>hawthorne <span class="op">+</span><span class="st"> </span>self <span class="op">+</span><span class="st"> </span>neighbors, <span class="dt">data=</span>gerber, <span class="dt">cp=</span><span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb390-3" title="3"><span class="kw">prp</span>(CARTmodel2)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-75-2.png" width="672" /></p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="co">#2.4 - Make a new tree that includes the &quot;sex&quot; variable, again with cp = 0.0</span></a>
+<a class="sourceLine" id="cb391-2" title="2">CARTmodel3 =<span class="st"> </span><span class="kw">rpart</span>(voting <span class="op">~</span><span class="st"> </span>civicduty <span class="op">+</span><span class="st"> </span>hawthorne <span class="op">+</span><span class="st"> </span>self <span class="op">+</span><span class="st"> </span>neighbors <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>gerber, <span class="dt">cp=</span><span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb391-3" title="3"><span class="kw">prp</span>(CARTmodel3)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-75-3.png" width="672" /></p>
+</div>
+<div id="problem-3---interaction-terms" class="section level4">
+<h4><span class="header-section-number">5.4.1.3</span> Problem 3 - Interaction Terms</h4>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1"><span class="co">#3.1 - Tree with only control varaible and tree with control and sex variable</span></a>
+<a class="sourceLine" id="cb392-2" title="2">CARTmodel =<span class="st"> </span><span class="kw">rpart</span>(voting <span class="op">~</span><span class="st"> </span>control, <span class="dt">data=</span>gerber, <span class="dt">cp=</span><span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb392-3" title="3"><span class="kw">prp</span>(CARTmodel, <span class="dt">digits =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" title="1"><span class="fl">0.34</span> <span class="fl">-0.296638</span><span class="co">#difference in the predicted prob of voting between being in the control group versus being in a different group</span></a></code></pre></div>
+<pre><code>## [1] 0.043362</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1"><span class="co">#3.2</span></a>
+<a class="sourceLine" id="cb395-2" title="2">CARTmodel =<span class="st"> </span><span class="kw">rpart</span>(voting <span class="op">~</span><span class="st"> </span>control <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data=</span>gerber, <span class="dt">cp=</span><span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb395-3" title="3"><span class="kw">prp</span>(CARTmodel, <span class="dt">digits =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-76-2.png" width="672" /></p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1"><span class="co">#3.4</span></a>
+<a class="sourceLine" id="cb396-2" title="2">Possibilities =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">control=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb396-3" title="3">logModelSex &lt;-<span class="st"> </span><span class="kw">glm</span>(voting <span class="op">~</span><span class="st"> </span>control <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> gerber, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb396-4" title="4"><span class="kw">summary</span>(logModelSex)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = voting ~ control + sex, family = &quot;binomial&quot;, data = gerber)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9220  -0.9012  -0.8290   1.4564   1.5717  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+...</code></pre>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1"><span class="kw">predict</span>(logModelSex, <span class="dt">newdata=</span>Possibilities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<pre><code>##         1         2         3         4 
+## 0.3462559 0.3024455 0.3337375 0.2908065</code></pre>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1"><span class="co">#3.5 - How do you interpret the coefficient for the new variable in isolation? That is, how does it relate to the dependent variable?</span></a>
+<a class="sourceLine" id="cb400-2" title="2">LogModel2 =<span class="st"> </span><span class="kw">glm</span>(voting <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>control <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>control, <span class="dt">data=</span>gerber, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)<span class="co"># sex:control means if sex and control are both 1</span></a>
+<a class="sourceLine" id="cb400-3" title="3"><span class="kw">summary</span>(LogModel2) <span class="co"># Ans - If a person is a woman and in the control group, the chance that she voted goes down</span></a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = voting ~ sex + control + sex:control, family = &quot;binomial&quot;, 
+##     data = gerber)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9213  -0.9019  -0.8284   1.4573   1.5724  
+## 
+## Coefficients:
+...</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1"><span class="kw">predict</span>(LogModel2, <span class="dt">newdata=</span>Possibilities, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<pre><code>##         1         2         3         4 
+## 0.3458183 0.3027947 0.3341757 0.2904558</code></pre>
+</div>
+</div>
+<div id="part-2---letter-recognition" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> Part 2 - Letter Recognition</h3>
+<div id="problem-1---predicting-b-or-not-b" class="section level4">
+<h4><span class="header-section-number">5.4.2.1</span> Problem 1 - Predicting B or not B</h4>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" title="1">letters &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week4/letters_ABPR.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb404-2" title="2">letters<span class="op">$</span>isB &lt;-<span class="st"> </span><span class="kw">as.factor</span>(letters<span class="op">$</span>letter <span class="op">==</span><span class="st"> &quot;B&quot;</span>)</a>
+<a class="sourceLine" id="cb404-3" title="3"><span class="co">#Split data into Train and Test set by 50%</span></a>
+<a class="sourceLine" id="cb404-4" title="4"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb404-5" title="5"><span class="kw">set.seed</span>(<span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb404-6" title="6">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(letters<span class="op">$</span>isB, <span class="dt">SplitRatio =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb404-7" title="7">lettersTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(letters, spl <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb404-8" title="8">lettersTest &lt;-<span class="st"> </span><span class="kw">subset</span>(letters, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb404-9" title="9"></a>
+<a class="sourceLine" id="cb404-10" title="10"><span class="co">#1.1 - Baseline model always not B accuracy</span></a>
+<a class="sourceLine" id="cb404-11" title="11"><span class="kw">table</span>(lettersTest<span class="op">$</span>isB)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##  1175   383</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1"><span class="dv">1175</span><span class="op">/</span>(<span class="dv">1175</span><span class="op">+</span><span class="dv">383</span>) <span class="co">#0.754172</span></a></code></pre></div>
+<pre><code>## [1] 0.754172</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" title="1"><span class="co">#1.2 Classification tree accuracy</span></a>
+<a class="sourceLine" id="cb408-2" title="2">CARTb =<span class="st"> </span><span class="kw">rpart</span>(isB <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>letter, <span class="dt">data=</span>lettersTrain, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb408-3" title="3"><span class="kw">prp</span>(CARTb)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" title="1">predictCART &lt;-<span class="st"> </span><span class="kw">predict</span>(CARTb, <span class="dt">newdata =</span> lettersTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb409-2" title="2"><span class="kw">table</span>(lettersTest<span class="op">$</span>isB, predictCART) <span class="co">#Confusion matrix</span></a></code></pre></div>
+<pre><code>##        predictCART
+##         FALSE TRUE
+##   FALSE  1118   57
+##   TRUE     43  340</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" title="1">(<span class="dv">340</span><span class="op">+</span><span class="dv">1118</span>)<span class="op">/</span>(<span class="dv">1118</span> <span class="op">+</span><span class="st"> </span><span class="dv">340</span> <span class="op">+</span><span class="dv">57</span> <span class="op">+</span><span class="dv">43</span>) <span class="co">#Accuacy = 0.9358151</span></a></code></pre></div>
+<pre><code>## [1] 0.9358151</code></pre>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" title="1"><span class="co">#1.3 - Random Forest accuracy</span></a>
+<a class="sourceLine" id="cb413-2" title="2"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb413-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb413-4" title="4">lettersForest &lt;-<span class="st"> </span><span class="kw">randomForest</span>(isB <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>letter, <span class="dt">data=</span>lettersTrain) </a>
+<a class="sourceLine" id="cb413-5" title="5">predictForest &lt;-<span class="st"> </span><span class="kw">predict</span>(lettersForest, <span class="dt">newdata =</span> lettersTest)<span class="co"># prediction using random forest</span></a>
+<a class="sourceLine" id="cb413-6" title="6"><span class="kw">table</span>(lettersTest<span class="op">$</span>isB, predictForest) <span class="co"># confusion Matrix</span></a></code></pre></div>
+<pre><code>##        predictForest
+##         FALSE TRUE
+##   FALSE  1163   12
+##   TRUE      9  374</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" title="1">(<span class="dv">1163</span><span class="op">+</span><span class="st"> </span><span class="dv">374</span>)<span class="op">/</span><span class="kw">nrow</span>(lettersTest) <span class="co">#Accuracy = 0.9865212 (Almost perfect)</span></a></code></pre></div>
+<pre><code>## [1] 0.9865212</code></pre>
+</div>
+<div id="problem-2---predicting-the-letters-a-b-p-r" class="section level4">
+<h4><span class="header-section-number">5.4.2.2</span> Problem 2 - Predicting the letters A, B, P, R</h4>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" title="1">letters<span class="op">$</span>letter &lt;-<span class="st"> </span><span class="kw">as.factor</span>(letters<span class="op">$</span>letter)</a>
+<a class="sourceLine" id="cb417-2" title="2"><span class="kw">set.seed</span>(<span class="dv">2000</span>)</a>
+<a class="sourceLine" id="cb417-3" title="3">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(letters<span class="op">$</span>letter, <span class="dt">SplitRatio =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb417-4" title="4">lettersTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(letters, spl <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb417-5" title="5">lettersTest &lt;-<span class="st"> </span><span class="kw">subset</span>(letters, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb417-6" title="6"></a>
+<a class="sourceLine" id="cb417-7" title="7"><span class="co">#2.1 - What is the baseline accuracy?</span></a>
+<a class="sourceLine" id="cb417-8" title="8"><span class="kw">table</span>(lettersTest<span class="op">$</span>letter)</a></code></pre></div>
+<pre><code>## 
+##   A   B   P   R 
+## 395 383 401 379</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" title="1"><span class="dv">401</span><span class="op">/</span><span class="kw">nrow</span>(lettersTest) <span class="co">#0.2573813</span></a></code></pre></div>
+<pre><code>## [1] 0.2573813</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" title="1"><span class="co">#2.2 What is the test set accuracy of CART model?</span></a>
+<a class="sourceLine" id="cb421-2" title="2">CARTb =<span class="st"> </span><span class="kw">rpart</span>(letter <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>isB, <span class="dt">data=</span>lettersTrain, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb421-3" title="3"><span class="kw">prp</span>(CARTb)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" title="1">predictCART &lt;-<span class="st"> </span><span class="kw">predict</span>(CARTb, <span class="dt">newdata =</span> lettersTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb422-2" title="2"><span class="kw">table</span>(lettersTest<span class="op">$</span>letter, predictCART)</a></code></pre></div>
+<pre><code>##    predictCART
+##       A   B   P   R
+##   A 348   4   0  43
+##   B   8 318  12  45
+##   P   2  21 363  15
+##   R  10  24   5 340</code></pre>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" title="1">(<span class="dv">348</span><span class="op">+</span><span class="dv">318</span><span class="op">+</span><span class="dv">363</span><span class="op">+</span><span class="dv">340</span>)<span class="op">/</span><span class="kw">nrow</span>(lettersTest)</a></code></pre></div>
+<pre><code>## [1] 0.8786906</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" title="1"><span class="co">#2.3 - Random Forest</span></a>
+<a class="sourceLine" id="cb426-2" title="2"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb426-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb426-4" title="4">lettersForest &lt;-<span class="st"> </span><span class="kw">randomForest</span>(letter <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>isB, <span class="dt">data=</span>lettersTrain) </a>
+<a class="sourceLine" id="cb426-5" title="5">predictForest &lt;-<span class="st"> </span><span class="kw">predict</span>(lettersForest, <span class="dt">newdata =</span> lettersTest)<span class="co"># prediction using random forest</span></a>
+<a class="sourceLine" id="cb426-6" title="6"><span class="kw">table</span>(lettersTest<span class="op">$</span>letter, predictForest) <span class="co"># confusion Matrix</span></a></code></pre></div>
+<pre><code>##    predictForest
+##       A   B   P   R
+##   A 391   0   3   1
+##   B   0 380   1   2
+##   P   0   6 394   1
+##   R   3  14   0 362</code></pre>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1">(<span class="dv">391</span><span class="op">+</span><span class="dv">380</span><span class="op">+</span><span class="dv">394</span><span class="op">+</span><span class="dv">362</span>)<span class="op">/</span><span class="kw">nrow</span>(lettersTest) <span class="co">#Accuracy = 0.9801027</span></a></code></pre></div>
+<pre><code>## [1] 0.9801027</code></pre>
+</div>
+</div>
+<div id="part-3---predicting-earnings-from-census-data" class="section level3">
+<h3><span class="header-section-number">5.4.3</span> Part 3 - Predicting Earnings from Census Data</h3>
+<div id="problem-1---a-logistic-regression-model" class="section level4">
+<h4><span class="header-section-number">5.4.3.1</span> Problem 1 - A Logistic Regression Model</h4>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" title="1">census &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;week4/census.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb430-2" title="2"><span class="kw">set.seed</span>(<span class="dv">2000</span>)</a>
+<a class="sourceLine" id="cb430-3" title="3">spl &lt;-<span class="st"> </span><span class="kw">sample.split</span>(census<span class="op">$</span>over50k, <span class="dt">SplitRatio =</span> <span class="fl">0.6</span>)</a>
+<a class="sourceLine" id="cb430-4" title="4">censusTrain &lt;-<span class="st"> </span><span class="kw">subset</span>(census, spl <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb430-5" title="5">censusTest &lt;-<span class="st"> </span><span class="kw">subset</span>(census, spl <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb430-6" title="6"></a>
+<a class="sourceLine" id="cb430-7" title="7"><span class="co">#1.1 - build a logistic regression model to predict the dependent variable &quot;over50k&quot;, using all of the other variables in the dataset</span></a>
+<a class="sourceLine" id="cb430-8" title="8">logCensusModel &lt;-<span class="st"> </span><span class="kw">glm</span>(over50k <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span> censusTrain, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" title="1"><span class="kw">summary</span>(logCensusModel)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = over50k ~ ., family = &quot;binomial&quot;, data = censusTrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -5.1065  -0.5037  -0.1804  -0.0008   3.3383  
+## 
+## Coefficients: (1 not defined because of singularities)
+##                                            Estimate Std. Error z value Pr(&gt;|z|)
+...</code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" title="1"><span class="co">#1.2 - Model accuracy</span></a>
+<a class="sourceLine" id="cb434-2" title="2">logPrediction &lt;-<span class="st"> </span><span class="kw">predict</span>(logCensusModel, <span class="dt">newdata =</span> censusTest, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading</code></pre>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" title="1"><span class="kw">summary</span>(logPrediction)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.00000 0.01388 0.10074 0.24115 0.39293 1.00000</code></pre>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k, logPrediction <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##         
+##          FALSE TRUE
+##    &lt;=50K  9051  662
+##    &gt;50K   1190 1888</code></pre>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1">(<span class="dv">9051</span><span class="op">+</span><span class="dv">1888</span>)<span class="op">/</span><span class="kw">nrow</span>(censusTest) <span class="co">#accuracy - 0.8552107</span></a></code></pre></div>
+<pre><code>## [1] 0.8552107</code></pre>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="co">#1.3 - Baseline model</span></a>
+<a class="sourceLine" id="cb442-2" title="2"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k)</a></code></pre></div>
+<pre><code>## 
+##  &lt;=50K   &gt;50K 
+##   9713   3078</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" title="1"><span class="dv">9713</span><span class="op">/</span><span class="kw">nrow</span>(censusTest) <span class="co">#accuracy - 0.7593621</span></a></code></pre></div>
+<pre><code>## [1] 0.7593621</code></pre>
+</div>
+<div id="problem-2---a-cart-model" class="section level4">
+<h4><span class="header-section-number">5.4.3.2</span> Problem 2 - A CART model</h4>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" title="1"><span class="co">#2.1</span></a>
+<a class="sourceLine" id="cb446-2" title="2">censusTree &lt;-<span class="st"> </span><span class="kw">rpart</span>(over50k <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span> censusTrain, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb446-3" title="3"><span class="kw">prp</span>(censusTree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" title="1"><span class="co">#2.4</span></a>
+<a class="sourceLine" id="cb447-2" title="2"><span class="co">#Classification Tree</span></a>
+<a class="sourceLine" id="cb447-3" title="3">predictCART &lt;-<span class="st"> </span><span class="kw">predict</span>(censusTree, <span class="dt">newdata =</span> censusTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb447-4" title="4"><span class="kw">summary</span>(predictCART)</a></code></pre></div>
+<pre><code>##  &lt;=50K   &gt;50K 
+##  10725   2066</code></pre>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" title="1"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k, predictCART)</a></code></pre></div>
+<pre><code>##         predictCART
+##           &lt;=50K  &gt;50K
+##    &lt;=50K   9243   470
+##    &gt;50K    1482  1596</code></pre>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1">(<span class="dv">9243</span><span class="op">+</span><span class="dv">1596</span>)<span class="op">/</span><span class="kw">nrow</span>(censusTest)</a></code></pre></div>
+<pre><code>## [1] 0.8473927</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1"><span class="co">#Regresion tree with threshold 0.5</span></a>
+<a class="sourceLine" id="cb453-2" title="2">predictCART2 &lt;-<span class="st"> </span><span class="kw">predict</span>(censusTree, <span class="dt">newdata =</span> censusTest)</a>
+<a class="sourceLine" id="cb453-3" title="3"><span class="kw">summary</span>(predictCART2)</a></code></pre></div>
+<pre><code>##       &lt;=50K             &gt;50K        
+##  Min.   :0.01286   Min.   :0.05099  
+##  1st Qu.:0.69728   1st Qu.:0.05099  
+##  Median :0.94901   Median :0.05099  
+##  Mean   :0.75905   Mean   :0.24095  
+##  3rd Qu.:0.94901   3rd Qu.:0.30272  
+##  Max.   :0.94901   Max.   :0.98714</code></pre>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" title="1"><span class="kw">head</span>(predictCART2)</a></code></pre></div>
+<pre><code>##        &lt;=50K       &gt;50K
+## 2  0.2794982 0.72050176
+## 5  0.2794982 0.72050176
+## 7  0.9490143 0.05098572
+## 8  0.6972807 0.30271934
+## 11 0.6972807 0.30271934
+## 12 0.2794982 0.72050176</code></pre>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k, predictCART2[,<span class="dv">2</span>] <span class="op">&gt;</span><span class="fl">0.5</span>)</a></code></pre></div>
+<pre><code>##         
+##          FALSE TRUE
+##    &lt;=50K  9243  470
+##    &gt;50K   1482 1596</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1"><span class="co">#2.6 AUC</span></a>
+<a class="sourceLine" id="cb459-2" title="2">ROCRpred =<span class="st"> </span><span class="kw">prediction</span>(predictCART2[,<span class="dv">2</span>], censusTest<span class="op">$</span>over50k)</a>
+<a class="sourceLine" id="cb459-3" title="3"><span class="kw">as.numeric</span>(<span class="kw">performance</span>(ROCRpred, <span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values)</a></code></pre></div>
+<pre><code>## [1] 0.8470256</code></pre>
+</div>
+<div id="problem-3---a-random-forest-model" class="section level4">
+<h4><span class="header-section-number">5.4.3.3</span> Problem 3 - A random forest model</h4>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1"><span class="co">#3.1 - model accuracy</span></a>
+<a class="sourceLine" id="cb461-2" title="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb461-3" title="3">trainSmall =<span class="st"> </span>censusTrain[<span class="kw">sample</span>(<span class="kw">nrow</span>(censusTrain), <span class="dv">2000</span>), ]</a>
+<a class="sourceLine" id="cb461-4" title="4"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb461-5" title="5">smallCensusForest &lt;-<span class="st"> </span><span class="kw">randomForest</span>(over50k <span class="op">~</span><span class="st"> </span>. , <span class="dt">data=</span>trainSmall) </a>
+<a class="sourceLine" id="cb461-6" title="6">predictForest &lt;-<span class="st"> </span><span class="kw">predict</span>(smallCensusForest, <span class="dt">newdata =</span> censusTest)<span class="co"># prediction using random forest</span></a>
+<a class="sourceLine" id="cb461-7" title="7"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k, predictForest) <span class="co"># confusion Matrix</span></a></code></pre></div>
+<pre><code>##         predictForest
+##           &lt;=50K  &gt;50K
+##    &lt;=50K   8955   758
+##    &gt;50K    1125  1953</code></pre>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1">(<span class="dv">8994</span><span class="op">+</span><span class="dv">1854</span>)<span class="op">/</span><span class="kw">nrow</span>(censusTest) <span class="co">#Accuracy - 0.8480963</span></a></code></pre></div>
+<pre><code>## [1] 0.8480963</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" title="1"><span class="co">#3.2  - Forest metrics</span></a>
+<a class="sourceLine" id="cb465-2" title="2">vu =<span class="st"> </span><span class="kw">varUsed</span>(smallCensusForest, <span class="dt">count=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb465-3" title="3">vusorted =<span class="st"> </span><span class="kw">sort</span>(vu, <span class="dt">decreasing =</span> <span class="ot">FALSE</span>, <span class="dt">index.return =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb465-4" title="4"><span class="kw">dotchart</span>(vusorted<span class="op">$</span>x, <span class="kw">names</span>(smallCensusForest<span class="op">$</span>forest<span class="op">$</span>xlevels[vusorted<span class="op">$</span>ix])) <span class="co"># Chart of variables and number of splits selected in all forest</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">summary</span>(smallCensusForest)</a></code></pre></div>
+<pre><code>##                 Length Class  Mode     
+## call               3   -none- call     
+## type               1   -none- character
+## predicted       2000   factor numeric  
+## err.rate        1500   -none- numeric  
+## confusion          6   -none- numeric  
+## votes           4000   matrix numeric  
+## oob.times       2000   -none- numeric  
+## classes            2   -none- character
+## importance        12   -none- numeric  
+...</code></pre>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1"><span class="kw">varImpPlot</span>(smallCensusForest)<span class="co">#Impurity - how homogenous each bucket of the tree is. Each variable split reduces impurity since we get a more detailed classification.</span></a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-81-2.png" width="672" /></p>
+</div>
+<div id="problem-4---cross-validation" class="section level4">
+<h4><span class="header-section-number">5.4.3.4</span> Problem 4 - Cross validation</h4>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1"><span class="kw">library</span>(e1071)</a>
+<a class="sourceLine" id="cb469-2" title="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb469-3" title="3"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb469-4" title="4"><span class="co">#4.1 - Which value of cp does the train function recommend?</span></a>
+<a class="sourceLine" id="cb469-5" title="5">censusTrainControl &lt;-<span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">10</span>) <span class="co"># k = 10 folds</span></a>
+<a class="sourceLine" id="cb469-6" title="6">cartGrid =<span class="st"> </span><span class="kw">expand.grid</span>( <span class="dt">.cp =</span> <span class="kw">seq</span>(<span class="fl">0.002</span>,<span class="fl">0.1</span>,<span class="fl">0.002</span>)) </a>
+<a class="sourceLine" id="cb469-7" title="7">trained &lt;-<span class="st"> </span><span class="kw">train</span>(over50k <span class="op">~</span><span class="st"> </span>. , <span class="dt">data =</span> censusTrain, <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl =</span> censusTrainControl, <span class="dt">tuneGrid =</span> cartGrid)</a>
+<a class="sourceLine" id="cb469-8" title="8">trained</a></code></pre></div>
+<pre><code>## CART 
+## 
+## 19187 samples
+##    12 predictor
+##     2 classes: &#39; &lt;=50K&#39;, &#39; &gt;50K&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 17268, 17269, 17269, 17268, 17268, 17268, ... 
+## Resampling results across tuning parameters:
+...</code></pre>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1"><span class="co">#4.2 - Fit a CART model to the training data using this value of cp. What is the prediction accuracy on the test set?</span></a>
+<a class="sourceLine" id="cb471-2" title="2">censusTree &lt;-<span class="st"> </span><span class="kw">rpart</span>(over50k <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span> censusTrain, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.002</span>) <span class="co">#new tree with cp</span></a>
+<a class="sourceLine" id="cb471-3" title="3"><span class="kw">prp</span>(censusTree)</a></code></pre></div>
+<p><img src="analytics_edge_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" title="1">cpCensusPrediction &lt;-<span class="st"> </span><span class="kw">predict</span>(censusTree, <span class="dt">newdata =</span> censusTest, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb472-2" title="2"><span class="kw">table</span>(censusTest<span class="op">$</span>over50k, cpCensusPrediction)</a></code></pre></div>
+<pre><code>##         cpCensusPrediction
+##           &lt;=50K  &gt;50K
+##    &lt;=50K   9178   535
+##    &gt;50K    1240  1838</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1">(<span class="dv">9178</span><span class="op">+</span><span class="dv">1838</span>)<span class="op">/</span><span class="kw">nrow</span>(censusTest) <span class="co">#Accuray - 0.8612306</span></a></code></pre></div>
+<pre><code>## [1] 0.8612306</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="logistic-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="text-analytics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"download": ["pdf", "epub"]
+}
+});
+});
+</script>
+
+</body>
+
+</html>
