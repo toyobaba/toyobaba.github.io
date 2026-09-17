@@ -12,7 +12,7 @@ collections:
         - b_rpi.md
         - c_fisk.md
     
-author: Omotoyosi Taiwo
+author: Toyosi Taiwo
 description: "Small page to display the works I've done"
 keywords: "Software Engineering, Electrical Engineering, Programming"
 colophon: "This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and created with <a href='http://jekyllrb.com/'>Jekyll</a>."

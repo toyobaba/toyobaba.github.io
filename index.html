@@ -6,7 +6,7 @@ title: Home
 		
         <div id="header-container" class="center">
             <div id="header" class="content center">
-                <h1>Matthew Taiwo</h1>
+                <h1>Toyosi Taiwo</h1>
                 <span id="header-links">
 				
                 <a href="https://github.com/toyobaba"> GitHub </a> |
@@ -20,49 +20,13 @@ title: Home
                 </span>
 				<hr>
 				<p>
-				<strong> Software (Backend) and Electrical Engineer (Semi-conductors)</strong> <br/>
-				<strong> I like to learn new things, lift weights, and play <a href="https://lichess.org/@/matttai90">chess</a></strong></p>
+				<strong> Senior Data Engineer - Ex Microsoft</strong> <br/>
+				<strong> I like to learn new things, stay fit, and play <a href="https://lichess.org/@/matttai90">chess</a></strong></p>
 				
             </div>
         </div>
 		
-	
 		<section class="box">
-		 <div id="content-container" class="center">
-            <div id="content" class="content left">          
-
-                <h2 class="center">Work History</h2>
-				<br>
-				
-				<!-- Loop Work contents wth Liquid -->
-				{% for work in site.works %}
-				
-					<div class="work">
-					<header>
-						<a href="{{work.worksite}}">      
-						<img itemprop="logo" src="{{work.image_path}}" alt="RPI">      
-						</a>
-						
-						<h2><a href="{{work.worksite}}">{{ work.name }}</a></h2>						
-					</header>
-					<em>{{work.from}}&ndash;{{work.to}}</em><br />
-					<strong>{{ work.role }}</strong><br />
-					<strong>Technologies Used:</strong>&nbsp; {{ work.technologies }}
-						
-						<ul style="list-style-type:square" class = "work_description">
-							<li>{{ work.description }}</li>
-						</ul>
-						
-					</div>
-					<br>
-				{% endfor %}
-
-               
-            </div>
-        </div>
-	</section>	
-	
-	<section class="box">
         <div id="projects" class="center">
             <div id="content" class="content left">          
 
@@ -101,19 +65,53 @@ title: Home
         </div>
 		
 	</section>	
+	
+		<section class="box">
+		 <div id="content-container" class="center">
+            <div id="content" class="content left">          
 
+                <h2 class="center">Work History</h2>
+				<br>
+				
+				<!-- Loop Work contents wth Liquid -->
+				{% for work in site.works %}
+				
+					<div class="work">
+					<header>
+						<a href="{{work.worksite}}">      
+						<img itemprop="logo" src="{{work.image_path}}" alt="RPI">      
+						</a>
+						
+						<h2><a href="{{work.worksite}}">{{ work.name }}</a></h2>						
+					</header>
+					<em>{{work.from}}&ndash;{{work.to}}</em><br />
+					<strong>{{ work.role }}</strong><br />
+					<strong>Technologies Used:</strong>&nbsp; {{ work.technologies }}
+						
+						<ul style="list-style-type:square" class = "work_description">
+							<li>{{ work.description }}</li>
+						</ul>
+						
+					</div>
+					<br>
+				{% endfor %}
+
+               
+            </div>
+        </div>
+	</section>	
 		
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org/",
-            "@type": "Person",
+	<script type="application/ld+json">
+	{
+		"@context": "http://schema.org/",
+		"@type": "Person",
 
-            "name": "Omotoyosi Taiwo,
-            "born": "1991-07-05",
-            "email": "pmtaiwo@gmail.com",
-            "gender": "Male",
+		"name": "Toyosi Taiwo,
+		"born": "1991-07-05",
+		"email": "pmtaiwo@gmail.com",
+		"gender": "Male",
 
-            "jobTitle": "Electrical and Software Engineer",
-            "url": "toyobaba.github.io"
-        }
-        </script>
+		"jobTitle": "Electrical and Software Engineer",
+		"url": "toyobaba.github.io"
+	}
+	</script>
