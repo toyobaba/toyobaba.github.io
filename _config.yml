@@ -8,6 +8,8 @@ collections:
         - d_delta_doping.md
     works:
        order:
+        - 0_autocomply.md
+        - 1_microsoft.md
         - a_globalfoundries.md
         - b_rpi.md
         - c_fisk.md

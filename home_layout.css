@@ -13,6 +13,29 @@
             #content-container { width: 100%; max-width: 40em; }
 			#projects { width: 100%; max-width: 40em; }
             #header a { text-decoration: none; }
+            .header-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.6em;
+                margin: 1em 0;
+            }
+            .header-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4em;
+                padding: 0.4em 0.9em;
+                border: 1px solid #C84648;
+                border-radius: 8px;
+                color: #C84648;
+                text-decoration: none;
+                font-size: 0.8em;
+                font-family: 'EB Garamond', 'Garamond', 'Georgia', serif;
+            }
+            .header-link:hover, .header-link:active {
+                background: #C84648;
+                color: #fff;
+            }
             .project .work{
                 
                 padding: 10px;
